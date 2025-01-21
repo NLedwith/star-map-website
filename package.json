@@ -1,0 +1,20 @@
+{
+    "name": "Star Map",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "build": "webpack",
+        "dev": "webpack --watch"
+    },
+    "dependencies": {
+        "gl-matrix": "^3.4.3",
+        "typescript": "^5.2.2"
+    },
+    "devDependencies": {
+        "ts-loader": "^9.5.1",
+        "typscript": "^5.1.6",
+        "webpack": "^5.97.0",
+        "webpack-cli": "^5.1.4"
+    }
+}
