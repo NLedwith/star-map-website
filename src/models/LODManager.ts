@@ -39,7 +39,7 @@ export class LODManager {
 		}
 	}
 	public draw(dt: number,
-		    cameraDistance: number,
+		    isVisible: boolean,
 		    gl: WebGL2RenderingContext,
 		    matWorldUniform: WebGLUniformLocation,
 		    newPos: vec3,
@@ -47,7 +47,7 @@ export class LODManager {
 		   drawOrder: number) {
 
 		this._shape.draw(gl, matWorldUniform, newPos, dt);
-		if (cameraDistance <= 10000) {
+		if (!isVisible) {
 			this._div.style.visibility = 'hidden';
 		} else {
 			let drawPos = vec3.create();

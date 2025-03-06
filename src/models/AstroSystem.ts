@@ -58,4 +58,30 @@ export class AstroSystem {
 			}
 		}
 	}
+
+	public getDrawList(userPosition: vec3): AstroObject[] {
+		let evalList: AstroObject[] = []
+		for(let k = 0; k < this._astroObjectList.length; k++) {
+			if(this._astroObjectList[k].name == "Sun") {
+				evalList.push(this._astroObjectList[k])
+			}
+		}
+		let retList: AstroObject[] = []
+		while (evalList.length != 0) {
+			retList.push(evalList.shift()!);
+			let v = vec3.create()
+			vec3.scale(v, retList[retList.length-1].position, 10**-9)
+			if (retList[retList.length-1].systemSpace > vec3.distance(userPosition, v)) {
+				for(let i = 0; i < this._astroObjectList.length; i++) {
+					for(let j = 0; j < retList[retList.length-1].subsystem.length; j++) {
+						if (retList[retList.length-1].subsystem[j] == this._astroObjectList[i].name) {
+							evalList.push(this._astroObjectList[i])
+						}
+					}
+				}
+			}
+		}
+		console.log(retList)
+		return retList;
+	}
 }

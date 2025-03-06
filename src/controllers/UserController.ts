@@ -14,9 +14,9 @@ export class UserController {
     public coupledAstroObject: AstroObject | null;
     
     constructor() {
-        this.userPosition = vec3.fromValues(0, 10000, 10000)
+        this.userPosition = vec3.fromValues(0, 0, 10000)
         this.velocity = vec3.fromValues(0, 0, 0)
-        this.userOrientation = vec3.fromValues(-45, -90, 0)
+        this.userOrientation = vec3.fromValues(0, -90, 0)
 	this.viewVec = vec3.fromValues(0, 0, -1)
         this.setUserOrientation = vec3.fromValues(0, 0, 0)
         this.targetUserOrientation = vec3.fromValues(0, 0, 0)
@@ -37,7 +37,6 @@ export class UserController {
 		vec3.scale(tVec, this.coupledAstroObject.position, 10**-9)
 		vec3.subtract(iVec, tVec, this.userPosition);
 		vec3.normalize(iVec, iVec);
-		console.log(iVec)
 		vec3.scale(movementVec, iVec, curSpeed);
 	    } else { 
             	vec3.scale(movementVec, vec3.fromValues(Math.cos(glMatrix.toRadian(this.userOrientation[1])), 0, Math.sin(glMatrix.toRadian(this.userOrientation[1]))), curSpeed)
@@ -50,7 +49,6 @@ export class UserController {
 			vec3.scale(tVec, this.coupledAstroObject.position, 10**-9)
 			vec3.subtract(iVec, tVec, this.userPosition);
 			vec3.normalize(iVec, iVec);
-			console.log(iVec)
 			vec3.scale(movementVec, iVec, -curSpeed);
 		} else {
             		vec3.scale(movementVec, vec3.fromValues(Math.cos(glMatrix.toRadian(this.userOrientation[1])), 0, Math.sin(glMatrix.toRadian(this.userOrientation[1]))), -curSpeed)
@@ -67,7 +65,6 @@ export class UserController {
 			vec3.subtract(iVec, tVec, this.userPosition);
 			vec3.cross(qVec, cVec, iVec)
 			vec3.normalize(qVec, qVec);
-			console.log(qVec)
 			vec3.scale(movementVec, qVec, -curSpeed);
 		} else {
 			vec3.scale(movementVec, vec3.fromValues(Math.cos(glMatrix.toRadian(90+this.userOrientation[1])), 0, Math.sin(glMatrix.toRadian(90+this.userOrientation[1]))), curSpeed)
@@ -82,7 +79,6 @@ export class UserController {
 			vec3.subtract(iVec, tVec, this.userPosition);
 			vec3.cross(qVec, cVec, iVec)
 			vec3.normalize(qVec, qVec);
-			console.log(qVec)
 			vec3.scale(movementVec, qVec, curSpeed);
 		} else {
             		vec3.scale(movementVec, vec3.fromValues(Math.cos(glMatrix.toRadian(90+this.userOrientation[1])), 0, Math.sin(glMatrix.toRadian(90+this.userOrientation[1]))), -curSpeed)
@@ -101,7 +97,6 @@ export class UserController {
 			vec3.cross(qVec, cVec, iVec)
 			vec3.cross(cVec, qVec, iVec)
 			vec3.normalize(cVec, cVec)
-			console.log(iVec);
 			vec3.scale(movementVec, cVec, -curSpeed);
 
 		} else {
@@ -109,12 +104,18 @@ export class UserController {
 		}
 
         } else if(this.velocity[1] < 0) {
+
 		if (this.coupledAstroObject != null) {
-			let sightVec = vec3.fromValues(Math.cos(glMatrix.toRadian(this.userOrientation[1])), 0, Math.sin(glMatrix.toRadian(this.userOrientation[1])))
-			let crossSightVec = vec3.fromValues(Math.cos(glMatrix.toRadian(90+this.userOrientation[1])), 0, Math.sin(glMatrix.toRadian(90+this.userOrientation[1])))
-			let crossVec = vec3.create()
-			vec3.cross(crossVec, sightVec, crossSightVec)
-			vec3.scale(movementVec, crossVec, curSpeed)
+			let iVec = vec3.create();
+			let tVec = vec3.create();
+			let qVec = vec3.create();
+			let cVec = vec3.fromValues(0, 1, 0);
+			vec3.scale(tVec, this.coupledAstroObject.position, 10**-9)
+			vec3.subtract(iVec, tVec, this.userPosition);
+			vec3.cross(qVec, cVec, iVec)
+			vec3.cross(cVec, qVec, iVec)
+			vec3.normalize(cVec, cVec)
+			vec3.scale(movementVec, cVec, curSpeed);
 		} else {	
             		vec3.scale(movementVec, vec3.fromValues(0, 1, 0), -curSpeed)
 		}
@@ -161,9 +162,7 @@ export class UserController {
 		let phi = Math.asin((tVec[1])/Math.cos(theta))
 		this.userOrientation[0] = (theta*180)/Math.PI
 		this.userOrientation[1] = (phi*180)/Math.PI
-		console.log(this.userOrientation);
-		//console.log(this.viewVec[0], this.viewVec[1], this.viewVec[2])
-		//console.log(theta, phi)
+		
 	}
     }
 
@@ -181,12 +180,10 @@ export class UserController {
 		let dist = vec3.distance(this.userPosition, scaledObjPos)
 		let posSpeed = .1;
 		console.log(dist);
-		if (dist > 5) {
-			curSpeed = dist;
-		} else {
-
-			curSpeed = this.speed
-		}
+		//curSpeed = this.speed*(dist**2);
+		
+		
+		curSpeed = dist;
 	}
 	return curSpeed;
     }

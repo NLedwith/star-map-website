@@ -9,6 +9,8 @@ export class AstroObject {
 		    public acceleration: vec3, 
 		    public name: string,
 		    public mass: number,
+		    public systemSpace: number,
+		    public subsystem: string[],
 		    private _polarRadius: number,
 		    private _equatorialRadius: number,
 		   public _lodManager: LODManager,

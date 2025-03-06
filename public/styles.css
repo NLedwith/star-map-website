@@ -245,8 +245,9 @@ html, head, body {
 		-1px 0 3px #000278, 
 		1px 0 3px #8000ff;
     }
-    .sun {
+    div.sun {
 	position: absolute;
+	float: left;
 	display: inline-block;
 	top: calc(50% - 12px);
 	left: calc(50% - 12px);
@@ -301,7 +302,9 @@ html, head, body {
 	.sun:hover .text-node {
 		left: 32px;
 		display: inline-block;
-		background-color: red;
+		background-color: rgba(0, 0, 0, 0.4);
+		padding: 2px;
+		border-radius: 10%;
 		animation: test .25s steps(40,end);
 	}
     .planet:hover  .text-node {

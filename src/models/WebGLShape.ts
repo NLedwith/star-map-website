@@ -1,11 +1,14 @@
 import { vec3, ReadonlyVec3, mat4, quat } from "gl-matrix";
-
+import { showError, createStaticVertexBuffer, createStaticIndexBuffer } from "../utils/gl-utils";
+import { Sphere, create3dPosColorInterleavedVao } from "../geometry";
 
 export class WebGLShape {
 	
 	private _matWorld: mat4;
 	private _scaleVec: vec3;
 	private _rotation: quat;
+	public readonly vao: WebGLVertexArrayObject;
+	public readonly numIndices: number;
 
 	constructor(
 		private _pos: vec3,
@@ -14,11 +17,28 @@ export class WebGLShape {
 		private _yRotationAngle: number,
 		private _zRotationAngle: number,
 		private _rotationSpeed: number,
-		public readonly vao: WebGLVertexArrayObject,
-		public readonly numIndices: number) {
+		gl: WebGL2RenderingContext,
+		posAttrib: number, 
+		colorAttrib: number) {
+
 		this._matWorld = mat4.create();
 		this._scaleVec = vec3.create();
 		this._rotation = quat.create();
+
+		let ellipsoid = new Sphere(36, 36, 1, 1);
+		let ellipsoidVertices = createStaticVertexBuffer(gl, ellipsoid.vertices);
+		let ellipsoidIndices = createStaticIndexBuffer(gl, ellipsoid.indices);
+
+		if (!ellipsoidVertices || !ellipsoidIndices) {
+			throw new Error(`Failed to create geo: ellipsoid (v=${!!ellipsoidVertices}, i=${ellipsoidIndices})`);
+		}
+		
+		let ellipsoidVao = create3dPosColorInterleavedVao(gl, ellipsoidVertices, ellipsoidIndices, posAttrib, colorAttrib);
+		if (!ellipsoidVao) {
+			throw new Error(`Failed to create geo: ellipsoid=${!!ellipsoidVao}`);
+		}
+		this.vao = ellipsoidVao;
+		this.numIndices = ellipsoid.indices.length;
 	}
 
 	public draw(

@@ -2,71 +2,103 @@
 	"10" : {
 		"name": "Sun",
 		"mass": "(1.99 * (10**30))",
-		"subsystem": ["199", "299", "399", "499", "599", "699", "799", "899", "DES=20000001;", "999", "920136108", "DES=20136472;", "920136199"]
+		"systemSpace": 20000,
+		"subsystem": ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Ceres", "Pluto", "Haumea", "Makemake", "Eris"]
 	},
 	"199": {
 		"name": "Mercury",
 		"mass": "(3.285 * (10**23))",
+		"systemSpace": 0,
 		"subsystem": []
 	},
 	"299": {
 		"name": "Venus",
 		"mass": "(48.685 * (10**23))",
+		"systemSpace": 0,
 		"subsystem": []
 	},
 	"399": {
 		"name": "Earth",
 		"mass": "(6 * (10**24))",
+		"systemSpace": 15,
+		"subsystem": ["Luna"]
+	},
+	"301": {
+		"name": "Luna",
+		"mass": "(7.3476 * (10**22))",
+		"systemSpace": 0,
 		"subsystem": []
 	},
 	"499": {
 		"name": "Mars",
 		"mass": "(6.4191 * (10**22))",
+		"systemSpace": 0.8,
+		"subsystem": ["Phobos", "Deimos"]
+	},
+	"401": {
+		"name": "Phobos",
+		"mass": "(1.06 * (10**16))",
+		"systemSpace": 0,
+		"subsystem": []
+	},
+	"402": {
+		"name": "Deimos",
+		"mass": "(1.51 * (10**15))",
+		"systemSpace": 0,
 		"subsystem": []
 	},
 	"599": {
 		"name": "Jupiter",
 		"mass": "(1.898 * (10**27))",
+		"systemSpace": 0,
 		"subsystem": []
 	},
 	"699": {
 		"name": "Saturn",
 		"mass": "(5.683 * (10**26))",
+		"systemSpace": 0,
 		"subsystem": []
 	},
 	"799": {
 		"name": "Uranus",
 		"mass": "(8.681 * (10**25))",
+		"systemSpace": 0,
 		"subsystem": []
 	},
 	"899": {
 		"name": "Neptune",
 		"mass": "(1.0241 * (10 ** 26))",
+		"systemSpace": 0,
 		"subsystem": []
 	},
 	"Ceres": {
 		"name": "Ceres",
 		"mass": "(9.3839 * (10**20))",
+		"systemSpace": 0,
 		"subsystem": []
 	},
 	"999": {
 		"name": "Pluto",
 		"mass": "(1.307 * (10**22))",
+		"systemSpace": 0,
 		"subsystem": []
 	},
 	"920136108": {
 		"name": "Haumea",
 		"mass": "(4.01 * (10**21))",
+		"systemSpace": 0,
 		"subsystem": []
 	},
 	"Makemake": {
 		"name": "Makemake",
 		"mass": "(3.1 * (10**21))",
+		"systemSpace": 0,
 		"subsystem": []
 	},
 	"920136199": {
 		"name": "Eris",
 		"mass": "(1.67 * (10**22))",
+		"systemSpace": 0,
 		"subsystem": []
 	}
 }

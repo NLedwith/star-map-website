@@ -524,7 +524,7 @@ async function main() {
         const cameraZ = user.userPosition[2];
 
 	// Updating system where every second updates a day
-        system.updateAstroSystem(dt*86000)
+        system.updateAstroSystem(dt)
         
         mat4.lookAt(
             matView,
@@ -563,6 +563,7 @@ async function main() {
         gl.uniformMatrix4fv(matViewProjUniform, false, matViewProj);
      
 
+
 	system._astroObjectList = system._astroObjectList.sort((a, b) => {
 		let iVecA = vec3.create();
 		let iVecB = vec3.create();
@@ -570,10 +571,12 @@ async function main() {
 		vec3.scale(iVecB, b.position, 10**-9);
 		return vec3.distance(user.userPosition, iVecB)-vec3.distance(user.userPosition, iVecA)
 	});	
+
 	// Here I need to check distance from camera for each item and choose to draw HTML element or 3d model
         let i = 0
+	let retList = system.getDrawList(user.userPosition)
 	system._astroObjectList.forEach((obj) => {
-		obj._lodManager.draw(dt, vec3.distance(user.userPosition, obj.position), gl, matWorldUniform, obj.position,  matViewProj, i)
+		obj._lodManager.draw(dt, retList.includes(obj), gl, matWorldUniform, obj.position,  matViewProj, i)
 		i++;
 	});
       
@@ -588,21 +591,7 @@ async function buildAstroObjects(gl: WebGL2RenderingContext, posAttrib: number, 
 
 	const curEphemeris = await api.getEphemeris(new Date(Date.now()), Object.keys(planetData));
 
-	let ellipsoid = new Sphere(36, 36, 1, 1);
-
-        let ellipsoidVertices = createStaticVertexBuffer(gl, ellipsoid.vertices);
-        let ellipsoidIndices = createStaticIndexBuffer(gl, ellipsoid.indices);
-
-        if (!ellipsoidVertices || !ellipsoidIndices) {
-            showError(`Failed to create geo: ellipsoid: (v=${!!ellipsoidVertices}, i=${ellipsoidIndices})`)
-	    return ret;
-        }
-        let ellipsoidVao = create3dPosColorInterleavedVao(
-            gl, ellipsoidVertices, ellipsoidIndices, posAttrib, colorAttrib);
-        if (!ellipsoidVao) {
-            showError(`Failed to create VAOs: ellipsoid=${!!ellipsoidVao}`);
-        	return ret;
-	}
+	
 
 	
     	var divContainerElement = document.querySelector("#divcontainer")!
@@ -610,14 +599,32 @@ async function buildAstroObjects(gl: WebGL2RenderingContext, posAttrib: number, 
 	const initialData = planetData as Record<string, AstroObjectConfig>;
 	Object.entries(initialData).forEach(([key, data]) => {
 		// Get WebGLShape
+		let size = 1
+		let tilt = glMatrix.toRadian(4);
+		let rSpeed = glMatrix.toRadian(1);
+		if (data.name == "Earth") {
+			size = .009159318
+			tilt =glMatrix.toRadian(23.5);
+			rSpeed = glMatrix.toRadian(5);
+		} else if (data.name == "Mars") {
+			size = .00487
+		} else if (data.name == "Phobos") {
+			size = .000016
+		} else if (data.name == "Deimos") {
+			size = .0000089
+		} else if (data.name == "Luna" || data.name == "Deimos") {
+			size = .002495;
+		}
+		
 		let shape = new WebGLShape(vec3.create(), 
-					  1,
+					  size,
 					vec3.fromValues(0,1,0),
-					  glMatrix.toRadian(4),
-					  glMatrix.toRadian(20),
-					  glMatrix.toRadian(1),
-					  ellipsoidVao,
-					  ellipsoid.indices.length);
+					  glMatrix.toRadian(0),
+					  tilt,
+					  rSpeed,
+					  gl,
+					  posAttrib,
+					  colorAttrib);
 		let lodManager = new LODManager(shape, divContainerElement, data.name, user);
 		let position = vec3.fromValues((curEphemeris[key].xPos * (10**curEphemeris[key].xPosExpn)), (curEphemeris[key].zPos * (10**curEphemeris[key].zPosExpn)), -(curEphemeris[key].yPos * (10**curEphemeris[key].yPosExpn)));
 		vec3.scale(position, position, 1000);
@@ -636,6 +643,8 @@ async function buildAstroObjects(gl: WebGL2RenderingContext, posAttrib: number, 
 						 acceleration,
 						 name,
 						 mass,
+						 data.systemSpace,
+						 data.subsystem,
 						 pRadius,
 						 eRadius,
 						 lodManager);
@@ -643,10 +652,10 @@ async function buildAstroObjects(gl: WebGL2RenderingContext, posAttrib: number, 
 
 
 
-		let newObj = new AstroObject(position, velocity, acceleration, name, mass, pRadius, eRadius, lodManager);
+		//let newObj = new AstroObject(position, velocity, acceleration, name, mass, pRadius, eRadius, lodManager);
 		console.log(`Key: ${key}, Name: ${data.name}, Mass: ${data.mass}`);
 		console.log(`Position: ${curEphemeris[key].xPos}`)	
-		ret.push(newObj);
+		ret.push(astroObject);
 		console.log(ret);
 	});
 	
