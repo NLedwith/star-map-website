@@ -128,20 +128,12 @@ class System {
         let shape1 = new Shape(vec3.fromValues(0, 1, 0), 1.3, vec3.fromValues(0, 1, 0), glMatrix.toRadian(1), glMatrix.toRadian(7.25), glMatrix.toRadian(.1), 0, 0, ellipsoidVao, ellipsoid.indices.length)
         let shape2 = new Shape(vec3.fromValues(1, .75, -1), .1, vec3.fromValues(0, 1, 0), 0, 0,  glMatrix.toRadian(.5), glMatrix.toRadian(1), 1, ellipsoidVao, ellipsoid.indices.length)
         let shape3 = new Shape(vec3.fromValues(1, .25, -1), .05, vec3.fromValues(0, 1, 0), 0, 0,  glMatrix.toRadian(.5), glMatrix.toRadian(1), 1, ellipsoidVao, ellipsoid.indices.length)
-        //let shape = new Shape(vec3.fromValues(0, 1, 0), .05, vec3.fromValues(0, 1, 0), glMatrix.toRadian(1), glMatrix.toRadian(7.25), glMatrix.toRadian(.1), 0, 0, ellipsoidVao, ellipsoid.indices.length)
-        //this.AstroObjects.push(new AstroObject(shape2, .01, 1, 1, vec3.fromValues(-1, 0, 0), vec3.fromValues(0, 0, -0.004)))
-        //0.000004736
-        //5.8
-        this.AstroObjects.push(new AstroObject(shape1, (1.99*(10**30)), 1, 1, vec3.fromValues(0, 0, -1), vec3.fromValues(0, 0, 0))) // Sun
-        this.AstroObjects.push(new AstroObject(shape2, (3.302*(10**23)), 1, 1, vec3.fromValues((6.982*(10**10)), 0, -1), vec3.fromValues(0, 0, 47362.5))) // Mercury
-        this.AstroObjects.push(new AstroObject(shape2, (4.87*(10**24)), 1, 1, vec3.fromValues((1.08210*(10**11)), 0, -1), vec3.fromValues(0, 0, 35000))) // Venus
-        this.AstroObjects.push(new AstroObject(shape2, (6*(10**24)), 1, 1, vec3.fromValues((1.5*(10**11)), 0, -1), vec3.fromValues(0, 0, 29780))) // Earth
-        this.AstroObjects.push(new AstroObject(shape3, (7.3*(10**22)), 1, 1, vec3.fromValues((1.5*(10**11)), (4.07*(10**8)), -1), vec3.fromValues(0, 0, 30802))) // Moon
-        this.AstroObjects.push(new AstroObject(shape2, (6.4191*(10**23)), 1, 1, vec3.fromValues((2.2794*(10**11)), 0, -1), vec3.fromValues(0, 0, 24000))) // Mars
-        //this.AstroObjects.push(new AstroObject(shape2, .00000033, 1, 1, vec3.fromValues(0 , 0, -3), vec3.fromValues(-0.083, 0, 0)))
-       // this.AstroObjects.push(new AstroObject(shape2, .00000033, 1, 1, vec3.fromValues(-2, 0, -5), vec3.fromValues(0, 0, -0.083)))
-        //this.AstroObjects.push(new AstroObject(shape2, .00000033, 1, 1, vec3.fromValues(0, 0, -7), vec3.fromValues(0.083, 0, 0)))
-        //this.AstroObjects.push(new AstroObject(shape1, 1.9891, 1, 1, vec3.fromValues(0, 0, -5), vec3.fromValues(0, 0,0)))
+        this.AstroObjects.push(new AstroObject(shape1, (1.99*(10**30)), 1, 1, vec3.fromValues(0, 0, 0), vec3.fromValues(0, 0, 0))) // Sun
+        this.AstroObjects.push(new AstroObject(shape2, (3.285*(10**23)), 1, 1, vec3.fromValues((-.5146596575*(10**11)), (-.413779996*(10**11)), (.0133902546*(10**11))), vec3.fromValues(20563.71359, -35787.82873, -4810.78023))) // Mercury
+	this.AstroObjects.push(new AstroObject(shape2, (48.685*(10**23)), 1, 1, vec3.fromValues((-1.00251152320*(10**11)), (-.39705354015*(10**11)), (.0523900652169227*(10**11))), vec3.fromValues(12657.91636, -32720.35568, -1179.84856))) // Venus
+	this.AstroObjects.push(new AstroObject(shape3, (6*(10**24)), 1, 1, vec3.fromValues((-1.4508401140*(10**11)), (-.3651260404*(10**11)), (.0000256939*(10**11))), vec3.fromValues(6798.33795, -29000.20290, 1.66591))) // Earth
+	this.AstroObjects.push(new AstroObject(shape3, (7.3*(10**22)), 1, 1, vec3.fromValues((-1.4508602393*(10**11)), (-.3613932604*(10**11)), (.0003691849*(10**11))), vec3.fromValues(5754.86345, -28941.89452, 1.90289))) // Moon
+        this.AstroObjects.push(new AstroObject(shape2, (6.4191*(10**23)), 1, 1, vec3.fromValues((-2.1675293037*(10**11)), (1.2253271140*(10**11)), (0.0788317509*(10**11))), vec3.fromValues(-11014.83043, -19023.13965, -128.54525))) // Mars
     }
 
     public updateSystem(dt: number) {
@@ -476,7 +468,8 @@ function introTo3DDemo() {
         const cameraY = user.userPosition[1];
         const cameraZ = user.userPosition[2];
 
-        system.updateSystem(dt*1000000)
+	// Updating system where every second updates a day
+        system.updateSystem(dt*86400)
         console.log("Time Elapsed:", dt)
         console.log("Mercury Position:", system.AstroObjects[1].position[0], system.AstroObjects[1].position[1], system.AstroObjects[1].position[2])
         console.log("Mercury Velocity:", system.AstroObjects[1].velocity[0], system.AstroObjects[1].velocity[1], system.AstroObjects[1].velocity[2])
