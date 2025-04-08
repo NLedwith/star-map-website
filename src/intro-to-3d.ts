@@ -1,6 +1,6 @@
 import { showError, createStaticVertexBuffer, getContext, createStaticIndexBuffer, createProgram} from "./gl-utils"
 import { CUBE_INDICES, CUBE_VERTICES, TABLE_VERTICES, TABLE_INDICES, create3dPosColorInterleavedVao, PYRAMID_INDICES, PYRAMID_VERTICES, Sphere } from "./geometry";
-import { glMatrix, mat4, quat, ReadonlyVec3, vec3 } from "gl-matrix";
+import { glMatrix, mat4, quat, ReadonlyVec3, vec3, vec4 } from "gl-matrix";
 
 //.00000000006674
 const G = (6.6743*(10**-11));
@@ -43,7 +43,7 @@ class UserController {
     public isMoving: boolean;
     public speed: number;
     constructor() {
-        this.userPosition = vec3.fromValues(0, 0, 20)
+        this.userPosition = vec3.fromValues(0, 0, 500)
         this.velocity = vec3.fromValues(0, 0, 0)
         this.userOrientation = vec3.fromValues(0, -90, 0)
         this.setUserOrientation = vec3.fromValues(0, 0, 0)
@@ -104,7 +104,7 @@ class System {
     public AstroObjects: AstroObject[]
     private minDistance: number
     private maxDistance: number
-    constructor(gl: WebGL2RenderingContext, posAttrib: number, colorAttrib: number) {
+    constructor(gl: WebGL2RenderingContext, posAttrib: number, colorAttrib: number, divContainerElement: Element) {
         this.minDistance = 999999
         this.maxDistance = -1
         this.AstroObjects = []
@@ -125,15 +125,21 @@ class System {
             showError(`Failed to create VAOs: ellipsoid=${!!ellipsoidVao}`);
             return;
         }
-        let shape1 = new Shape(vec3.fromValues(0, 1, 0), 1.3, vec3.fromValues(0, 1, 0), glMatrix.toRadian(1), glMatrix.toRadian(7.25), glMatrix.toRadian(.1), 0, 0, ellipsoidVao, ellipsoid.indices.length)
-        let shape2 = new Shape(vec3.fromValues(1, .75, -1), .1, vec3.fromValues(0, 1, 0), 0, 0,  glMatrix.toRadian(.5), glMatrix.toRadian(1), 1, ellipsoidVao, ellipsoid.indices.length)
-        let shape3 = new Shape(vec3.fromValues(1, .25, -1), .05, vec3.fromValues(0, 1, 0), 0, 0,  glMatrix.toRadian(.5), glMatrix.toRadian(1), 1, ellipsoidVao, ellipsoid.indices.length)
-        this.AstroObjects.push(new AstroObject(shape1, (1.99*(10**30)), 1, 1, vec3.fromValues(0, 0, 0), vec3.fromValues(0, 0, 0))) // Sun
-        this.AstroObjects.push(new AstroObject(shape2, (3.285*(10**23)), 1, 1, vec3.fromValues((-.5146596575*(10**11)), (-.413779996*(10**11)), (.0133902546*(10**11))), vec3.fromValues(20563.71359, -35787.82873, -4810.78023))) // Mercury
-	this.AstroObjects.push(new AstroObject(shape2, (48.685*(10**23)), 1, 1, vec3.fromValues((-1.00251152320*(10**11)), (-.39705354015*(10**11)), (.0523900652169227*(10**11))), vec3.fromValues(12657.91636, -32720.35568, -1179.84856))) // Venus
-	this.AstroObjects.push(new AstroObject(shape3, (6*(10**24)), 1, 1, vec3.fromValues((-1.4508401140*(10**11)), (-.3651260404*(10**11)), (.0000256939*(10**11))), vec3.fromValues(6798.33795, -29000.20290, 1.66591))) // Earth
-	this.AstroObjects.push(new AstroObject(shape3, (7.3*(10**22)), 1, 1, vec3.fromValues((-1.4508602393*(10**11)), (-.3613932604*(10**11)), (.0003691849*(10**11))), vec3.fromValues(5754.86345, -28941.89452, 1.90289))) // Moon
-        this.AstroObjects.push(new AstroObject(shape2, (6.4191*(10**23)), 1, 1, vec3.fromValues((-2.1675293037*(10**11)), (1.2253271140*(10**11)), (0.0788317509*(10**11))), vec3.fromValues(-11014.83043, -19023.13965, -128.54525))) // Mars
+        let shape1 = new Shape(vec3.fromValues(0, 1, 0), 1.392, vec3.fromValues(0, 1, 0), glMatrix.toRadian(1), glMatrix.toRadian(7.25), glMatrix.toRadian(.1), 0, 0, ellipsoidVao, ellipsoid.indices.length)
+        let shape2 = new Shape(vec3.fromValues(1, .75, -1), .00350531609, vec3.fromValues(0, 1, 0), 0, 0,  glMatrix.toRadian(.5), glMatrix.toRadian(1), 1, ellipsoidVao, ellipsoid.indices.length)
+        let shape3 = new Shape(vec3.fromValues(1, .25, -1), .00869540229, vec3.fromValues(0, 1, 0), 0, 0,  glMatrix.toRadian(.5), glMatrix.toRadian(1), 1, ellipsoidVao, ellipsoid.indices.length)
+        let shape4 = new Shape(vec3.fromValues(1, .25, -1), .0091637931, vec3.fromValues(0, 1, 0), 0, 0,  glMatrix.toRadian(.5), glMatrix.toRadian(1), 1, ellipsoidVao, ellipsoid.indices.length)
+        let shape5 = new Shape(vec3.fromValues(1, .25, -1), .0024, vec3.fromValues(0, 1, 0), 0, 0,  glMatrix.toRadian(.5), glMatrix.toRadian(1), 1, ellipsoidVao, ellipsoid.indices.length)
+        let shape6 = new Shape(vec3.fromValues(1, .25, -1), .0048, vec3.fromValues(0, 1, 0), 0, 0,  glMatrix.toRadian(.5), glMatrix.toRadian(1), 1, ellipsoidVao, ellipsoid.indices.length)
+        
+	
+	// Need to pull these values from JPL Horizon API and convert
+	this.AstroObjects.push(new AstroObject(shape1, "", (1.99*(10**30)), 1, 1, vec3.fromValues(0, 0, 0), vec3.fromValues(0, 0, 0), divContainerElement)) // Sun
+        this.AstroObjects.push(new AstroObject(shape2, "Mercury", (3.285*(10**23)), 1, 1, vec3.fromValues((-.5146596575*(10**11)), (-.413779996*(10**11)), (.0133902546*(10**11))), vec3.fromValues(20563.71359, -35787.82873, -4810.78023), divContainerElement)) // Mercury
+	this.AstroObjects.push(new AstroObject(shape3, "Venus", (48.685*(10**23)), 2, 1, vec3.fromValues((-1.00251152320*(10**11)), (-.39705354015*(10**11)), (.0523900652169227*(10**11))), vec3.fromValues(12657.91636, -32720.35568, -1179.84856), divContainerElement)) // Venus
+	this.AstroObjects.push(new AstroObject(shape4, "Earth", (6*(10**24)), 1, 1, vec3.fromValues((-1.4508401140*(10**11)), (-.3651260404*(10**11)), (.0000256939*(10**11))), vec3.fromValues(6798.33795, -29000.20290, 1.66591), divContainerElement)) // Earth
+	this.AstroObjects.push(new AstroObject(shape5, "", (7.3*(10**22)), 1, 1, vec3.fromValues((-1.4508602393*(10**11)), (-.3613932604*(10**11)), (.0003691849*(10**11))), vec3.fromValues(5754.86345, -28941.89452, 1.90289), divContainerElement)) // Moon
+        this.AstroObjects.push(new AstroObject(shape6, "Mars", (6.4191*(10**23)), 4, 1, vec3.fromValues((-2.1675293037*(10**11)), (1.2253271140*(10**11)), (0.0788317509*(10**11))), vec3.fromValues(-11014.83043, -19023.13965, -128.54525), divContainerElement)) // Mars
     }
 
     public updateSystem(dt: number) {
@@ -167,15 +173,30 @@ class System {
         }
     }
 }
-
+function printPlanet(name: string) {
+	console.log(name)
+}
 // Hold info on astro objects along with drawing stuff
 class AstroObject {
     public acceleration: vec3;
     public velocity: vec3;
-    constructor(public shape: Shape, public mass: number, public polarRadius: number, public equatorialRadius: number, public position: vec3, public initialVelocity: vec3) {
+    public div: Element;
+    public textNode: Text;
+    public txt: Element;
+
+    constructor(public shape: Shape, public name: string, public mass: number, public polarRadius: number, public equatorialRadius: number, public position: vec3, public initialVelocity: vec3, divContainerElement: Element) {
         this.acceleration = [0,0,0]
         this.velocity = this.initialVelocity
         
+    	this.div = document.createElement("div")
+    	this.div.className = "floating-div"
+	this.txt = document.createElement("div")
+	this.txt.className = "text-node"
+    	this.textNode = document.createTextNode(name)
+    	this.txt.appendChild(this.textNode)
+	this.div.appendChild(this.txt)
+	this.div.onclick = function(){console.log(name)}
+    	divContainerElement.appendChild(this.div)
     }
 
     public updatePhysics(dt: number) {
@@ -224,7 +245,7 @@ class Shape {
         private pos: vec3,
         private scale: number,
         private rotationAxis: vec3,
-        private yRotationAngle: number,
+	private yRotationAngle: number,
         private zRotationAngle: number,
         private rotationSpeed: number,
         private orbitLocation: number,
@@ -251,7 +272,7 @@ class Shape {
     }
 
     // change this to take in x, y, z positions
-    draw(gl: WebGL2RenderingContext, matWorldUniform: WebGLUniformLocation, newPos: vec3) {
+    draw(gl: WebGL2RenderingContext, matWorldUniform: WebGLUniformLocation, newPos: vec3, div: HTMLDivElement, textNode: Text, pName: string, mvp: mat4) {
         this.rotate();
         this.pos = newPos
         //this.move();
@@ -265,16 +286,31 @@ class Shape {
 
         vec3.set(this.scaleVec, this.scale, this.scale, this.scale);
         let drawPos = vec3.fromValues(0,0,0)
-        vec3.scale(drawPos, this.pos, (10**-10))
+        vec3.scale(drawPos, this.pos, 10**-9))
         mat4.fromRotationTranslationScale(
             this.matWorld,
             this.rotation,
             drawPos,
             this.scaleVec);
         gl.uniformMatrix4fv(matWorldUniform, false, this.matWorld);
+	
         gl.bindVertexArray(this.vao);
         gl.drawElements(gl.TRIANGLES, this.numIndices, gl.UNSIGNED_SHORT, 0);
         gl.bindVertexArray(null);
+	
+	
+	let clipspace = vec4.fromValues(0,0,0,0)
+	vec4.transformMat4(clipspace, [drawPos[0], drawPos[1], drawPos[2], 1], mvp)
+	clipspace[0] /= clipspace[3]
+	clipspace[1] /= clipspace[3]
+
+	//console.log(clipspace)
+	var pixelX = (clipspace[0] * 0.5 +0.5) *gl.canvas.width
+	var pixelY = (clipspace[1] * -0.5 + 0.5) *gl.canvas.height
+
+	div.style.left = Math.floor(pixelX) + "px"
+	div.style.top = Math.floor(pixelY) + "px"
+	//console.log(div.style.left, div.style.top)
     }
 }
 function scrollFunc() {
@@ -375,32 +411,20 @@ function introTo3DDemo() {
         showError('Could not get Canvas reference');
         return;
     }
+    
+    var divContainerElement = document.querySelector("#divcontainer")!
+
+
     window.addEventListener("keydown", keyDown);
     window.addEventListener("keyup", keyUp);
     window.addEventListener("mousedown", click);
     window.addEventListener("mouseup", click2);
     window.addEventListener("mousemove", rotateCamera);
     window.addEventListener("wheel", whee, { passive: false });
-    //window.addEventListener("wheel", whee);
+   
  
     const gl = getContext(canvas);
-    /*
-    // For each planet info create new sphere
-    let sptest = new Sphere(36, 36, 1, 1);
-    const cubeVertices = createStaticVertexBuffer(gl, CUBE_VERTICES);
-    const cubeIndices = createStaticIndexBuffer(gl, CUBE_INDICES);
-    const tableVertices = createStaticVertexBuffer(gl, TABLE_VERTICES);
-    const tableIndices = createStaticIndexBuffer(gl, TABLE_INDICES);
-    const pyramidVertices = createStaticVertexBuffer(gl, PYRAMID_VERTICES);
-    const pyramidIndices = createStaticIndexBuffer(gl, PYRAMID_INDICES);
-    const sphereVertices = createStaticVertexBuffer(gl, sptest.vertices);
-    const sphereIndices = createStaticIndexBuffer(gl, sptest.indices);
-
-    if (!cubeVertices || !cubeIndices || !tableVertices || !tableIndices || !pyramidVertices || !pyramidIndices || !sphereVertices || !sphereIndices) {
-        showError(`Failed to create geo: cube: (v=${!!cubeVertices}, i=${cubeIndices}), table=(v=${!!tableVertices} i=${!!tableIndices}), pyramid=(v=${!!pyramidVertices} i=${!!pyramidIndices})`)
-        return;
-    }
-    */
+   
 
     const demoProgram = createProgram(gl, vertexShaderSourceCode, fragmentShaderSourceCode);
     if (!demoProgram) {
@@ -420,35 +444,8 @@ function introTo3DDemo() {
             `matWorld=${!!matWorldUniform} matViewProj=${!!matViewProjUniform}`);
         return;
     }
-    /*
-    const cubeVao = create3dPosColorInterleavedVao(
-        gl, cubeVertices, cubeIndices, posAttrib, colorAttrib);
-    const tableVao = create3dPosColorInterleavedVao(
-        gl, tableVertices, tableIndices, posAttrib, colorAttrib);
-    const pyramidVao = create3dPosColorInterleavedVao(
-        gl, pyramidVertices, pyramidIndices, posAttrib, colorAttrib);
-    const sphereVao = create3dPosColorInterleavedVao(
-        gl, sphereVertices, sphereIndices, posAttrib, colorAttrib);
-    if (!cubeVao || !tableVao || !pyramidVao || !sphereVao) {
-        showError(`Failed to create VAOs: cube=${!!cubeVao} table=${!!tableVao} pyramid=${!!pyramidVao}`);
-        return;
-    }
-
-    const UP_VEC = vec3.fromValues(0, 1, 0);
-    const TILT_VEC = vec3.fromValues(Math.cos(glMatrix.toRadian(45)), Math.sin(glMatrix.toRadian(45)), 0)
-    const shapes = [
-        new Shape(vec3.fromValues(0, 0, 0), 1, UP_VEC, 0, 0, 0, 0, 0, tableVao, TABLE_INDICES.length),
-        //new Shape(vec3.fromValues(0, 0.4, 0), 0.4, UP_VEC, 0, cubeVao, CUBE_INDICES.length),
-        //new Shape(vec3.fromValues(1, 0.05, 1), 0.05, UP_VEC, glMatrix.toRadian(20), cubeVao, CUBE_INDICES.length),
-        //new Shape(vec3.fromValues(1, 0.1, -1), 0.1, UP_VEC, glMatrix.toRadian(40), cubeVao, CUBE_INDICES.length),
-        //new Shape(vec3.fromValues(-1, 0.15, 1), 0.15, UP_VEC, glMatrix.toRadian(60), cubeVao, CUBE_INDICES.length),
-        //new Shape(vec3.fromValues(-1, 0.2, -1), 0.2, UP_VEC, glMatrix.toRadian(80), cubeVao, CUBE_INDICES.length),
-        new Shape(vec3.fromValues(0, 1, 0), .5, UP_VEC, glMatrix.toRadian(1), glMatrix.toRadian(7.25), glMatrix.toRadian(.1), 0, 0, sphereVao, sptest.indices.length),
-        new Shape(vec3.fromValues(1, .75, -1), .1, UP_VEC, 0, 0,  glMatrix.toRadian(.5), glMatrix.toRadian(1), 1, sphereVao, sptest.indices.length),
-
-    ]
-    */
-    let system = new System(gl, posAttrib, colorAttrib);
+  
+    let system = new System(gl, posAttrib, colorAttrib, divContainerElement);
 
     const matWorld = mat4.create();
     const matView = mat4.create();
@@ -470,11 +467,7 @@ function introTo3DDemo() {
 
 	// Updating system where every second updates a day
         system.updateSystem(dt*86400)
-        console.log("Time Elapsed:", dt)
-        console.log("Mercury Position:", system.AstroObjects[1].position[0], system.AstroObjects[1].position[1], system.AstroObjects[1].position[2])
-        console.log("Mercury Velocity:", system.AstroObjects[1].velocity[0], system.AstroObjects[1].velocity[1], system.AstroObjects[1].velocity[2])
-        console.log("Mercury Acceleration:", system.AstroObjects[1].acceleration[0], system.AstroObjects[1].acceleration[1], system.AstroObjects[1].acceleration[2])
-
+        
         mat4.lookAt(
             matView,
             vec3.fromValues(cameraX, cameraY, cameraZ),
@@ -483,9 +476,9 @@ function introTo3DDemo() {
 
         mat4.perspective(
             matProj,
-            glMatrix.toRadian(80),
+            glMatrix.toRadian(65),
             canvas.width / canvas.height,
-            0.1, 100.0);
+            0.001, 100.0);
             
         const matViewProj = mat4.create();
 
@@ -497,7 +490,7 @@ function introTo3DDemo() {
         gl.clearColor(0.02, 0.02, 0.02, 1);
         gl.clear(gl.DEPTH_BUFFER_BIT | gl.COLOR_BUFFER_BIT);
         gl.enable(gl.DEPTH_TEST);
-        //gl.enable(gl.CULL_FACE)
+        
         gl.cullFace(gl.BACK);
         gl.frontFace(gl.CCW);
         gl.viewport(0, 0, canvas.width, canvas.height);
@@ -510,17 +503,31 @@ function introTo3DDemo() {
        
 
         gl.uniformMatrix4fv(matViewProjUniform, false, matViewProj);
-        // iterate through system and draw astroObject
-        //shapes.forEach((shape) => shape.draw(gl, matWorldUniform));
-        system.AstroObjects.forEach((obj) => obj.shape.draw(gl, matWorldUniform, obj.position))
-        //system.AstroObjects[0].shape.draw(gl, matWorldUniform);
+     
+	
+	// Here I need to check distance from camera for each item and choose to draw HTML element or 3d model
+        system.AstroObjects.forEach((obj) => obj.shape.draw(gl, matWorldUniform, obj.position, obj.div, obj.textNode, obj.name, matViewProj))
+      
         requestAnimationFrame(frame);
     }
     requestAnimationFrame(frame);
 }
 
+interface Model {
+	result: string;
+}
+async function getPlanetData(): Promise<string> {
+	console.log("Hello")	
+	const response = await fetch("http://localhost:8000/planet-state/{310}", {method: 'GET'})
+	if(!response.ok) {
+		throw new Error("HTTP error! status: ${response.status}")
+	}
+	const data: string = await response.json()
+	return data
+}
 try {
-    introTo3DDemo();
+	getPlanetData().then(stri => console.log(stri))
+	introTo3DDemo();
 } catch(e) {
     showError(`Unhandled JavaScript exception: ${e}`)
 }
