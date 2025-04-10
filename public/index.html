@@ -9,6 +9,10 @@
                 margin: 0;
                 background-color: #2a2a2a;
             }
+	    @font-face{
+	    	font-family: 'Futura';
+		src: url(./assets/fonts/FuturaBook.ttf);
+	    }
 
             #demo-canvas {
                 position: fixed;
@@ -45,33 +49,53 @@
 	    .floating-div {
 	    	position: absolute;
 		color:red;
-		height: 6px;
-		width: 6px;
+		height: 12px;
+		width: 12px;
 		border-radius: 50%;
-		background-color: white;
+		background-color: transparent;
 		display: inline-block;
 		border-color: black;
-		border-width: 4px;
+		border-width: 1px;
 		border-style: solid;
+		border-color: white;
+	    }
+	    .small-point {
+	    	position: absolute;
+		top: 5px;
+		left: 5px;
+		height: 2px;
+		width: 2px;
+		border-radius: 50%;
+		background-color: white;
 	    }
 
+
 	    .floating-div:hover {
-		box-shadow: 0 0 10px 2px #fff;
+		border-color: white;
+		box-shadow: 0 0 10px 2px #DBE9F4;
 	    }
 	    .floating-div:hover .text-node {
 	    	display: block;
+		animation-name: test;
+		animation-duration: 4s;
 	    }
 	    .container {
 	    	position: relative;
 		overflow: none
 	    }
 	    .text-node {
+		font-family: 'Futura';
 		display: none;
 		position: relative;
 		top: 50%;
 		left: 20px;
 		transform:  translateY(-50%);
-	    	color: red;
+	    	color: white;
+	    }
+
+	    @keyframes test {
+	    	from {width: 0px;}
+		to {width: fit-content;}
 	    }
         </style>
     </head>
@@ -83,6 +107,6 @@
             		<span class="error-box-title">Error messages, if any, go in here.</span>
         	</div>
 	</div>
-        <script src="dist/intro-to-3d.js"></script>
+        <script src="../dist/app.js"></script>
     </body>
 </html>

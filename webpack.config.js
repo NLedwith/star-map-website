@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    entry: './src/intro-to-3d.ts',
+    entry: './src/app.ts',
     mode: 'development',
     devtool: 'inline-source-map',
     module: {
@@ -17,7 +17,7 @@ module.exports = {
         extensions: ['.ts'],
     },
     output: {
-        filename: 'intro-to-3d.js',
+        filename: 'app.js',
         path: path.resolve(__dirname, 'dist'),
     },
 };

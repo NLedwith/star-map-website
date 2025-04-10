@@ -43,14 +43,14 @@ class UserController {
     public isMoving: boolean;
     public speed: number;
     constructor() {
-        this.userPosition = vec3.fromValues(0, 0, 500)
+        this.userPosition = vec3.fromValues(0, 0, 1000)
         this.velocity = vec3.fromValues(0, 0, 0)
         this.userOrientation = vec3.fromValues(0, -90, 0)
         this.setUserOrientation = vec3.fromValues(0, 0, 0)
         this.targetUserOrientation = vec3.fromValues(0, 0, 0)
         this.rotationVec = vec3.fromValues(0, 0, 0)
         this.isMoving = false;
-        this.speed = .1
+        this.speed = 10
     }
 
     public translate(dt: number) {
@@ -104,7 +104,7 @@ class System {
     public AstroObjects: AstroObject[]
     private minDistance: number
     private maxDistance: number
-    constructor(gl: WebGL2RenderingContext, posAttrib: number, colorAttrib: number, divContainerElement: Element) {
+    constructor(gl: WebGL2RenderingContext, posAttrib: number, colorAttrib: number, divContainerElement: Element, datas: AstroData[]) {
         this.minDistance = 999999
         this.maxDistance = -1
         this.AstroObjects = []
@@ -125,14 +125,73 @@ class System {
             showError(`Failed to create VAOs: ellipsoid=${!!ellipsoidVao}`);
             return;
         }
-        let shape1 = new Shape(vec3.fromValues(0, 1, 0), 1.392, vec3.fromValues(0, 1, 0), glMatrix.toRadian(1), glMatrix.toRadian(7.25), glMatrix.toRadian(.1), 0, 0, ellipsoidVao, ellipsoid.indices.length)
+        
+        let shape0 = new Shape(vec3.fromValues(0, 1, 0), .05, vec3.fromValues(0, 1, 0), glMatrix.toRadian(1), glMatrix.toRadian(7.25), glMatrix.toRadian(.1), 0, 0, ellipsoidVao, ellipsoid.indices.length)
+	let shape1 = new Shape(vec3.fromValues(0, 1, 0), 1.392, vec3.fromValues(0, 1, 0), glMatrix.toRadian(1), glMatrix.toRadian(7.25), glMatrix.toRadian(.1), 0, 0, ellipsoidVao, ellipsoid.indices.length)
         let shape2 = new Shape(vec3.fromValues(1, .75, -1), .00350531609, vec3.fromValues(0, 1, 0), 0, 0,  glMatrix.toRadian(.5), glMatrix.toRadian(1), 1, ellipsoidVao, ellipsoid.indices.length)
         let shape3 = new Shape(vec3.fromValues(1, .25, -1), .00869540229, vec3.fromValues(0, 1, 0), 0, 0,  glMatrix.toRadian(.5), glMatrix.toRadian(1), 1, ellipsoidVao, ellipsoid.indices.length)
         let shape4 = new Shape(vec3.fromValues(1, .25, -1), .0091637931, vec3.fromValues(0, 1, 0), 0, 0,  glMatrix.toRadian(.5), glMatrix.toRadian(1), 1, ellipsoidVao, ellipsoid.indices.length)
         let shape5 = new Shape(vec3.fromValues(1, .25, -1), .0024, vec3.fromValues(0, 1, 0), 0, 0,  glMatrix.toRadian(.5), glMatrix.toRadian(1), 1, ellipsoidVao, ellipsoid.indices.length)
         let shape6 = new Shape(vec3.fromValues(1, .25, -1), .0048, vec3.fromValues(0, 1, 0), 0, 0,  glMatrix.toRadian(.5), glMatrix.toRadian(1), 1, ellipsoidVao, ellipsoid.indices.length)
         
-	
+	for(let i = 0; i < datas.length; i++) {
+		let mass = 0
+		let curShape = shape0
+		let name = ""
+		switch(i) {
+			case 0:
+				mass = (1.99*(10**30))
+				name = "Sun"
+				curShape = shape1
+				break
+			case 1:
+				mass = (3.285*(10**23))
+				name = "Mercury"
+				curShape = shape2
+				break
+			case 2:
+				mass = (48.685*(10**23))
+				name = "Venus"
+				curShape = shape3
+				break
+			case 3: 
+				mass = (6*(10**24))
+				name = "Earth"
+				curShape = shape4
+				break
+			case 4:
+				mass = (6.4191*(10**22))
+				name = "Mars"
+				curShape = shape6
+				break
+			case 5:
+				mass = (1.898*(10**27))
+				name = "Jupiter"
+				break
+			case 6: 
+				mass = (5.683*(10**26))
+				name = "Saturn"
+				break
+			case 7:
+				mass = (8.681*(10**25))
+				name = "Uranus"
+				break
+			case 8: 
+				mass = (1.0241*(10**26))
+				name = "Neptune"
+				break
+			case 9:
+				mass = (1.307*(10**22))
+				name = "Pluto"
+				break
+		}
+		if(i != 0){
+			this.AstroObjects.push(new AstroObject(curShape, name, mass, 1, 1, vec3.fromValues((datas[i].x*(10**(datas[i].xe+3))), (datas[i].z*(10**(datas[i].ze+3))), -datas[i].y*(10**(datas[i].ye+3))), vec3.fromValues((datas[i].xv*(10**(datas[i].xve+3))), (datas[i].zv*(10**(datas[i].zve+3))), -datas[i].yv*(10**(datas[i].yve+3))), divContainerElement))
+		} else {
+			this.AstroObjects.push(new AstroObject(curShape, name, mass, 1, 1, vec3.fromValues(0, 0, 0), vec3.fromValues(0, 0, 0), divContainerElement))
+		}
+	}
+	/*
 	// Need to pull these values from JPL Horizon API and convert
 	this.AstroObjects.push(new AstroObject(shape1, "", (1.99*(10**30)), 1, 1, vec3.fromValues(0, 0, 0), vec3.fromValues(0, 0, 0), divContainerElement)) // Sun
         this.AstroObjects.push(new AstroObject(shape2, "Mercury", (3.285*(10**23)), 1, 1, vec3.fromValues((-.5146596575*(10**11)), (-.413779996*(10**11)), (.0133902546*(10**11))), vec3.fromValues(20563.71359, -35787.82873, -4810.78023), divContainerElement)) // Mercury
@@ -140,6 +199,7 @@ class System {
 	this.AstroObjects.push(new AstroObject(shape4, "Earth", (6*(10**24)), 1, 1, vec3.fromValues((-1.4508401140*(10**11)), (-.3651260404*(10**11)), (.0000256939*(10**11))), vec3.fromValues(6798.33795, -29000.20290, 1.66591), divContainerElement)) // Earth
 	this.AstroObjects.push(new AstroObject(shape5, "", (7.3*(10**22)), 1, 1, vec3.fromValues((-1.4508602393*(10**11)), (-.3613932604*(10**11)), (.0003691849*(10**11))), vec3.fromValues(5754.86345, -28941.89452, 1.90289), divContainerElement)) // Moon
         this.AstroObjects.push(new AstroObject(shape6, "Mars", (6.4191*(10**23)), 4, 1, vec3.fromValues((-2.1675293037*(10**11)), (1.2253271140*(10**11)), (0.0788317509*(10**11))), vec3.fromValues(-11014.83043, -19023.13965, -128.54525), divContainerElement)) // Mars
+i*/    
     }
 
     public updateSystem(dt: number) {
@@ -180,7 +240,7 @@ function printPlanet(name: string) {
 class AstroObject {
     public acceleration: vec3;
     public velocity: vec3;
-    public div: Element;
+    public div: HTMLDivElement;
     public textNode: Text;
     public txt: Element;
 
@@ -192,10 +252,15 @@ class AstroObject {
     	this.div.className = "floating-div"
 	this.txt = document.createElement("div")
 	this.txt.className = "text-node"
+	let dot = document.createElement("div")
+	dot.className = "small-point"
     	this.textNode = document.createTextNode(name)
     	this.txt.appendChild(this.textNode)
+	this.div.appendChild(dot)
 	this.div.appendChild(this.txt)
-	this.div.onclick = function(){console.log(name)}
+	let thatName = this.name
+	let thatPos = this.position
+	this.div.addEventListener('click', function() {console.log(thatName, thatPos})
     	divContainerElement.appendChild(this.div)
     }
 
@@ -285,8 +350,8 @@ class Shape {
         quat.multiply(this.rotation, zQuat, yQuat)
 
         vec3.set(this.scaleVec, this.scale, this.scale, this.scale);
-        let drawPos = vec3.fromValues(0,0,0)
-        vec3.scale(drawPos, this.pos, 10**-9))
+        let drawPos = vec3.fromValues(0,0,0);
+        vec3.scale(drawPos, this.pos, 10**-9);
         mat4.fromRotationTranslationScale(
             this.matWorld,
             this.rotation,
@@ -301,15 +366,16 @@ class Shape {
 	
 	let clipspace = vec4.fromValues(0,0,0,0)
 	vec4.transformMat4(clipspace, [drawPos[0], drawPos[1], drawPos[2], 1], mvp)
-	clipspace[0] /= clipspace[3]
-	clipspace[1] /= clipspace[3]
-
-	//console.log(clipspace)
-	var pixelX = (clipspace[0] * 0.5 +0.5) *gl.canvas.width
-	var pixelY = (clipspace[1] * -0.5 + 0.5) *gl.canvas.height
-
-	div.style.left = Math.floor(pixelX) + "px"
-	div.style.top = Math.floor(pixelY) + "px"
+	
+	
+	clipspace[0] /= clipspace[2]
+	clipspace[1] /= clipspace[2]
+	var pixelX = (clipspace[0] * 0.5 + 0.5) * gl.canvas.width
+	var pixelY = (clipspace[1] * -0.5 + 0.5) * gl.canvas.height
+	if(clipspace[2] >= 0) {
+		div.style.left = Math.floor(pixelX) + "px"
+		div.style.top = Math.floor(pixelY) + "px"
+	}	
 	//console.log(div.style.left, div.style.top)
     }
 }
@@ -343,6 +409,13 @@ function keyDown(e: KeyboardEvent){
     if(e.code == "ControlLeft") {
         user.velocity[1] = -user.speed
     }
+    if(e.code == "KeyB") {
+    	if(user.speed >= 0.1) {
+		user.speed -= 0.1
+	} else {
+		user.speed -= 0.001
+	}
+    }
 }
 function keyUp(e: KeyboardEvent){
     if(e.code == "KeyW") {
@@ -362,7 +435,7 @@ function keyUp(e: KeyboardEvent){
     }
     if(e.code == "ControlLeft") {
         user.velocity[1] = 0
-    }
+    } 
 }
 let rotating = false
 function click(e: MouseEvent){
@@ -404,7 +477,7 @@ function whee(e: WheelEvent) {
         moveBackward = true
     }
 }
-function introTo3DDemo() {
+function introTo3DDemo(datas: AstroData[]) {
     
     const canvas = document.getElementById('demo-canvas');
     if (!canvas || !(canvas instanceof HTMLCanvasElement)) {
@@ -445,7 +518,7 @@ function introTo3DDemo() {
         return;
     }
   
-    let system = new System(gl, posAttrib, colorAttrib, divContainerElement);
+    let system = new System(gl, posAttrib, colorAttrib, divContainerElement, datas);
 
     const matWorld = mat4.create();
     const matView = mat4.create();
@@ -466,7 +539,7 @@ function introTo3DDemo() {
         const cameraZ = user.userPosition[2];
 
 	// Updating system where every second updates a day
-        system.updateSystem(dt*86400)
+        system.updateSystem(dt)//*86000)
         
         mat4.lookAt(
             matView,
@@ -476,7 +549,7 @@ function introTo3DDemo() {
 
         mat4.perspective(
             matProj,
-            glMatrix.toRadian(65),
+            glMatrix.toRadian(50),
             canvas.width / canvas.height,
             0.001, 100.0);
             
@@ -513,21 +586,55 @@ function introTo3DDemo() {
     requestAnimationFrame(frame);
 }
 
-interface Model {
-	result: string;
+interface AstroData {
+	x: number;
+	xe: number;
+	y: number;
+	ye: number;
+	z: number;
+	ze: number;
+	xv: number;
+	xve: number;
+	yv: number;
+	yve: number;
+	zv: number;
+	zve: number;
 }
-async function getPlanetData(): Promise<string> {
-	console.log("Hello")	
-	const response = await fetch("http://localhost:8000/planet-state/{310}", {method: 'GET'})
-	if(!response.ok) {
-		throw new Error("HTTP error! status: ${response.status}")
+
+async function getPlanetData(): Promise<AstroData[]> {
+	let ids: string[] = ["10", "199", "299", "399", "499", "599", "699", "799", "899", "999"]	
+	let datas: AstroData[] = []
+	const date = new Date(Date.now())
+	let year = String(date.getFullYear())
+	let month = String(date.getMonth())
+	if(month.length != 2) {
+		month = "0"+month
 	}
-	const data: string = await response.json()
-	return data
+	let day = String(date.getDate())
+	if(day.length != 2) {
+		day = "0"+day
+	}
+	let hour = String(date.getHours())
+	if(hour.length != 2) {
+		hour = "0"+hour
+	}
+	let minutes = String(date.getMinutes())
+	if(minutes.length != 2) {
+		minutes = "0"+minutes
+	}
+	let time = year+"-"+month+"-"+day+"-"+hour+":"+minutes
+	for(let value of ids) {
+		let response = await fetch("http://localhost:8000/planet-state?id="+value+"&timestamp="+time, {method: 'GET'})
+		if(!response.ok) {
+			throw new Error("HTTP error! status: ${response.status}")
+		}
+		let data: AstroData = await response.json()
+		datas.push(data)
+	}
+	return datas
 }
 try {
-	getPlanetData().then(stri => console.log(stri))
-	introTo3DDemo();
+	getPlanetData().then(datas => introTo3DDemo(datas))
 } catch(e) {
     showError(`Unhandled JavaScript exception: ${e}`)
 }
