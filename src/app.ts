@@ -1,8 +1,10 @@
 import { showError, createStaticVertexBuffer, getContext, createStaticIndexBuffer, createProgram} from "./gl-utils"
 import { CUBE_INDICES, CUBE_VERTICES, TABLE_VERTICES, TABLE_INDICES, create3dPosColorInterleavedVao, PYRAMID_INDICES, PYRAMID_VERTICES, Sphere } from "./geometry";
 import { glMatrix, mat4, quat, ReadonlyVec3, vec3, vec4 } from "gl-matrix";
+import { UserController } from "./controllers/UserController";
+import { ApiClient } from "./services/ApiClient";
+import planetData from "./config/astroobjectdata.json";
 
-//.00000000006674
 const G = (6.6743*(10**-11));
 
 const vertexShaderSourceCode = `#version 300 es
@@ -32,79 +34,13 @@ const fragmentShaderSourceCode = `#version 300 es
         outputColor = vec4(fragmentColor, 1.0);
     }`;
 
-
-class UserController {
-    public userPosition: vec3;
-    public velocity: vec3;
-    public userOrientation: vec3;
-    public setUserOrientation: vec3;
-    public targetUserOrientation: vec3;
-    public rotationVec: vec3;
-    public isMoving: boolean;
-    public speed: number;
-    constructor() {
-        this.userPosition = vec3.fromValues(0, 0, 1000)
-        this.velocity = vec3.fromValues(0, 0, 0)
-        this.userOrientation = vec3.fromValues(0, -90, 0)
-        this.setUserOrientation = vec3.fromValues(0, 0, 0)
-        this.targetUserOrientation = vec3.fromValues(0, 0, 0)
-        this.rotationVec = vec3.fromValues(0, 0, 0)
-        this.isMoving = false;
-        this.speed = 10
-    }
-
-    public translate(dt: number) {
-        let movementVec = vec3.fromValues(0,0,0);
-        if(this.velocity[2] > 0) {
-            //vec3.scale(movementVec, vec3.fromValues((Math.cos(glMatrix.toRadian(user.userOrientation[0]))*Math.cos(glMatrix.toRadian(user.userOrientation[1]))), Math.sin(glMatrix.toRadian(user.userOrientation[0])), (Math.cos(glMatrix.toRadian(user.userOrientation[0]))*Math.sin(glMatrix.toRadian(user.userOrientation[1])))), this.speed)
-            vec3.scale(movementVec, vec3.fromValues(Math.cos(glMatrix.toRadian(user.userOrientation[1])), 0, Math.sin(glMatrix.toRadian(user.userOrientation[1]))), this.speed)
-
-        } else if(this.velocity[2] < 0) {
-            vec3.scale(movementVec, vec3.fromValues(Math.cos(glMatrix.toRadian(user.userOrientation[1])), 0, Math.sin(glMatrix.toRadian(user.userOrientation[1]))), -this.speed)
-
-        }
-        if(this.velocity[0] > 0) {
-            vec3.scale(movementVec, vec3.fromValues(Math.cos(glMatrix.toRadian(90+user.userOrientation[1])), 0, Math.sin(glMatrix.toRadian(90+user.userOrientation[1]))), this.speed)
-
-        } else if(this.velocity[0] < 0) {
-            vec3.scale(movementVec, vec3.fromValues(Math.cos(glMatrix.toRadian(90+user.userOrientation[1])), 0, Math.sin(glMatrix.toRadian(90+user.userOrientation[1]))), -this.speed)
-        }
-        if(this.velocity[1] > 0) {
-            vec3.scale(movementVec, vec3.fromValues(0, 1, 0), this.speed)
-
-        } else if(this.velocity[1] < 0) {
-            vec3.scale(movementVec, vec3.fromValues(0, 1, 0), -this.speed)
-        }
-
-        vec3.add(this.userPosition, this.userPosition, movementVec)//(vec3.scale(this.velocity, this.velocity, dt)))
-    }
-    public rotate() {
-        //this.userOrientation[0] += 1
-        //console.log(this.userOrientation[0], this.userOrientation[1])
-        let d = Math.sqrt((this.targetUserOrientation[0]-this.setUserOrientation[0])**2 + (this.targetUserOrientation[1]-this.setUserOrientation[1])**2)
-        if(d >= 5) {
-            let newX = this.setUserOrientation[0] + (10/d)*(this.targetUserOrientation[0]-this.setUserOrientation[0])
-            let newY = this.setUserOrientation[1] + (10/d)*(this.targetUserOrientation[1]-this.setUserOrientation[1])
-            //console.log(this.userOrientation[0], this.userOrientation[1])
-            this.userOrientation[1] -= (newX - this.setUserOrientation[0])/5
-            this.userOrientation[0] +=  (newY - this.setUserOrientation[1])/5
-    
-            this.setUserOrientation[0] = newX
-            this.setUserOrientation[1] = newY
-        } else {
-            this.targetUserOrientation[0] = this.setUserOrientation[0]
-            this.targetUserOrientation[1] = this.setUserOrientation[1]
-        }
-    } 
-}
-
 let user = new UserController();
 
 class System {
     public AstroObjects: AstroObject[]
     private minDistance: number
     private maxDistance: number
-    constructor(gl: WebGL2RenderingContext, posAttrib: number, colorAttrib: number, divContainerElement: Element, datas: AstroData[]) {
+    constructor(gl: WebGL2RenderingContext, posAttrib: number, colorAttrib: number, divContainerElement: Element, datas: AstroData[], user: UserController) {
         this.minDistance = 999999
         this.maxDistance = -1
         this.AstroObjects = []
@@ -128,7 +64,7 @@ class System {
         
         let shape0 = new Shape(vec3.fromValues(0, 1, 0), .05, vec3.fromValues(0, 1, 0), glMatrix.toRadian(1), glMatrix.toRadian(7.25), glMatrix.toRadian(.1), 0, 0, ellipsoidVao, ellipsoid.indices.length)
 	let shape1 = new Shape(vec3.fromValues(0, 1, 0), 1.392, vec3.fromValues(0, 1, 0), glMatrix.toRadian(1), glMatrix.toRadian(7.25), glMatrix.toRadian(.1), 0, 0, ellipsoidVao, ellipsoid.indices.length)
-        let shape2 = new Shape(vec3.fromValues(1, .75, -1), .00350531609, vec3.fromValues(0, 1, 0), 0, 0,  glMatrix.toRadian(.5), glMatrix.toRadian(1), 1, ellipsoidVao, ellipsoid.indices.length)
+	let shape2 = new Shape(vec3.fromValues(1, .75, -1), .00350531609, vec3.fromValues(0, 1, 0), 0, 0,  glMatrix.toRadian(.5), glMatrix.toRadian(1), 1, ellipsoidVao, ellipsoid.indices.length)
         let shape3 = new Shape(vec3.fromValues(1, .25, -1), .00869540229, vec3.fromValues(0, 1, 0), 0, 0,  glMatrix.toRadian(.5), glMatrix.toRadian(1), 1, ellipsoidVao, ellipsoid.indices.length)
         let shape4 = new Shape(vec3.fromValues(1, .25, -1), .0091637931, vec3.fromValues(0, 1, 0), 0, 0,  glMatrix.toRadian(.5), glMatrix.toRadian(1), 1, ellipsoidVao, ellipsoid.indices.length)
         let shape5 = new Shape(vec3.fromValues(1, .25, -1), .0024, vec3.fromValues(0, 1, 0), 0, 0,  glMatrix.toRadian(.5), glMatrix.toRadian(1), 1, ellipsoidVao, ellipsoid.indices.length)
@@ -186,9 +122,9 @@ class System {
 				break
 		}
 		if(i != 0){
-			this.AstroObjects.push(new AstroObject(curShape, name, mass, 1, 1, vec3.fromValues((datas[i].x*(10**(datas[i].xe+3))), (datas[i].z*(10**(datas[i].ze+3))), -datas[i].y*(10**(datas[i].ye+3))), vec3.fromValues((datas[i].xv*(10**(datas[i].xve+3))), (datas[i].zv*(10**(datas[i].zve+3))), -datas[i].yv*(10**(datas[i].yve+3))), divContainerElement))
+			this.AstroObjects.push(new AstroObject(curShape, name, mass, 1, 1, vec3.fromValues((datas[i].x*(10**(datas[i].xe+3))), (datas[i].z*(10**(datas[i].ze+3))), -datas[i].y*(10**(datas[i].ye+3))), vec3.fromValues((datas[i].xv*(10**(datas[i].xve+3))), (datas[i].zv*(10**(datas[i].zve+3))), -datas[i].yv*(10**(datas[i].yve+3))), divContainerElement, user))
 		} else {
-			this.AstroObjects.push(new AstroObject(curShape, name, mass, 1, 1, vec3.fromValues(0, 0, 0), vec3.fromValues(0, 0, 0), divContainerElement))
+			this.AstroObjects.push(new AstroObject(curShape, name, mass, 1, 1, vec3.fromValues(0, 0, 0), vec3.fromValues(0, 0, 0), divContainerElement, user))
 		}
 	}
 	/*
@@ -244,23 +180,82 @@ class AstroObject {
     public textNode: Text;
     public txt: Element;
 
-    constructor(public shape: Shape, public name: string, public mass: number, public polarRadius: number, public equatorialRadius: number, public position: vec3, public initialVelocity: vec3, divContainerElement: Element) {
+    constructor(public shape: Shape, public name: string, public mass: number, public polarRadius: number, public equatorialRadius: number, public position: vec3, public initialVelocity: vec3, divContainerElement: Element, user: UserController) {
         this.acceleration = [0,0,0]
         this.velocity = this.initialVelocity
-        
+    
+        //this.userOrientation[0] += 1
+       // console.log(this.setUserOrientation[0], this.targetUserOrientation[0])
     	this.div = document.createElement("div")
-    	this.div.className = "floating-div"
+	if(this.name == "Sun")
+		this.div.className = "sun"
+	else {
+		this.div.className = "planet"
+	}
 	this.txt = document.createElement("div")
 	this.txt.className = "text-node"
 	let dot = document.createElement("div")
-	dot.className = "small-point"
+	//dot.className = "small-point"
     	this.textNode = document.createTextNode(name)
     	this.txt.appendChild(this.textNode)
-	this.div.appendChild(dot)
+	//this.div.appendChild(dot)
 	this.div.appendChild(this.txt)
 	let thatName = this.name
 	let thatPos = this.position
-	this.div.addEventListener('click', function() {console.log(thatName, thatPos})
+	let thatUsr = user
+	this.div.addEventListener('dblclick', function() {
+		//console.log(thatUsr.userOrientation[0], thatUsr.userOrientation[1])
+		//thatUsr.setUserOrientation[0] = 0 
+		//thatUsr.setUserOrientation[1] = thatUsr.userOrientation[1]6
+		//thatUsr.targetUserOrientation[0] = (thatPos[1]-thatUsr.userPosition[1]) * (10**-9)
+		//let theta = Math.asin(i
+		let a = vec3.create()
+		vec3.subtract(a, thatPos, thatUsr.userPosition) // hypotenuse
+		vec3.normalize(a, a)
+		console.log("a: ", a)
+		let q = vec3.create()
+		let b = vec3.create()
+		b[0] = -thatUsr.userPosition[0]
+		b[1] = -thatUsr.userPosition[1]
+		b[2] = -thatUsr.userPosition[2]
+		vec3.add(q, b, thatUsr.viewVec)
+		console.log("q: ", q)
+		vec3.normalize(q, q)
+		console.log("normal q:", q)
+		console.log("b: ", b)
+		let c = vec3.create()
+		vec3.subtract(c, a, b)
+		console.log("c: ", c)
+		//console.log("t:", t)
+	      	let targetVec = vec3.create()
+		//vec3.normalize(targetVec, t)
+		//console.log(thatUsr.viewVec)
+		thatUsr.viewVec[0] += targetVec[0]
+		thatUsr.viewVec[1] += targetVec[1]
+		thatUsr.viewVec[2] += targetVec[2] +1
+		//console.log(thatUsr.userOrientation[0], thatUsr.userOrientation[1])
+		//console.log(thatUsr.viewVec)
+		//let j = vec3.create()
+		//vec3.subtract(j, thatUsr.viewVec, thatUsr.userPosition)
+		//console.log(j)
+		/*thatUsr.targetUserOrientation[0] = theta
+		thatUsr.targetUserOrientation[1] = -phi
+		thatUsr.setUserOrientation[0] = thatUsr.userOrientation[0]
+		thatUsr.setUserOrientation[1] = thatUsr.userOrientation[1]
+		*/
+	       	
+		
+		//console.log(thatUsr.userOrientation[0], thatUsr.userOrientation[1])
+		//thatUsr.userOrientation[0] = theta
+		//thatUsr.userOrientation[1] = phi
+		//console.log(thatUsr.userOrientation[0], thatUsr.userOrientation[1])
+		//console.log(thati, phi)
+		//let theta = Math.asin(thatUsr.userPosition[1] - i
+		//console.log(thatUsr.targetUserOrientation[0], thatUsr.setUserOrientation[0])//0, (phi*180)/3.14, thatUsr.userOrientation)
+		//console.log(thatUsr.targetUserOrientation[1], thatUsr.setUserOrientation[1])
+         	//thatUsr.targetUserOrientation[1] = thatUsr.userPosition[1] - thatPos[1]
+	})
+		
     	divContainerElement.appendChild(this.div)
     }
 
@@ -518,7 +513,7 @@ function introTo3DDemo(datas: AstroData[]) {
         return;
     }
   
-    let system = new System(gl, posAttrib, colorAttrib, divContainerElement, datas);
+    let system = new System(gl, posAttrib, colorAttrib, divContainerElement, datas, user);
 
     const matWorld = mat4.create();
     const matView = mat4.create();
@@ -539,12 +534,12 @@ function introTo3DDemo(datas: AstroData[]) {
         const cameraZ = user.userPosition[2];
 
 	// Updating system where every second updates a day
-        system.updateSystem(dt)//*86000)
+        system.updateSystem(dt)//86000)
         
         mat4.lookAt(
             matView,
             vec3.fromValues(cameraX, cameraY, cameraZ),
-            vec3.fromValues(cameraX+(Math.cos(glMatrix.toRadian(user.userOrientation[0]))*Math.cos(glMatrix.toRadian(user.userOrientation[1]))), cameraY+Math.sin(glMatrix.toRadian(user.userOrientation[0])), cameraZ+(Math.cos(glMatrix.toRadian(user.userOrientation[0]))*Math.sin(glMatrix.toRadian(user.userOrientation[1])))),
+            vec3.fromValues(user.viewVec[0], user.viewVec[1], user.viewVec[2]),
             vec3.fromValues(0, 1, 0));
 
         mat4.perspective(
@@ -560,7 +555,7 @@ function introTo3DDemo(datas: AstroData[]) {
         canvas.width = canvas.clientWidth * devicePixelRatio;
         canvas.height = canvas.clientHeight * devicePixelRatio;
 
-        gl.clearColor(0.02, 0.02, 0.02, 1);
+        gl.clearColor(0.0039, 0.0429, 0.0976, 1);
         gl.clear(gl.DEPTH_BUFFER_BIT | gl.COLOR_BUFFER_BIT);
         gl.enable(gl.DEPTH_TEST);
         
@@ -634,7 +629,11 @@ async function getPlanetData(): Promise<AstroData[]> {
 	return datas
 }
 try {
-	getPlanetData().then(datas => introTo3DDemo(datas))
+	for (const key of Object.keys(planetData)) {
+		console.log(key)
+	}	
+	let x = new ApiClient()
+	//getPlanetData().then(datas => introTo3DDemo(datas))
 } catch(e) {
     showError(`Unhandled JavaScript exception: ${e}`)
 }
