@@ -127,15 +127,6 @@ class System {
 			this.AstroObjects.push(new AstroObject(curShape, name, mass, 1, 1, vec3.fromValues(0, 0, 0), vec3.fromValues(0, 0, 0), divContainerElement, user))
 		}
 	}
-	/*
-	// Need to pull these values from JPL Horizon API and convert
-	this.AstroObjects.push(new AstroObject(shape1, "", (1.99*(10**30)), 1, 1, vec3.fromValues(0, 0, 0), vec3.fromValues(0, 0, 0), divContainerElement)) // Sun
-        this.AstroObjects.push(new AstroObject(shape2, "Mercury", (3.285*(10**23)), 1, 1, vec3.fromValues((-.5146596575*(10**11)), (-.413779996*(10**11)), (.0133902546*(10**11))), vec3.fromValues(20563.71359, -35787.82873, -4810.78023), divContainerElement)) // Mercury
-	this.AstroObjects.push(new AstroObject(shape3, "Venus", (48.685*(10**23)), 2, 1, vec3.fromValues((-1.00251152320*(10**11)), (-.39705354015*(10**11)), (.0523900652169227*(10**11))), vec3.fromValues(12657.91636, -32720.35568, -1179.84856), divContainerElement)) // Venus
-	this.AstroObjects.push(new AstroObject(shape4, "Earth", (6*(10**24)), 1, 1, vec3.fromValues((-1.4508401140*(10**11)), (-.3651260404*(10**11)), (.0000256939*(10**11))), vec3.fromValues(6798.33795, -29000.20290, 1.66591), divContainerElement)) // Earth
-	this.AstroObjects.push(new AstroObject(shape5, "", (7.3*(10**22)), 1, 1, vec3.fromValues((-1.4508602393*(10**11)), (-.3613932604*(10**11)), (.0003691849*(10**11))), vec3.fromValues(5754.86345, -28941.89452, 1.90289), divContainerElement)) // Moon
-        this.AstroObjects.push(new AstroObject(shape6, "Mars", (6.4191*(10**23)), 4, 1, vec3.fromValues((-2.1675293037*(10**11)), (1.2253271140*(10**11)), (0.0788317509*(10**11))), vec3.fromValues(-11014.83043, -19023.13965, -128.54525), divContainerElement)) // Mars
-i*/    
     }
 
     public updateSystem(dt: number) {
@@ -232,28 +223,7 @@ class AstroObject {
 		//console.log(thatUsr.viewVec)
 		thatUsr.viewVec[0] += targetVec[0]
 		thatUsr.viewVec[1] += targetVec[1]
-		thatUsr.viewVec[2] += targetVec[2] +1
-		//console.log(thatUsr.userOrientation[0], thatUsr.userOrientation[1])
-		//console.log(thatUsr.viewVec)
-		//let j = vec3.create()
-		//vec3.subtract(j, thatUsr.viewVec, thatUsr.userPosition)
-		//console.log(j)
-		/*thatUsr.targetUserOrientation[0] = theta
-		thatUsr.targetUserOrientation[1] = -phi
-		thatUsr.setUserOrientation[0] = thatUsr.userOrientation[0]
-		thatUsr.setUserOrientation[1] = thatUsr.userOrientation[1]
-		*/
-	       	
-		
-		//console.log(thatUsr.userOrientation[0], thatUsr.userOrientation[1])
-		//thatUsr.userOrientation[0] = theta
-		//thatUsr.userOrientation[1] = phi
-		//console.log(thatUsr.userOrientation[0], thatUsr.userOrientation[1])
-		//console.log(thati, phi)
-		//let theta = Math.asin(thatUsr.userPosition[1] - i
-		//console.log(thatUsr.targetUserOrientation[0], thatUsr.setUserOrientation[0])//0, (phi*180)/3.14, thatUsr.userOrientation)
-		//console.log(thatUsr.targetUserOrientation[1], thatUsr.setUserOrientation[1])
-         	//thatUsr.targetUserOrientation[1] = thatUsr.userPosition[1] - thatPos[1]
+		thatUsr.viewVec[2] += targetVec[2] + 1
 	})
 		
     	divContainerElement.appendChild(this.div)
@@ -371,9 +341,9 @@ class Shape {
 		div.style.left = Math.floor(pixelX) + "px"
 		div.style.top = Math.floor(pixelY) + "px"
 	}	
-	//console.log(div.style.left, div.style.top)
     }
 }
+
 function scrollFunc() {
 }
 let moveForward = false
@@ -581,21 +551,6 @@ function introTo3DDemo(datas: AstroData[]) {
     requestAnimationFrame(frame);
 }
 
-interface AstroData {
-	x: number;
-	xe: number;
-	y: number;
-	ye: number;
-	z: number;
-	ze: number;
-	xv: number;
-	xve: number;
-	yv: number;
-	yve: number;
-	zv: number;
-	zve: number;
-}
-
 async function getPlanetData(): Promise<AstroData[]> {
 	let ids: string[] = ["10", "199", "299", "399", "499", "599", "699", "799", "899", "999"]	
 	let datas: AstroData[] = []
@@ -629,10 +584,11 @@ async function getPlanetData(): Promise<AstroData[]> {
 	return datas
 }
 try {
-	for (const key of Object.keys(planetData)) {
+	/*for (const key of Object.keys(planetData)) {
 		console.log(key)
-	}	
+	}*/	
 	let x = new ApiClient()
+	x.getEphemeris(new Date(Date.now()), Object.keys(planetData))
 	//getPlanetData().then(datas => introTo3DDemo(datas))
 } catch(e) {
     showError(`Unhandled JavaScript exception: ${e}`)

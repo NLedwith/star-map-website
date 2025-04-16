@@ -1,4 +1,5 @@
 import { config } from '../config/config';
+import { AstroObjectState } from '../interfaces/AstroObjectState';
 
 
 export class ApiClient {
@@ -6,8 +7,9 @@ export class ApiClient {
 	constructor() {
 		console.log(`${config.apiUrl}/planet-state`);
 	}
-/*
-	async function getEphemeris(time: Date): Promise<AstroData[]> {
-		let ids: string[] = ["10", "199", "299", "399", "499", "599", "699", "799", "899", "999"]
-	}*/
+
+	async getEphemeris(time: Date, astroIdList: string[]): Promise<string[]> {
+		console.log(astroIdList)
+		return astroIdList
+	}
 }
