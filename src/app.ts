@@ -329,6 +329,9 @@ class Shape {
         gl.bindVertexArray(null);
 	
 	
+
+	
+	//THIS NEEDS TO BE ADDED IN THE LODMANAGER
 	let clipspace = vec4.fromValues(0,0,0,0)
 	vec4.transformMat4(clipspace, [drawPos[0], drawPos[1], drawPos[2], 1], mvp)
 	
@@ -442,7 +445,7 @@ function whee(e: WheelEvent) {
         moveBackward = true
     }
 }
-function introTo3DDemo(datas: AstroData[]) {
+function runSimulation(datas: AstroData[]) {
     
     const canvas = document.getElementById('demo-canvas');
     if (!canvas || !(canvas instanceof HTMLCanvasElement)) {
@@ -551,45 +554,15 @@ function introTo3DDemo(datas: AstroData[]) {
     requestAnimationFrame(frame);
 }
 
-async function getPlanetData(): Promise<AstroData[]> {
-	let ids: string[] = ["10", "199", "299", "399", "499", "599", "699", "799", "899", "999"]	
-	let datas: AstroData[] = []
-	const date = new Date(Date.now())
-	let year = String(date.getFullYear())
-	let month = String(date.getMonth())
-	if(month.length != 2) {
-		month = "0"+month
-	}
-	let day = String(date.getDate())
-	if(day.length != 2) {
-		day = "0"+day
-	}
-	let hour = String(date.getHours())
-	if(hour.length != 2) {
-		hour = "0"+hour
-	}
-	let minutes = String(date.getMinutes())
-	if(minutes.length != 2) {
-		minutes = "0"+minutes
-	}
-	let time = year+"-"+month+"-"+day+"-"+hour+":"+minutes
-	for(let value of ids) {
-		let response = await fetch("http://localhost:8000/planet-state?id="+value+"&timestamp="+time, {method: 'GET'})
-		if(!response.ok) {
-			throw new Error("HTTP error! status: ${response.status}")
-		}
-		let data: AstroData = await response.json()
-		datas.push(data)
-	}
-	return datas
-}
 try {
-	/*for (const key of Object.keys(planetData)) {
-		console.log(key)
-	}*/	
-	let x = new ApiClient()
-	x.getEphemeris(new Date(Date.now()), Object.keys(planetData))
-	//getPlanetData().then(datas => introTo3DDemo(datas))
+	
+	const api = new ApiClient();
+	const curEphemeris = await api.getEphemeris(new Date(Date.now()), Object.keys(planetData));
+	// Initialize UserController
+	// Initialize AstroObjects
+	// Initialize AstroSystem
+	//
+
 } catch(e) {
     showError(`Unhandled JavaScript exception: ${e}`)
 }
