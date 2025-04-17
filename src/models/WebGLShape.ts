@@ -1,9 +1,11 @@
+import { vec3, ReadonlyVec3, mat4, quat } from "gl-matrix";
+
 
 export class WebGLShape {
 	
 	private _matWorld: mat4;
-	private _scaleVec = vec3;
-	private _rotation = quat;
+	private _scaleVec: vec3;
+	private _rotation: quat;
 
 	constructor(
 		private _pos: vec3,
@@ -12,8 +14,6 @@ export class WebGLShape {
 		private _yRotationAngle: number,
 		private _zRotationAngle: number,
 		private _rotationSpeed: number,
-		private _orbitLocation: number,
-		private _orbitDistance: number,
 		public readonly vao: WebGLVertexArrayObject,
 		public readonly numIndices: number) {
 		this._matWorld = mat4.create();
@@ -36,6 +36,8 @@ export class WebGLShape {
 		quat.setAxisAngle(yQuat, vec3.fromValues(0, 1, 0), this._yRotationAngle);
 		quat.setAxisAngle(zQuat, vec3.fromValues(0, 0, 1), this._zRotationAngle);
 		quat.multiply(this._rotation, zQuat, yQuat);
+		
+		vec3.set(this._scaleVec, this._scale, this._scale, this._scale);
 
 		let drawPos = vec3.create();
 		vec3.scale(drawPos, this._pos, 10**-9);
@@ -49,7 +51,7 @@ export class WebGLShape {
 		gl.uniformMatrix4fv(matWorldUniform, false, this._matWorld);
 
 		gl.bindVertexArray(this.vao);
-		gl.drawElements(gl.TRIANGLES, this._numIndices, gl.UNSIGNED_SHORT, 0);
+		gl.drawElements(gl.TRIANGLES, this.numIndices, gl.UNSIGNED_SHORT, 0);
 		gl.bindVertexArray(null);
 
 

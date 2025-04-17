@@ -16,7 +16,7 @@
 	},
 	"399": {
 		"name": "Earth",
-		"mass": "(6 * (10**24)",
+		"mass": "(6 * (10**24))",
 		"subsystem": []
 	},
 	"499": {
@@ -44,7 +44,7 @@
 		"mass": "(1.0241 * (10 ** 26))",
 		"subsystem": []
 	},
-	"DES=20000001;": {
+	"Ceres": {
 		"name": "Ceres",
 		"mass": "(9.3839 * (10**20))",
 		"subsystem": []
@@ -59,7 +59,7 @@
 		"mass": "(4.01 * (10**21))",
 		"subsystem": []
 	},
-	"DES=20136472;": {
+	"Makemake": {
 		"name": "Makemake",
 		"mass": "(3.1 * (10**21))",
 		"subsystem": []

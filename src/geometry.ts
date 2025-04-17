@@ -1,4 +1,4 @@
-import { showError } from "./gl-utils";
+import { showError } from "./utils/gl-utils";
 
 // Iterate through each sector
 // Iterate through each stack

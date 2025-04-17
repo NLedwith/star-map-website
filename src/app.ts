@@ -1,9 +1,14 @@
-import { showError, createStaticVertexBuffer, getContext, createStaticIndexBuffer, createProgram} from "./gl-utils"
+import { showError, createStaticVertexBuffer, getContext, createStaticIndexBuffer, createProgram} from "./utils/gl-utils"
 import { CUBE_INDICES, CUBE_VERTICES, TABLE_VERTICES, TABLE_INDICES, create3dPosColorInterleavedVao, PYRAMID_INDICES, PYRAMID_VERTICES, Sphere } from "./geometry";
 import { glMatrix, mat4, quat, ReadonlyVec3, vec3, vec4 } from "gl-matrix";
 import { UserController } from "./controllers/UserController";
 import { ApiClient } from "./services/ApiClient";
 import planetData from "./config/astroobjectdata.json";
+import { AstroObjectConfig } from "./interfaces/AstroObjectConfig";
+import { LODManager } from "./models/LODManager";
+import { WebGLShape } from "./models/WebGLShape";
+import { AstroObject } from "./models/AstroObject";
+import { AstroSystem } from "./models/AstroSystem";
 
 const G = (6.6743*(10**-11));
 
@@ -40,13 +45,13 @@ class System {
     public AstroObjects: AstroObject[]
     private minDistance: number
     private maxDistance: number
-    constructor(gl: WebGL2RenderingContext, posAttrib: number, colorAttrib: number, divContainerElement: Element, datas: AstroData[], user: UserController) {
+    constructor(gl: WebGL2RenderingContext, posAttrib: number, colorAttrib: number, divContainerElement: Element, user: UserController) {
         this.minDistance = 999999
         this.maxDistance = -1
         this.AstroObjects = []
 
         //
-        let ellipsoid = new Sphere(36, 36, 1, 1);
+	let ellipsoid = new Sphere(36, 36, 1, 1);
 
         let ellipsoidVertices = createStaticVertexBuffer(gl, ellipsoid.vertices);
         let ellipsoiIndices = createStaticIndexBuffer(gl, ellipsoid.indices);
@@ -69,7 +74,7 @@ class System {
         let shape4 = new Shape(vec3.fromValues(1, .25, -1), .0091637931, vec3.fromValues(0, 1, 0), 0, 0,  glMatrix.toRadian(.5), glMatrix.toRadian(1), 1, ellipsoidVao, ellipsoid.indices.length)
         let shape5 = new Shape(vec3.fromValues(1, .25, -1), .0024, vec3.fromValues(0, 1, 0), 0, 0,  glMatrix.toRadian(.5), glMatrix.toRadian(1), 1, ellipsoidVao, ellipsoid.indices.length)
         let shape6 = new Shape(vec3.fromValues(1, .25, -1), .0048, vec3.fromValues(0, 1, 0), 0, 0,  glMatrix.toRadian(.5), glMatrix.toRadian(1), 1, ellipsoidVao, ellipsoid.indices.length)
-        
+	/*        
 	for(let i = 0; i < datas.length; i++) {
 		let mass = 0
 		let curShape = shape0
@@ -122,11 +127,11 @@ class System {
 				break
 		}
 		if(i != 0){
-			this.AstroObjects.push(new AstroObject(curShape, name, mass, 1, 1, vec3.fromValues((datas[i].x*(10**(datas[i].xe+3))), (datas[i].z*(10**(datas[i].ze+3))), -datas[i].y*(10**(datas[i].ye+3))), vec3.fromValues((datas[i].xv*(10**(datas[i].xve+3))), (datas[i].zv*(10**(datas[i].zve+3))), -datas[i].yv*(10**(datas[i].yve+3))), divContainerElement, user))
+		this.AstroObjects.push(new AstroObject(curShape, name, mass, 1, 1, vec3.fromValues((datas[i].x*(10**(datas[i].xe+3))), (datas[i].z*(10**(datas[i].ze+3))), -datas[i].y*(10**(datas[i].ye+3))), vec3.fromValues((datas[i].xv*(10**(datas[i].xve+3))), (datas[i].zv*(10**(datas[i].zve+3))), -datas[i].yv*(10**(datas[i].yve+3))), divContainerElement, user))
 		} else {
 			this.AstroObjects.push(new AstroObject(curShape, name, mass, 1, 1, vec3.fromValues(0, 0, 0), vec3.fromValues(0, 0, 0), divContainerElement, user))
 		}
-	}
+	}*/
     }
 
     public updateSystem(dt: number) {
@@ -163,7 +168,7 @@ class System {
 function printPlanet(name: string) {
 	console.log(name)
 }
-// Hold info on astro objects along with drawing stuff
+/*
 class AstroObject {
     public acceleration: vec3;
     public velocity: vec3;
@@ -245,8 +250,6 @@ class AstroObject {
         let v0 = vec3.create()
         vec3.copy(r0, this.position)
         vec3.scale(v0, this.velocity, dt)
-
-        // Set new position
         vec3.add(i1, r0, v0)
         vec3.scale(i2, this.acceleration, (0.5 * (dt**2)))
         vec3.add(this.position, i1, i2)
@@ -264,7 +267,7 @@ class AstroObject {
         vec3.scale(i1, this.acceleration, dt)
         vec3.add(this.velocity, v0, i1)
     }
-}
+}*/
 
 class Shape {
     private matWorld = mat4.create();
@@ -445,7 +448,7 @@ function whee(e: WheelEvent) {
         moveBackward = true
     }
 }
-function runSimulation(datas: AstroData[]) {
+async function main() {
     
     const canvas = document.getElementById('demo-canvas');
     if (!canvas || !(canvas instanceof HTMLCanvasElement)) {
@@ -485,8 +488,8 @@ function runSimulation(datas: AstroData[]) {
             `matWorld=${!!matWorldUniform} matViewProj=${!!matViewProjUniform}`);
         return;
     }
-  
-    let system = new System(gl, posAttrib, colorAttrib, divContainerElement, datas, user);
+    let astroObjectList = await buildAstroObjects(gl, posAttrib, colorAttrib);
+    let system = new AstroSystem(astroObjectList);
 
     const matWorld = mat4.create();
     const matView = mat4.create();
@@ -507,7 +510,7 @@ function runSimulation(datas: AstroData[]) {
         const cameraZ = user.userPosition[2];
 
 	// Updating system where every second updates a day
-        system.updateSystem(dt)//86000)
+        system.updateAstroSystem(dt*86000)
         
         mat4.lookAt(
             matView,
@@ -547,17 +550,87 @@ function runSimulation(datas: AstroData[]) {
      
 	
 	// Here I need to check distance from camera for each item and choose to draw HTML element or 3d model
-        system.AstroObjects.forEach((obj) => obj.shape.draw(gl, matWorldUniform, obj.position, obj.div, obj.textNode, obj.name, matViewProj))
+        system._astroObjectList.forEach((obj) => obj._lodManager.draw(dt, 1500, gl, matWorldUniform, obj.position,  matViewProj))
       
         requestAnimationFrame(frame);
     }
     requestAnimationFrame(frame);
 }
 
-try {
-	
+async function buildAstroObjects(gl: WebGL2RenderingContext, posAttrib: number, colorAttrib: number): Promise<AstroObject[]>{
+	let ret: AstroObject[] = []
 	const api = new ApiClient();
+
 	const curEphemeris = await api.getEphemeris(new Date(Date.now()), Object.keys(planetData));
+
+	let ellipsoid = new Sphere(36, 36, 1, 1);
+
+        let ellipsoidVertices = createStaticVertexBuffer(gl, ellipsoid.vertices);
+        let ellipsoidIndices = createStaticIndexBuffer(gl, ellipsoid.indices);
+
+        if (!ellipsoidVertices || !ellipsoidIndices) {
+            showError(`Failed to create geo: ellipsoid: (v=${!!ellipsoidVertices}, i=${ellipsoidIndices})`)
+	    return ret;
+        }
+        let ellipsoidVao = create3dPosColorInterleavedVao(
+            gl, ellipsoidVertices, ellipsoidIndices, posAttrib, colorAttrib);
+        if (!ellipsoidVao) {
+            showError(`Failed to create VAOs: ellipsoid=${!!ellipsoidVao}`);
+        	return ret;
+	}
+
+	
+    	var divContainerElement = document.querySelector("#divcontainer")!
+
+	const initialData = planetData as Record<string, AstroObjectConfig>;
+	Object.entries(initialData).forEach(([key, data]) => {
+		// Get WebGLShape
+		let shape = new WebGLShape(vec3.create(), 
+					  1,
+					vec3.fromValues(0,1,0),
+					  glMatrix.toRadian(4),
+					  glMatrix.toRadian(7),
+					  glMatrix.toRadian(.1),
+					  ellipsoidVao,
+					  ellipsoid.indices.length);
+		let lodManager = new LODManager(shape, divContainerElement, data.name);
+		let position = vec3.fromValues((curEphemeris[key].xPos * (10**curEphemeris[key].xPosExpn)), (curEphemeris[key].yPos * (10**curEphemeris[key].yPosExpn)), (curEphemeris[key].zPos * (10**curEphemeris[key].zPosExpn)));
+		vec3.scale(position, position, 1000);
+
+		let velocity = vec3.fromValues((curEphemeris[key].xVel * (10**curEphemeris[key].xVelExpn)), (curEphemeris[key].yVel * (10**curEphemeris[key].yVelExpn)), (curEphemeris[key].zVel * (10**curEphemeris[key].zVelExpn)));
+
+		vec3.scale(velocity, velocity, 1000);
+		let acceleration = vec3.create();
+
+		let name = data.name;
+		let mass = eval(data.mass);
+		let pRadius = 1;
+		let eRadius = 1;
+		let astroObject = new AstroObject(position,
+						 velocity,
+						 acceleration,
+						 name,
+						 mass,
+						 pRadius,
+						 eRadius,
+						 lodManager);
+
+
+
+		let newObj = new AstroObject(position, velocity, acceleration, name, mass, pRadius, eRadius, lodManager);
+		console.log(`Key: ${key}, Name: ${data.name}, Mass: ${data.mass}`);
+		console.log(`Position: ${curEphemeris[key].xPos}`)	
+		ret.push(newObj);
+		console.log(ret);
+	});
+	
+
+
+	return ret
+}
+
+try {
+	main()
 	// Initialize UserController
 	// Initialize AstroObjects
 	// Initialize AstroSystem
