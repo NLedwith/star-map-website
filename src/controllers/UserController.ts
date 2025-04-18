@@ -12,7 +12,7 @@ export class UserController {
     public viewVec: vec3;
     
     constructor() {
-        this.userPosition = vec3.fromValues(0, 0, 1000)
+        this.userPosition = vec3.fromValues(0, 0, 20)
         this.velocity = vec3.fromValues(0, 0, 0)
         this.userOrientation = vec3.fromValues(0, -90, 0)
 	this.viewVec = vec3.fromValues(0, 0, -1)
@@ -25,37 +25,38 @@ export class UserController {
 
     public translate(dt: number) {
         let movementVec = vec3.fromValues(0,0,0);
+	let curSpeed = this.speed * dt
         if(this.velocity[2] > 0) {
             
-            vec3.scale(movementVec, vec3.fromValues(Math.cos(glMatrix.toRadian(this.userOrientation[1])), 0, Math.sin(glMatrix.toRadian(this.userOrientation[1]))), this.speed)
+            vec3.scale(movementVec, vec3.fromValues(Math.cos(glMatrix.toRadian(this.userOrientation[1])), 0, Math.sin(glMatrix.toRadian(this.userOrientation[1]))), curSpeed)
 
         } else if(this.velocity[2] < 0) {
-            vec3.scale(movementVec, vec3.fromValues(Math.cos(glMatrix.toRadian(this.userOrientation[1])), 0, Math.sin(glMatrix.toRadian(this.userOrientation[1]))), -this.speed)
+            vec3.scale(movementVec, vec3.fromValues(Math.cos(glMatrix.toRadian(this.userOrientation[1])), 0, Math.sin(glMatrix.toRadian(this.userOrientation[1]))), -curSpeed)
 
         }
         if(this.velocity[0] > 0) {
-            vec3.scale(movementVec, vec3.fromValues(Math.cos(glMatrix.toRadian(90+this.userOrientation[1])), 0, Math.sin(glMatrix.toRadian(90+this.userOrientation[1]))), this.speed)
+            vec3.scale(movementVec, vec3.fromValues(Math.cos(glMatrix.toRadian(90+this.userOrientation[1])), 0, Math.sin(glMatrix.toRadian(90+this.userOrientation[1]))), curSpeed)
 
         } else if(this.velocity[0] < 0) {
-            vec3.scale(movementVec, vec3.fromValues(Math.cos(glMatrix.toRadian(90+this.userOrientation[1])), 0, Math.sin(glMatrix.toRadian(90+this.userOrientation[1]))), -this.speed)
+            vec3.scale(movementVec, vec3.fromValues(Math.cos(glMatrix.toRadian(90+this.userOrientation[1])), 0, Math.sin(glMatrix.toRadian(90+this.userOrientation[1]))), -curSpeed)
         }
         if(this.velocity[1] > 0) {
-            vec3.scale(movementVec, vec3.fromValues(0, 1, 0), this.speed)
+            vec3.scale(movementVec, vec3.fromValues(0, 1, 0), curSpeed)
 
         } else if(this.velocity[1] < 0) {
-            vec3.scale(movementVec, vec3.fromValues(0, 1, 0), -this.speed)
+            vec3.scale(movementVec, vec3.fromValues(0, 1, 0), -curSpeed)
         }
 
         vec3.add(this.userPosition, this.userPosition, movementVec)//(vec3.scale(this.velocity, this.velocity, dt)))
     }
-    public rotate() {
+    public rotate(dt: number) {
         //this.userOrientation[0] += 1
        // console.log(this.setUserOrientation[0], this.targetUserOrientation[0])
         
 	let d = Math.sqrt((this.targetUserOrientation[0]-this.setUserOrientation[0])**2 + (this.targetUserOrientation[1]-this.setUserOrientation[1])**2)
         if(d >= 5) {
-            let newX = this.setUserOrientation[0] + (10/d)*(this.targetUserOrientation[0]-this.setUserOrientation[0])
-            let newY = this.setUserOrientation[1] + (10/d)*(this.targetUserOrientation[1]-this.setUserOrientation[1])
+            let newX = this.setUserOrientation[0] + (dt*this.speed*(30/d))*(this.targetUserOrientation[0]-this.setUserOrientation[0])
+            let newY = this.setUserOrientation[1] + (dt*this.speed*(30/d))*(this.targetUserOrientation[1]-this.setUserOrientation[1])
             //console.log(this.userOrientation[0], this.userOrientation[1])
             this.userOrientation[1] -= (newX - this.setUserOrientation[0])/5
             this.userOrientation[0] +=  (newY - this.setUserOrientation[1])/5

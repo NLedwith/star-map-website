@@ -503,7 +503,7 @@ async function main() {
         lastFrameTime = thisFrameTime;
 
         user.translate(dt)
-        user.rotate()
+        user.rotate(dt)
 
         const cameraX = user.userPosition[0];
         const cameraY = user.userPosition[1];
@@ -550,7 +550,7 @@ async function main() {
      
 	
 	// Here I need to check distance from camera for each item and choose to draw HTML element or 3d model
-        system._astroObjectList.forEach((obj) => obj._lodManager.draw(dt, 1500, gl, matWorldUniform, obj.position,  matViewProj))
+        system._astroObjectList.forEach((obj) => obj._lodManager.draw(dt, vec3.distance(user.userPosition, obj.position), gl, matWorldUniform, obj.position,  matViewProj))
       
         requestAnimationFrame(frame);
     }
@@ -589,15 +589,15 @@ async function buildAstroObjects(gl: WebGL2RenderingContext, posAttrib: number, 
 					  1,
 					vec3.fromValues(0,1,0),
 					  glMatrix.toRadian(4),
-					  glMatrix.toRadian(7),
-					  glMatrix.toRadian(.1),
+					  glMatrix.toRadian(20),
+					  glMatrix.toRadian(1),
 					  ellipsoidVao,
 					  ellipsoid.indices.length);
 		let lodManager = new LODManager(shape, divContainerElement, data.name);
-		let position = vec3.fromValues((curEphemeris[key].xPos * (10**curEphemeris[key].xPosExpn)), (curEphemeris[key].yPos * (10**curEphemeris[key].yPosExpn)), (curEphemeris[key].zPos * (10**curEphemeris[key].zPosExpn)));
+		let position = vec3.fromValues((curEphemeris[key].xPos * (10**curEphemeris[key].xPosExpn)), (curEphemeris[key].zPos * (10**curEphemeris[key].zPosExpn)), -(curEphemeris[key].yPos * (10**curEphemeris[key].yPosExpn)));
 		vec3.scale(position, position, 1000);
 
-		let velocity = vec3.fromValues((curEphemeris[key].xVel * (10**curEphemeris[key].xVelExpn)), (curEphemeris[key].yVel * (10**curEphemeris[key].yVelExpn)), (curEphemeris[key].zVel * (10**curEphemeris[key].zVelExpn)));
+		let velocity = vec3.fromValues((curEphemeris[key].xVel * (10**curEphemeris[key].xVelExpn)), (curEphemeris[key].zVel * (10**curEphemeris[key].zVelExpn)), -(curEphemeris[key].yVel * (10**curEphemeris[key].yVelExpn)));
 
 		vec3.scale(velocity, velocity, 1000);
 		let acceleration = vec3.create();
