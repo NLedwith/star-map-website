@@ -12,15 +12,15 @@ export class UserController {
     public viewVec: vec3;
     
     constructor() {
-        this.userPosition = vec3.fromValues(0, 0, 20)
+        this.userPosition = vec3.fromValues(0, 10000, 10000)
         this.velocity = vec3.fromValues(0, 0, 0)
-        this.userOrientation = vec3.fromValues(0, -90, 0)
+        this.userOrientation = vec3.fromValues(-45, -90, 0)
 	this.viewVec = vec3.fromValues(0, 0, -1)
         this.setUserOrientation = vec3.fromValues(0, 0, 0)
         this.targetUserOrientation = vec3.fromValues(0, 0, 0)
         this.rotationVec = vec3.fromValues(0, 0, 0)
         this.isMoving = false;
-        this.speed = 10
+        this.speed = 1000
     }
 
     public translate(dt: number) {

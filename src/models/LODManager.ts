@@ -9,7 +9,11 @@ export class LODManager {
 		divContainerElement: Element, 
 	name: string) {
 		this._div = document.createElement("div");
-		this._div.className = "planet";
+		if (name == "Sun") {
+			this._div.className = "sun";
+		} else {
+			this._div.className = "planet";
+		}
 		let txt = document.createElement("div");
 		txt.className = "text-node";
 		let dot = document.createElement("div");
@@ -27,7 +31,7 @@ export class LODManager {
 		    mvp: mat4) {
 
 		this._shape.draw(gl, matWorldUniform, newPos, dt);
-		if (cameraDistance <= 1000000) {
+		if (cameraDistance <= 10000) {
 			this._div.style.visibility = 'hidden';
 		} else {
 			let drawPos = vec3.create();

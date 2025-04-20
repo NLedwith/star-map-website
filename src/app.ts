@@ -449,13 +449,16 @@ function whee(e: WheelEvent) {
     }
 }
 async function main() {
-    
-    const canvas = document.getElementById('demo-canvas');
+	
+	
+//	var loader = document.querySelector("#loader")!;
+    	const canvas = document.getElementById('demo-canvas');
     if (!canvas || !(canvas instanceof HTMLCanvasElement)) {
         showError('Could not get Canvas reference');
         return;
     }
-    
+   var loader = document.querySelector("#loader")!; 
+ 
     var divContainerElement = document.querySelector("#divcontainer")!
 
 
@@ -494,7 +497,9 @@ async function main() {
     const matWorld = mat4.create();
     const matView = mat4.create();
     const matProj = mat4.create();
-
+	// Make loader invisible here
+    loader.classList.add("loader-overlay--hidden");
+   
     let lastFrameTime = performance.now();
     const frame = function () {
         const thisFrameTime = performance.now();
@@ -630,6 +635,7 @@ async function buildAstroObjects(gl: WebGL2RenderingContext, posAttrib: number, 
 }
 
 try {
+
 	main()
 	// Initialize UserController
 	// Initialize AstroObjects
