@@ -497,8 +497,17 @@ async function main() {
     const matWorld = mat4.create();
     const matView = mat4.create();
     const matProj = mat4.create();
-	// Make loader invisible here
-    loader.classList.add("loader-overlay--hidden");
+    
+    const loaderText = document.getElementById('loader-text');
+    if (loaderText != null) {
+	loaderText.style.animationIterationCount = '1';
+    	loaderText.addEventListener('animationend', (event) => {
+		loader.classList.add("loader-overlay--hidden");
+    	});
+    } else {
+    	loader.classList.add("loader-overlay--hidden");
+    }
+    //loader.classList.add("loader-overlay--hidden");
    
     let lastFrameTime = performance.now();
     const frame = function () {
@@ -553,9 +562,20 @@ async function main() {
 
         gl.uniformMatrix4fv(matViewProjUniform, false, matViewProj);
      
-	
+
+	system._astroObjectList = system._astroObjectList.sort((a, b) => {
+		let iVecA = vec3.create();
+		let iVecB = vec3.create();
+		vec3.scale(iVecA, a.position, 10**-9);
+		vec3.scale(iVecB, b.position, 10**-9);
+		return vec3.distance(user.userPosition, iVecB)-vec3.distance(user.userPosition, iVecA)
+	});	
 	// Here I need to check distance from camera for each item and choose to draw HTML element or 3d model
-        system._astroObjectList.forEach((obj) => obj._lodManager.draw(dt, vec3.distance(user.userPosition, obj.position), gl, matWorldUniform, obj.position,  matViewProj))
+        let i = 0
+	system._astroObjectList.forEach((obj) => {
+		obj._lodManager.draw(dt, vec3.distance(user.userPosition, obj.position), gl, matWorldUniform, obj.position,  matViewProj, i)
+		i++;
+	});
       
         requestAnimationFrame(frame);
     }

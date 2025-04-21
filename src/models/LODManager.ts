@@ -28,7 +28,8 @@ export class LODManager {
 		    gl: WebGL2RenderingContext,
 		    matWorldUniform: WebGLUniformLocation,
 		    newPos: vec3,
-		    mvp: mat4) {
+		    mvp: mat4,
+		   drawOrder: number) {
 
 		this._shape.draw(gl, matWorldUniform, newPos, dt);
 		if (cameraDistance <= 10000) {
@@ -45,6 +46,7 @@ export class LODManager {
 			let pixelY = (clipspace[1] * -0.5 + 0.5) * gl.canvas.height;
 			if (clipspace[2] >= 0) {
 				this._div.style.visibility = 'visible';
+				this._div.style.zIndex = `${drawOrder}`;
 				this._div.style.left = `${Math.floor(pixelX)}px`;
 				this._div.style.top = `${Math.floor(pixelY)}px`;
 			} else {

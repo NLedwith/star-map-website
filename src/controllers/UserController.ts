@@ -55,8 +55,8 @@ export class UserController {
         
 	let d = Math.sqrt((this.targetUserOrientation[0]-this.setUserOrientation[0])**2 + (this.targetUserOrientation[1]-this.setUserOrientation[1])**2)
         if(d >= 5) {
-            let newX = this.setUserOrientation[0] + (dt*this.speed*(30/d))*(this.targetUserOrientation[0]-this.setUserOrientation[0])
-            let newY = this.setUserOrientation[1] + (dt*this.speed*(30/d))*(this.targetUserOrientation[1]-this.setUserOrientation[1])
+            let newX = this.setUserOrientation[0] + (10/d)*(this.targetUserOrientation[0]-this.setUserOrientation[0])
+            let newY = this.setUserOrientation[1] + (10/d)*(this.targetUserOrientation[1]-this.setUserOrientation[1])
             //console.log(this.userOrientation[0], this.userOrientation[1])
             this.userOrientation[1] -= (newX - this.setUserOrientation[0])/5
             this.userOrientation[0] +=  (newY - this.setUserOrientation[1])/5
