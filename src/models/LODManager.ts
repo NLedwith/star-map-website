@@ -1,13 +1,16 @@
 import { vec3, vec4, mat4 } from "gl-matrix";
 import { WebGLShape } from "./WebGLShape";
+import { UserController } from "../controllers/UserController";
+import { AstroObject } from "./AstroObject";
 
 
 export class LODManager {
 	private _div: HTMLDivElement;	
+	public astroObject: AstroObject | null;
 	constructor(
 		private _shape: WebGLShape,	
 		divContainerElement: Element, 
-	name: string) {
+	name: string, public userController: UserController) {
 		this._div = document.createElement("div");
 		if (name == "Sun") {
 			this._div.className = "sun";
@@ -21,8 +24,20 @@ export class LODManager {
 		txt.appendChild(textNode);
 		this._div.appendChild(txt);
 		divContainerElement.appendChild(this._div);
+		this.astroObject = null;
 		}
-
+	public setAstroObject(ast: AstroObject) {	
+		this.astroObject = ast;
+		let that = this;
+		this._div.onclick = function() { if(that.astroObject != null) {that.userController.setCoupledAstroObject(that.astroObject)}};
+	}
+	public testClick() {
+		if (this.astroObject != null) {
+			this.userController.setCoupledAstroObject(this.astroObject);
+		} else {
+			console.log("No coupled object", this.astroObject);
+		}
+	}
 	public draw(dt: number,
 		    cameraDistance: number,
 		    gl: WebGL2RenderingContext,

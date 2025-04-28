@@ -491,7 +491,7 @@ async function main() {
             `matWorld=${!!matWorldUniform} matViewProj=${!!matViewProjUniform}`);
         return;
     }
-    let astroObjectList = await buildAstroObjects(gl, posAttrib, colorAttrib);
+    let astroObjectList = await buildAstroObjects(gl, posAttrib, colorAttrib, user);
     let system = new AstroSystem(astroObjectList);
 
     const matWorld = mat4.create();
@@ -582,7 +582,7 @@ async function main() {
     requestAnimationFrame(frame);
 }
 
-async function buildAstroObjects(gl: WebGL2RenderingContext, posAttrib: number, colorAttrib: number): Promise<AstroObject[]>{
+async function buildAstroObjects(gl: WebGL2RenderingContext, posAttrib: number, colorAttrib: number, user: UserController): Promise<AstroObject[]>{
 	let ret: AstroObject[] = []
 	const api = new ApiClient();
 
@@ -618,7 +618,7 @@ async function buildAstroObjects(gl: WebGL2RenderingContext, posAttrib: number, 
 					  glMatrix.toRadian(1),
 					  ellipsoidVao,
 					  ellipsoid.indices.length);
-		let lodManager = new LODManager(shape, divContainerElement, data.name);
+		let lodManager = new LODManager(shape, divContainerElement, data.name, user);
 		let position = vec3.fromValues((curEphemeris[key].xPos * (10**curEphemeris[key].xPosExpn)), (curEphemeris[key].zPos * (10**curEphemeris[key].zPosExpn)), -(curEphemeris[key].yPos * (10**curEphemeris[key].yPosExpn)));
 		vec3.scale(position, position, 1000);
 
@@ -639,6 +639,7 @@ async function buildAstroObjects(gl: WebGL2RenderingContext, posAttrib: number, 
 						 pRadius,
 						 eRadius,
 						 lodManager);
+		astroObject._lodManager.setAstroObject(astroObject);
 
 
 
