@@ -460,7 +460,11 @@ async function main() {
    var loader = document.querySelector("#loader")!; 
  
     var divContainerElement = document.querySelector("#divcontainer")!
-
+    var dataContainer = document.getElementById("datacontainer")!
+    var dataContainerName = document.getElementById("datacontainerName")!
+    var dataContainerPosition = document.getElementById("datacontainerPosition")!
+    var dataContainerVelocity = document.getElementById("datacontainerVelocity")!
+    var dataContainerAcceleration = document.getElementById("datacontainerAcceleration")!
 
     window.addEventListener("keydown", keyDown);
     window.addEventListener("keyup", keyUp);
@@ -524,7 +528,7 @@ async function main() {
         const cameraZ = user.userPosition[2];
 
 	// Updating system where every second updates a day
-        system.updateAstroSystem(dt)
+        system.updateAstroSystem(dt*100000)
         
         mat4.lookAt(
             matView,
@@ -571,6 +575,16 @@ async function main() {
 		vec3.scale(iVecB, b.position, 10**-9);
 		return vec3.distance(user.userPosition, iVecB)-vec3.distance(user.userPosition, iVecA)
 	});	
+
+	if(user.coupledAstroObject == null) {
+		dataContainer.style.visibility = "hidden";
+	} else {
+		dataContainer.style.visibility = "visible";
+		dataContainerName.innerHTML = user.coupledAstroObject.name;
+		dataContainerPosition.innerHTML = `${user.coupledAstroObject.position[0]}, ${user.coupledAstroObject.position[1]}, ${user.coupledAstroObject.position[2]}`;
+		dataContainerVelocity.innerHTML = `${user.coupledAstroObject.velocity[0]}, ${user.coupledAstroObject.velocity[1]}, ${user.coupledAstroObject.velocity[2]}`;
+		dataContainerAcceleration.innerHTML = `${user.coupledAstroObject.acceleration[0]}, ${user.coupledAstroObject.acceleration[1]}, ${user.coupledAstroObject.acceleration[2]}`;
+	}
 
 	// Here I need to check distance from camera for each item and choose to draw HTML element or 3d model
         let i = 0

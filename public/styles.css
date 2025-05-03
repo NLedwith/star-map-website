@@ -227,6 +227,24 @@ html, head, body {
 	display: inline-block;
 	z-index: 4;
     }
+
+    .astro-data--container {
+	color: white;
+	font-family: 'Futura';
+	font-size: large;
+    	position: absolute;
+	bottom: 50px;
+	left: 100px;
+	width: fit-content;
+	height: fit-content;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: start;
+	padding: 1rem;
+	border-radius: 10px;
+    }
     div.planet {
 	position: absolute;
 	float: left;
