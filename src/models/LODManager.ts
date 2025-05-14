@@ -42,16 +42,14 @@ export class LODManager {
 		    isVisible: boolean,
 		    gl: WebGL2RenderingContext,
 		    matWorldUniform: WebGLUniformLocation,
-		    newPos: vec3,
+		    drawPos: vec3,
 		    mvp: mat4,
 		   drawOrder: number) {
 
-		this._shape.draw(gl, matWorldUniform, newPos, dt);
+		this._shape.draw(gl, matWorldUniform, drawPos, dt);
 		if (!isVisible) {
 			this._div.style.visibility = 'hidden';
 		} else {
-			let drawPos = vec3.create();
-			vec3.scale(drawPos, newPos, 10**-9);
 			let clipspace = vec4.create();
 			vec4.transformMat4(clipspace, [drawPos[0], drawPos[1], drawPos[2], 1], mvp);
 			clipspace[0] /= clipspace[2];

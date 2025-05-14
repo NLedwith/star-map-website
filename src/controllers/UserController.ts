@@ -1,5 +1,6 @@
 import { glMatrix, mat4, quat, ReadonlyVec3, vec3, vec4 } from "gl-matrix";
 import { AstroObject } from "../models/AstroObject";
+import * as bVec3 from "../utils/big-vec3";
 
 export class UserController {
     public userPosition: vec3;
@@ -33,8 +34,7 @@ export class UserController {
         if(this.velocity[2] > 0) {
             if (this.coupledAstroObject != null) {
 		let iVec = vec3.create();
-		let tVec = vec3.create();
-		vec3.scale(tVec, this.coupledAstroObject.position, 10**-9)
+		let tVec = bVec3.getScaledVec3(this.coupledAstroObject.position, 10, -9);
 		vec3.subtract(iVec, tVec, this.userPosition);
 		vec3.normalize(iVec, iVec);
 		vec3.scale(movementVec, iVec, curSpeed);
@@ -45,8 +45,7 @@ export class UserController {
         } else if(this.velocity[2] < 0) {
 		if (this.coupledAstroObject != null) {
 			let iVec = vec3.create();
-			let tVec = vec3.create();
-			vec3.scale(tVec, this.coupledAstroObject.position, 10**-9)
+			let tVec = bVec3.getScaledVec3(this.coupledAstroObject.position, 10, -9);
 			vec3.subtract(iVec, tVec, this.userPosition);
 			vec3.normalize(iVec, iVec);
 			vec3.scale(movementVec, iVec, -curSpeed);
@@ -58,10 +57,9 @@ export class UserController {
         if(this.velocity[0] > 0) {
 		if (this.coupledAstroObject != null) {
 			let iVec = vec3.create();
-			let tVec = vec3.create();
+			let tVec = bVec3.getScaledVec3(this.coupledAstroObject.position, 10, -9);
 			let qVec = vec3.create();
 			let cVec = vec3.fromValues(0, 1, 0);
-			vec3.scale(tVec, this.coupledAstroObject.position, 10**-9)
 			vec3.subtract(iVec, tVec, this.userPosition);
 			vec3.cross(qVec, cVec, iVec)
 			vec3.normalize(qVec, qVec);
@@ -72,10 +70,9 @@ export class UserController {
         } else if(this.velocity[0] < 0) {
 		if (this.coupledAstroObject != null) {
 			let iVec = vec3.create();
-			let tVec = vec3.create();
+			let tVec = bVec3.getScaledVec3(this.coupledAstroObject.position, 10, -9);
 			let qVec = vec3.create();
 			let cVec = vec3.fromValues(0, 1, 0);
-			vec3.scale(tVec, this.coupledAstroObject.position, 10**-9)
 			vec3.subtract(iVec, tVec, this.userPosition);
 			vec3.cross(qVec, cVec, iVec)
 			vec3.normalize(qVec, qVec);
@@ -89,10 +86,9 @@ export class UserController {
 
 		if (this.coupledAstroObject != null) {
 			let iVec = vec3.create();
-			let tVec = vec3.create();
+			let tVec = bVec3.getScaledVec3(this.coupledAstroObject.position, 10, -9);
 			let qVec = vec3.create();
 			let cVec = vec3.fromValues(0, 1, 0);
-			vec3.scale(tVec, this.coupledAstroObject.position, 10**-9)
 			vec3.subtract(iVec, tVec, this.userPosition);
 			vec3.cross(qVec, cVec, iVec)
 			vec3.cross(cVec, qVec, iVec)
@@ -107,10 +103,9 @@ export class UserController {
 
 		if (this.coupledAstroObject != null) {
 			let iVec = vec3.create();
-			let tVec = vec3.create();
+			let tVec = bVec3.getScaledVec3(this.coupledAstroObject.position, 10, -9);
 			let qVec = vec3.create();
 			let cVec = vec3.fromValues(0, 1, 0);
-			vec3.scale(tVec, this.coupledAstroObject.position, 10**-9)
 			vec3.subtract(iVec, tVec, this.userPosition);
 			vec3.cross(qVec, cVec, iVec)
 			vec3.cross(cVec, qVec, iVec)
@@ -152,8 +147,7 @@ export class UserController {
 	this.viewVec[1] = this.userPosition[1]+Math.sin(glMatrix.toRadian(this.userOrientation[0]))
         this.viewVec[2] = this.userPosition[2]+(Math.cos(glMatrix.toRadian(this.userOrientation[0]))*Math.sin(glMatrix.toRadian(this.userOrientation[1])))
 	} else {
-		let i1 = vec3.create()
-		vec3.scale(i1, this.coupledAstroObject.position, 10**-9);
+		let i1 = bVec3.getScaledVec3(this.coupledAstroObject.position, 10, -9);
 		vec3.subtract(this.viewVec, i1, this.userPosition);
 		vec3.add(this.viewVec, this.viewVec, this.userPosition);
 		let tVec = vec3.create()
@@ -174,16 +168,13 @@ export class UserController {
 
     private _getCurSpeed(): number {
     	let curSpeed = this.speed;
-	if (this.coupledAstroObject != null) {
-		let scaledObjPos = vec3.create();
-		vec3.scale(scaledObjPos, this.coupledAstroObject.position, 10**-9)
+	if (this.coupledAstroObject != null) { 
+		let scaledObjPos = bVec3.getScaledVec3(this.coupledAstroObject.position, 10, -9);
 		let dist = vec3.distance(this.userPosition, scaledObjPos)
-		let posSpeed = .1;
-		console.log(dist);
-		//curSpeed = this.speed*(dist**2);
+		let posSpeed = 100000000;
 		
-		
-		curSpeed = dist;
+		curSpeed = dist 
+		console.log("curSpeed:", curSpeed, dist)
 	}
 	return curSpeed;
     }
