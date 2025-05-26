@@ -1319,6 +1319,27 @@
     "ra": [9, 37, 34.9],
     "dec": [29, 31, 41]
   },
+
+  "J0927-6335": {
+    "name": "J0927-6335",
+    "system": "J0927-6335",
+    "spectralType": "D",
+    "absoluteMagnitude": -50,
+    "mass": 0.04,
+    "d": 25846.32,
+    "ra": [9, 27, 42.691],
+    "dec": [-63, 35, 40.328]
+  },
+  "Gaia20eae": {
+    "name": "Gaia20eae",
+    "system": "Gaia20eae",
+    "spectralType": "T",
+    "absoluteMagnitude": -50,
+    "mass": 0.04,
+    "d": 28487.15,
+    "ra": [19, 25, 40.63],
+    "dec": [15, 7, 46.582]
+  },
   "2MASS J05241392-0336543": {
     "name": "2MASS J05241392-0336543",
     "system": "2MASS J05241392-0336543",
