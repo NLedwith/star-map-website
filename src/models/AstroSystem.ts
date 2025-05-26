@@ -49,8 +49,10 @@ export class AstroSystem {
 				bVec3.normalize(gravityAccelJ, gravityAccelJ);
 
 				const sqDistance = bVec3.distance(this._astroObjectList[i].position, this._astroObjectList[j].position);
+				
 
 				// Calculate the magnitude of the force of gravity for both objects				
+					
 				const gMagI = (Big(G.toString()).multiply(this._astroObjectList[j].mass)).divide(sqDistance.pow(2), 20, RoundingMode.CEILING);
 				const gMagJ = (Big(G.toString()).multiply(this._astroObjectList[i].mass)).divide(sqDistance.pow(2), 20, RoundingMode.CEILING);
 				
@@ -66,7 +68,7 @@ export class AstroSystem {
 	}
 
 	public getDrawList(userPosition: vec3): AstroObject[] {
-		let evalList: AstroObject[] = []
+		/*let evalList: AstroObject[] = []
 		for(let k = 0; k < this._astroObjectList.length; k++) {
 			if(this._astroObjectList[k].name == "Sun") {
 				evalList.push(this._astroObjectList[k])
@@ -87,7 +89,7 @@ export class AstroSystem {
 				}
 			}
 		}
-		console.log(retList)
-		return retList;
+		console.log(retList)*/
+		return this._astroObjectList;
 	}
 }

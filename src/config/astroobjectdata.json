@@ -5,7 +5,7 @@
 		"radius": 696349,
 		"axialTilt": 0.1265364,
 		"rotationSpeed": 0,
-		"systemSpace": 40000,
+		"systemSpace": 9007199254740991,
 		"subsystem": ["Mercury", "Venus", "Earth",  "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Ceres", "Pluto", "Haumea", "Makemake", "Eris"]
 	},
 	"199": {

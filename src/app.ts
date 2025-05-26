@@ -5,12 +5,14 @@ import { UserController } from "./controllers/UserController";
 import { ApiClient } from "./services/ApiClient";
 import planetData from "./config/astroobjectdata.json";
 import { AstroObjectConfig } from "./interfaces/AstroObjectConfig";
+import { StarConfig } from "./interfaces/StarConfig";
 import { LODManager } from "./models/LODManager";
 import { WebGLShape } from "./models/WebGLShape";
 import { AstroObject } from "./models/AstroObject";
 import { AstroSystem } from "./models/AstroSystem";
 import  * as bVec3  from "./utils/big-vec3";
 import { BigDecimal, Big, MathContext, MC } from "bigdecimal.js";
+import starData from "./config/nearbystars.json";
 
 const G = (6.6743*(10**-11));
 
@@ -222,7 +224,7 @@ async function main() {
         const cameraZ = user.userPosition[2];
 
 	// Updating system where every second updates a day
-        system.updateAstroSystem(dt)
+        //system.updateAstroSystem(dt)
         
         mat4.lookAt(
             matView,
@@ -261,7 +263,7 @@ async function main() {
         gl.uniformMatrix4fv(matViewProjUniform, false, matViewProj);
      
 
-
+	/*
 	system._astroObjectList = system._astroObjectList.sort((a, b) => {
 		let bIVecA = bVec3.create();
 		let bIVecB = bVec3.create();
@@ -270,7 +272,7 @@ async function main() {
 		let iVecA = vec3.fromValues(Number(bIVecA[0].toBigInt()), Number(bIVecA[1].toBigInt()), Number(bIVecA[2].toBigInt()));
 		let iVecB = vec3.fromValues(Number(bIVecB[0].toBigInt()), Number(bIVecB[1].toBigInt()), Number(bIVecB[2].toBigInt()));
 		return vec3.distance(user.userPosition, iVecB)-vec3.distance(user.userPosition, iVecA)
-	});	
+	});*/	
 
 	if(user.coupledAstroObject == null) {
 		dataContainer.style.visibility = "hidden";
@@ -288,9 +290,7 @@ async function main() {
 	let v1 = bVec3.create();
 	let v2 = bVec3.create();
 	system._astroObjectList.forEach((obj) => {
-		let bIVecA = bVec3.create();
-		bVec3.scale(bIVecA, obj.position, Big("10").pow(-9, new MC(20)));
-		obj._lodManager.draw(dt, retList.includes(obj), gl, matWorldUniform, vec3.fromValues(Number(bIVecA[0].toEngineeringString()), Number(bIVecA[1].toEngineeringString()), Number(bIVecA[2].toEngineeringString())), matViewProj, i);
+		obj._lodManager.draw(dt, retList.includes(obj), gl, matWorldUniform, obj.drawPos, matViewProj, i, vec3.distance(user.userPosition, obj.drawPos));
 		i++;
 	});
       
@@ -309,8 +309,9 @@ async function buildAstroObjects(gl: WebGL2RenderingContext, posAttrib: number, 
 
 	
     	var divContainerElement = document.querySelector("#divcontainer")!
-
+	var sun: AstroObject;
 	const initialData = planetData as Record<string, AstroObjectConfig>;
+	let types = ["O", "B", "A", "F", "G", "K", "M"];
 	Object.entries(initialData).forEach(([key, data]) => {
 		// Get WebGLShape
 		let size = data.radius/696349
@@ -325,7 +326,7 @@ async function buildAstroObjects(gl: WebGL2RenderingContext, posAttrib: number, 
 					  gl,
 					  posAttrib,
 					  colorAttrib);
-		let lodManager = new LODManager(shape, divContainerElement, data.name, user);
+		let lodManager = new LODManager(shape, divContainerElement, data.name, user, "planet", 0, "");
 		let x0 = Big((curEphemeris[key].xPos).toString()).multiply(Big("10").pow((curEphemeris[key].xPosExpn), new MC(20)));
 		let y0 = Big((curEphemeris[key].yPos).toString()).multiply(Big("10").pow((curEphemeris[key].yPosExpn), new MC(20)));
 		let z0 = Big((curEphemeris[key].zPos).toString()).multiply(Big("10").pow((curEphemeris[key].zPosExpn), new MC(20)));
@@ -359,12 +360,67 @@ async function buildAstroObjects(gl: WebGL2RenderingContext, posAttrib: number, 
 
 
 		//let newObj = new AstroObject(position, velocity, acceleration, name, mass, pRadius, eRadius, lodManager);
+		if (astroObject.name == "Sun") {
+			sun = astroObject;
+		}
 		ret.push(astroObject);
 	});
 	
+	
+	const starsData = starData as Record<string, StarConfig>;
+	Object.entries(starsData).forEach(([key, data]) => {
+		let size = 1;
+		let tilt = 0;
+		let rSpeed = 0;
+		let shape = new WebGLShape(vec3.create(), 
+					size,
+					vec3.fromValues(0,1,0),
+					glMatrix.toRadian(0),
+					tilt,
+					rSpeed,
+					gl,
+					posAttrib,
+					colorAttrib);
+	
+		//let data = new StarConfig((Math.random() * 100000).toString(), "", typ, (Math.random() * 7), 1, (Math.random() * 700000), [(Math.random() * 24), (Math.random() * 60), (Math.random() * 60)], [negFlag * (Math.random()*90), Math.random() * 60, Math.random() * 60]);
+		let lodManager = new LODManager(shape, divContainerElement, data.name, user, data.spectralType, 6, data.spectralType);
+		
+		let alpha = (data.ra[0] + (data.ra[1]/60) + (data.ra[2]/3600)) * 15 * (Math.PI/180)
+		let delta = (data.dec[0] + (data.dec[1]/60) + (data.dec[2]/3600)) * (Math.PI/180)
+		let dist = Big(data.d.toString()).multiply(Big("9.461").multiply(Big("10").pow(15)))
+		let x0 = dist.multiply(Big(Math.cos(delta).toString()).multiply(Big(Math.cos(alpha).toString()))).toString();
+		let y0 = dist.multiply(Big(Math.cos(delta).toString()).multiply(Big(Math.sin(alpha).toString()))).toString();
+		let z0 = dist.multiply(Big(Math.sin(delta).toString())).toString();
+		let position = bVec3.fromValues(x0, z0, y0);
 
+		let velocity = bVec3.fromValues("0", "0", "0");
 
-	return ret
+		let acceleration = bVec3.create();
+
+		let name = data.name;
+		let mass = Big(data.mass.toString()).multiply(Big("1.989").multiply(Big("10").pow(30)));
+		let pRadius = 1;
+		let eRadius = 1;
+
+		let astroObject = new AstroObject(position,
+					velocity,
+					acceleration,
+					name,
+					mass,
+					0,
+					[],
+					pRadius,
+					eRadius,
+					lodManager);
+		astroObject._lodManager.setAstroObject(astroObject);
+
+		ret.push(astroObject);
+		
+		sun.subsystem.push(name);
+	});
+	
+	
+	return ret;
 }
 
 try {

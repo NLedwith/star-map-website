@@ -173,8 +173,7 @@ export class UserController {
 		let dist = vec3.distance(this.userPosition, scaledObjPos)
 		let posSpeed = 100000000;
 		
-		curSpeed = dist 
-		console.log("curSpeed:", curSpeed, dist)
+		curSpeed = 2* dist 
 	}
 	return curSpeed;
     }

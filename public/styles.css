@@ -283,6 +283,525 @@ html, head, body {
 
     }
 
+    div.brown-dwarf {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 3px);
+	left: calc(50% - 3px);
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background-color: orange;
+	box-shadow: inset 0 0 1px 2px maroon,
+	0px 0px 3px 3px maroon,
+	0px 0px 10px 4px maroon;
+    }
+    div.M-type-very-dim {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 1px);
+	left: calc(50% - 1px);
+    	background-color: rgba(255, 165, 0, .8);
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+    }
+    div.M-type-dim {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 1px);
+	left: calc(50% - 1px);
+    	background-color: orange;
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+    }
+    div.M-type-bright {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 0px);
+	left: calc(50% - 0px);
+    	background-color: orange;
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+	box-shadow:  0px 0px 3px 1px orangered, 0px 0px 4px 1px red;
+    }
+   
+    div.M-type-very-bright {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 0px);
+	left: calc(50% - 0px);
+    	background-color: orange;
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+	box-shadow:  0px 0px 1px 1px orange, 0px 0px 3px 1px orangered, 0px 0px 4px 1px red;
+    }
+    div.M-type-near {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 3px);
+	left: calc(50% - 3px);
+    	background-color: orange;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	box-shadow:  0px 0px 4px 4px orange, 0px 0px 8px 4px orangered, 0px 0px 10px 4px red;
+    }
+    div.K-type-very-dim {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 1px);
+	left: calc(50% - 1px);
+    	background-color: rgba(255, 255, 224, .8);
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+    }
+    div.K-type-dim {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 1px);
+	left: calc(50% - 1px);
+    	background-color: lightyellow;
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+    }
+    div.K-type-bright {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 0px);
+	left: calc(50% - 0px);
+    	background-color: lightyellow;
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+	box-shadow:  0px 0px 3px 1px yellow, 0px 0px 4px 1px orange;
+    }
+    div.K-type-very-bright {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 0px);
+	left: calc(50% - 0px);
+    	background-color: lightyellow;
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+	box-shadow:  0px 0px 1px 1px lightyellow, 0px 0px 3px 1px yellow, 0px 0px 4px 1px orange;
+    }
+    div.K-type-near {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 3px);
+	left: calc(50% - 3px);
+    	background-color: lightyellow;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	box-shadow:  0px 0px 4px 4px lightyellow, 0px 0px 8px 4px yellow, 0px 0px 10px 4px orange;
+    }
+    div.G-type-very-dim {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 1px);
+	left: calc(50% - 1px);
+    	background-color: rgba(255, 255, 255, .8);
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+    }
+    div.G-type-dim {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 1px);
+	left: calc(50% - 1px);
+    	background-color: white;
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+    }
+    div.G-type-bright {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 0px);
+	left: calc(50% - 0px);
+    	background-color: white;
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+	box-shadow:  0px 0px 3px 1px lightyellow, 0px 0px 4px 1px yellow;
+    }
+    div.G-type-very-bright {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 0px);
+	left: calc(50% - 0px);
+    	background-color: white;
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+	box-shadow:  0px 0px 1px 1px white, 0px 0px 3px 1px lightyellow, 0px 0px 4px 1px yellow;
+    }
+    div.G-type-near {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 3px);
+	left: calc(50% - 3px);
+    	background-color: white;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	box-shadow:  0px 0px 4px 4px white, 0px 0px 8px 4px lightyellow, 0px 0px 10px 4px yellow;
+    }
+    div.F-type-very-dim {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 1px);
+	left: calc(50% - 1px);
+    	background-color: rgba(255, 255, 255, .8);
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+    }
+    div.F-type-dim {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 1px);
+	left: calc(50% - 1px);
+    	background-color: white;
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+    }
+    div.F-type-bright {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 0px);
+	left: calc(50% - 0px);
+    	background-color: white;
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+	box-shadow:  0px 0px 3px 1px white, 0px 0px 4px 1px lightyellow;
+    }
+    div.F-type-very-bright {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 0px);
+	left: calc(50% - 0px);
+    	background-color: white;
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+	box-shadow:  0px 0px 1px 1px white, 0px 0px 3px 1px white, 0px 0px 4px 1px lightyellow;
+    }
+    div.F-type-near {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 3px);
+	left: calc(50% - 3px);
+    	background-color: white;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	box-shadow:  0px 0px 4px 4px white, 0px 0px 8px 4px white, 0px 0px 10px 4px lightyellow;
+    }
+    div.A-type-very-dim {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 1px);
+	left: calc(50% - 1px);
+    	background-color: rgba(255, 255, 255, .8);
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+    }
+    div.A-type-dim {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 1px);
+	left: calc(50% - 1px);
+    	background-color: white;
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+    }
+    div.A-type-bright {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 0px);
+	left: calc(50% - 0px);
+    	background-color: white;
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+	box-shadow:  0px 0px 3px 1px white, 0px 0px 4px 1px lightblue;
+    }
+    div.A-type-very-bright {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 0px);
+	left: calc(50% - 0px);
+    	background-color: white;
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+	box-shadow:  0px 0px 1px 1px white, 0px 0px 3px 1px white, 0px 0px 4px 1px lightblue;
+    }
+    div.A-type-near {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 3px);
+	left: calc(50% - 3px);
+    	background-color: white;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	box-shadow:  0px 0px 4px 4px white, 0px 0px 8px 4px white, 0px 0px 10px 4px lightblue;
+    }
+    div.B-type-very-dim {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 1px);
+	left: calc(50% - 1px);
+    	background-color: rgba(255, 255, 255, .8);
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+    }
+    div.B-type-dim {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 1px);
+	left: calc(50% - 1px);
+    	background-color: white;
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+    }
+    div.B-type-bright {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 0px);
+	left: calc(50% - 0px);
+    	background-color: white;
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+	box-shadow:  0px 0px 3px 1px lightblue, 0px 0px 4px 1px blue;
+    }
+    div.B-type-very-bright {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 0px);
+	left: calc(50% - 0px);
+    	background-color: white;
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+	box-shadow:  0px 0px 1px 1px white, 0px 0px 3px 1px lightblue, 0px 0px 4px 1px blue;
+    }
+    div.B-type-near {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 3px);
+	left: calc(50% - 3px);
+    	background-color: white;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	box-shadow:  0px 0px 4px 4px white, 0px 0px 8px 4px lightblue, 0px 0px 10px 4px blue;
+    }
+    div.O-type-very-dim {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 1px);
+	left: calc(50% - 1px);
+    	background-color: rgba(173, 216, 230, .8);
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+    }
+    div.O-type-dim {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 1px);
+	left: calc(50% - 1px);
+    	background-color: lightblue;
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+    }
+    div.O-type-bright {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 0px);
+	left: calc(50% - 0px);
+    	background-color: lightblue;
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+	box-shadow:  0px 0px 3px 1px blue, 0px 0px 4px 1px darkblue;
+    }
+    div.O-type-very-bright {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 0px);
+	left: calc(50% - 0px);
+    	background-color: lightblue;
+	width: 1px;
+	height: 1px;
+	border-radius: 50%;
+	box-shadow:  0px 0px 1px 1px lightblue, 0px 0px 3px 1px blue, 0px 0px 4px 1px darkblue;
+    }
+    div.O-type-near {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 3px);
+	left: calc(50% - 3px);
+    	background-color: lightblue;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	box-shadow:  0px 0px 4px 4px lightblue, 0px 0px 8px 4px blue, 0px 0px 10px 4px darkblue;
+    }
+    div.red-dwarf {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 3px);
+	left: calc(50% - 3px);
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background-color: white;
+	box-shadow: inset 0 0 1px 2px red,
+	0px 0px 3px 3px red,
+	0px 0px 10px 4px red;
+    }
+    div.orange-dwarf {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 3px);
+	left: calc(50% - 3px);
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background-color: white;
+	box-shadow: inset 0 0 1px 2px orange,
+	0px 0px 3px 3px orange,
+	0px 0px 10px 4px orange;
+    }
+    div.yellow-dwarf {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 3px);
+	left: calc(50% - 3px);
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background-color: white;
+	box-shadow: inset 0 0 1px 2px lightyellow,
+	0px 0px 3px 3px lightyellow,
+	0px 0px 10px 4px lightyellow;
+    }
+
+    div.white-dwarf {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 3px);
+	left: calc(50% - 3px);
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background-color: white;
+	box-shadow: inset 0 0 1px 2px white,
+	0px 0px 3px 3px white,
+	0px 0px 10px 4px white;
+    }
+    div.blue-white-dwarf {
+	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 3px);
+	left: calc(50% - 3px);
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background-color: white;
+	box-shadow: inset 0 0 1px 2px lightblue,
+	0px 0px 3px 3px lightblue,
+	0px 0px 10px 4px lightblue;
+    }
+
+    div.star-hoverable {
+    	position: absolute;
+	float: left;
+	display: inline-block;
+	top: calc(50% - 5px);
+	left: calc(50% - 5px);
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: transparent;
+    }
+
+    .star-hoverable:hover {
+    	border: 1px solid white;
+	box-shadow: 0px 0px 8px 1px white;
+
+    }
+	.star-hoverable:hover .text-node {
+		left: 20px;
+		display: inline-block;
+		background-color: rgba(0, 0, 0, 0.4);
+		padding: 2px;
+		border-radius: 10%;
+		animation: test .25s steps(40,end);
+	}
+
     .small-point {
 	position: absolute;
 	top: 5px;
@@ -318,6 +837,54 @@ html, head, body {
     }
 	
 	.sun:hover .text-node {
+		left: 32px;
+		display: inline-block;
+		background-color: rgba(0, 0, 0, 0.4);
+		padding: 2px;
+		border-radius: 10%;
+		animation: test .25s steps(40,end);
+	}
+	.brown-dwarf:hover .text-node {
+		left: 32px;
+		display: inline-block;
+		background-color: rgba(0, 0, 0, 0.4);
+		padding: 2px;
+		border-radius: 10%;
+		animation: test .25s steps(40,end);
+	}
+	.white-dwarf:hover .text-node {
+		left: 32px;
+		display: inline-block;
+		background-color: rgba(0, 0, 0, 0.4);
+		padding: 2px;
+		border-radius: 10%;
+		animation: test .25s steps(40,end);
+	}
+	.red-dwarf:hover .text-node {
+		left: 32px;
+		display: inline-block;
+		background-color: rgba(0, 0, 0, 0.4);
+		padding: 2px;
+		border-radius: 10%;
+		animation: test .25s steps(40,end);
+	}
+	.orange-dwarf:hover .text-node {
+		left: 32px;
+		display: inline-block;
+		background-color: rgba(0, 0, 0, 0.4);
+		padding: 2px;
+		border-radius: 10%;
+		animation: test .25s steps(40,end);
+	}
+	.yellow-dwarf:hover .text-node {
+		left: 32px;
+		display: inline-block;
+		background-color: rgba(0, 0, 0, 0.4);
+		padding: 2px;
+		border-radius: 10%;
+		animation: test .25s steps(40,end);
+	}
+	.blue-white-dwarf:hover .text-node {
 		left: 32px;
 		display: inline-block;
 		background-color: rgba(0, 0, 0, 0.4);

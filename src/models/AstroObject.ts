@@ -1,10 +1,11 @@
 import { vec3, ReadonlyVec3 } from "gl-matrix";
 import { LODManager } from "./LODManager";
-import { BigDecimal, Big } from "bigdecimal.js";
+import { BigDecimal, Big, MC } from "bigdecimal.js";
 import * as bVec3 from "../utils/big-vec3";
 
 export class AstroObject {
 	
+	public drawPos: vec3;	
 
 	constructor(public position: BigDecimal[],
 		    public velocity: BigDecimal[],
@@ -17,6 +18,9 @@ export class AstroObject {
 		    private _equatorialRadius: number,
 		   public _lodManager: LODManager,
 		   ) {
+			   let bVecA = bVec3.create();
+			   bVec3.scale(bVecA, this.position, Big("10").pow(-9, new MC(20)))
+			   this.drawPos = vec3.fromValues(Number(bVecA[0].toEngineeringString()), Number(bVecA[1].toEngineeringString()), Number(bVecA[2].toEngineeringString()));
 	}
 
 	public  updatePhysics(dt: number) {
