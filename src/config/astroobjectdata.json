@@ -2,102 +2,153 @@
 	"10" : {
 		"name": "Sun",
 		"mass": "(1.99 * (10**30))",
-		"systemSpace": 20000,
-		"subsystem": ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Ceres", "Pluto", "Haumea", "Makemake", "Eris"]
+		"radius": 696349,
+		"axialTilt": 0.1265364,
+		"rotationSpeed": 0,
+		"systemSpace": 9007199254740991,
+		"subsystem": ["Mercury", "Venus", "Earth",  "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Ceres", "Pluto", "Haumea", "Makemake", "Eris"]
 	},
 	"199": {
 		"name": "Mercury",
 		"mass": "(3.285 * (10**23))",
+		"radius": 2439.7,
+		"axialTilt": 0.00047,
+		"rotationSpeed": 0.0000175,
 		"systemSpace": 0,
 		"subsystem": []
 	},
 	"299": {
 		"name": "Venus",
 		"mass": "(48.685 * (10**23))",
+		"radius": 6051.8,
+		"axialTilt": 3.0962,
+		"rotationSpeed": 0.000000299,
 		"systemSpace": 0,
 		"subsystem": []
 	},
 	"399": {
 		"name": "Earth",
 		"mass": "(6 * (10**24))",
-		"systemSpace": 15,
+		"radius": 6378.14,
+		"axialTilt": 0.4101,
+		"rotationSpeed": 0.0000729,
+		"systemSpace": 20,
 		"subsystem": ["Luna"]
 	},
 	"301": {
 		"name": "Luna",
 		"mass": "(7.3476 * (10**22))",
+		"radius": 1737.4,
+		"axialTilt": 0.0261,
+		"rotationSpeed": 0.00000266,
 		"systemSpace": 0,
 		"subsystem": []
 	},
 	"499": {
 		"name": "Mars",
 		"mass": "(6.4191 * (10**22))",
+		"radius": 3389.5,
+		"axialTilt": 0.436332,
+		"rotationSpeed": 0.004398,
 		"systemSpace": 0.8,
 		"subsystem": ["Phobos", "Deimos"]
 	},
 	"401": {
 		"name": "Phobos",
 		"mass": "(1.06 * (10**16))",
+		"radius": 11.267,
+		"axialTilt": 0,
+		"rotationSpeed": 0.00645,
 		"systemSpace": 0,
 		"subsystem": []
 	},
 	"402": {
 		"name": "Deimos",
 		"mass": "(1.51 * (10**15))",
+		"radius": 6.2,
+		"axialTilt": 0.0349,
+		"rotationSpeed": 0.03979,
 		"systemSpace": 0,
 		"subsystem": []
 	},
 	"599": {
 		"name": "Jupiter",
 		"mass": "(1.898 * (10**27))",
+		"radius": 71492,
+		"axialTilt": 0.05462,
+		"rotationSpeed": 0.000176,
 		"systemSpace": 0,
 		"subsystem": []
 	},
 	"699": {
 		"name": "Saturn",
 		"mass": "(5.683 * (10**26))",
+		"radius": 58232,
+		"axialTilt": 0.46635,
+		"rotationSpeed": 0.000103,
 		"systemSpace": 0,
 		"subsystem": []
 	},
 	"799": {
 		"name": "Uranus",
 		"mass": "(8.681 * (10**25))",
+		"radius": 25362,
+		"axialTilt": 1.7069,
+		"rotationSpeed": 0.00010124,
 		"systemSpace": 0,
 		"subsystem": []
 	},
 	"899": {
 		"name": "Neptune",
 		"mass": "(1.0241 * (10 ** 26))",
+		"radius": 24622,
+		"axialTilt": 0.494277,
+		"rotationSpeed": 0.0000307,
 		"systemSpace": 0,
 		"subsystem": []
 	},
 	"Ceres": {
 		"name": "Ceres",
 		"mass": "(9.3839 * (10**20))",
+		"radius": 473,
+		"axialTilt": 0.06981,
+		"rotationSpeed": 0.0000616,
 		"systemSpace": 0,
 		"subsystem": []
 	},
 	"999": {
 		"name": "Pluto",
 		"mass": "(1.307 * (10**22))",
+		"radius": 1188.3,
+		"axialTilt": 2.0944,
+		"rotationSpeed": 0.0000179,
 		"systemSpace": 0,
 		"subsystem": []
 	},
 	"920136108": {
 		"name": "Haumea",
 		"mass": "(4.01 * (10**21))",
+		"radius": 816,
+		"axialTilt": 2.19911,
+		"rotationSpeed": 0.00044575,
 		"systemSpace": 0,
 		"subsystem": []
 	},
 	"Makemake": {
 		"name": "Makemake",
 		"mass": "(3.1 * (10**21))",
+		"radius": 715,
+		"axialTilt": 0,
+		"rotationSpeed": 0.0000423,
 		"systemSpace": 0,
 		"subsystem": []
 	},
 	"920136199": {
 		"name": "Eris",
 		"mass": "(1.67 * (10**22))",
+		"radius": 1163,
+		"axialTilt": 0.767945,
+		"rotationSpeed": 0.000434,
 		"systemSpace": 0,
 		"subsystem": []
 	}

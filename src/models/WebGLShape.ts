@@ -44,10 +44,9 @@ export class WebGLShape {
 	public draw(
 		gl: WebGL2RenderingContext, 
 		matWorldUniform: WebGLUniformLocation,
-		newPos: vec3, 
+		drawPos: vec3, 
 		dt: number) {
 		this._rotate(dt);
-		this._pos = newPos;
 
 		let iQuat = quat.create();
 		let yQuat = quat.create();
@@ -59,8 +58,6 @@ export class WebGLShape {
 		
 		vec3.set(this._scaleVec, this._scale, this._scale, this._scale);
 
-		let drawPos = vec3.create();
-		vec3.scale(drawPos, this._pos, 10**-9);
 
 		mat4.fromRotationTranslationScale(
 			this._matWorld,

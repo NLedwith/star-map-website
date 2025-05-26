@@ -1,0 +1,1403 @@
+{
+  "Proxima Centauri": {
+    "name": "Proxima Centauri",
+    "system": "Alpha Centauri",
+    "spectralType": "M",
+    "absoluteMagnitude": 15.6,
+    "mass": 0.122,
+    "d": 4.2465,
+    "ra": [14, 29, 43],
+    "dec": [-62, 40, 46] 
+  },
+  "Alpha Centauri A": {
+    "name": "Alpha Centauri A",
+    "system": "Alpha Centauri",
+    "spectralType": "G",
+    "absoluteMagnitude": 4.4,
+    "mass": 1.079,
+    "d": 4.3441,
+    "ra": [14, 39, 36.5],
+    "dec": [-60, 50, 2]
+  },
+  "Alpha Centauri B": {
+    "name": "Alpha Centauri B",
+    "system": "Alpha Centauri",
+    "spectralType": "K",
+    "absoluteMagnitude": 5.8,
+    "mass": 0.909,
+    "d": 4.3441,
+    "ra": [14, 39, 35.1],
+    "dec": [-60, 50, 14]
+  },
+  "Barnard's Star": {
+    "name": "Barnard's Star",
+    "system": "Barnard's Star",
+    "spectralType": "M",
+    "absoluteMagnitude": 13.2,
+    "mass": 0.144,
+    "d": 5.9629,
+    "ra": [17, 57, 48.5],
+    "dec": [4, 41, 36]
+  },
+  "Luhman 16 A": {
+    "name": "Luhman 16 A",
+    "system": "Luhman 16",
+    "spectralType": "L",
+    "absoluteMagnitude": 19.7,
+    "mass": 0.032,
+    "d": 6.5018,
+    "ra": [10, 49, 18.9],
+    "dec": [-53, 19, 10]
+  },
+  "Luhman 16 B": {
+    "name": "Luhman 16 B",
+    "system": "Luhman 16",
+    "spectralType": "T",
+    "absoluteMagnitude": 50,
+    "mass": 0.027,
+    "d": 6.5040,
+    "ra": [10, 49, 18.9],
+    "dec": [-53, 19, 10]
+  },
+  "WISE 0855-0714": {
+    "name": "WISE 0855-0714",
+    "system": "WISE 0855-0714",
+    "spectralType": "Y",
+    "absoluteMagnitude": 28.2,
+    "mass": 0.0065,
+    "d": 7.430,
+    "ra": [8, 55, 10.8],
+    "dec": [-7, 14, 43]
+  },
+  "Wolf 359": {
+    "name": "Wolf 359",
+    "system": "Wolf 359",
+    "spectralType": "M",
+    "absoluteMagnitude": 16.55,
+    "mass": 0.090,
+    "d": 7.8558,
+    "ra": [10, 56, 29.2],
+    "dec": [7, 0, 53]
+  },
+  "Lalande 21185": {
+    "name": "Lalande 21185",
+    "system": "Lalande 21185",
+    "spectralType": "M",
+    "absoluteMagnitude": 10.44,
+    "mass": 0.390,
+    "d": 8.3044,
+    "ra": [11, 3, 20.2],
+    "dec": [35, 58, 12]
+  },
+  "Sirius A": {
+    "name": "Sirius A",
+    "system": "Sirius",
+    "spectralType": "A",
+    "absoluteMagnitude": 1.42,
+    "mass": 2.063,
+    "d": 8.7148,
+    "ra": [6, 45, 8.9],
+    "dec": [-16, 42, 58]
+  },
+  "Sirius B": {
+    "name": "Sirius B",
+    "system": "Sirius",
+    "spectralType": "B",
+    "absoluteMagnitude": 8.44,
+    "mass": 1.018,
+    "d": 8.704,
+    "ra": [6, 45, 8.9],
+    "dec": [-16, 42, 58]
+  },
+  "Gliese 65 A": {
+    "name": "Gliese 65 A",
+    "system": "Gliese 65",
+    "spectralType": "M",
+    "absoluteMagnitude": 12.54,
+    "mass": 0.102,
+    "d": 8.712,
+    "ra": [1, 39, 1.3],
+    "dec": [-17, 57, 1]
+  },
+  "Gliese 65 B": {
+    "name": "Gliese 65 B",
+    "system": "Gliese 65",
+    "spectralType": "M",
+    "absoluteMagnitude": 15.85,
+    "mass": 0.1,
+    "d": 8.736,
+    "ra": [1, 39, 1.3],
+    "dec": [-17, 57, 1]
+  },
+  "Ross 154": {
+    "name": "Ross 154",
+    "system": "Ross 154",
+    "spectralType": "M",
+    "absoluteMagnitude": 10.43,
+    "mass": 0.17,
+    "d": 9.7063,
+    "ra": [18, 49, 49.4],
+    "dec": [-23, 50, 10]
+  },
+  "Ross 248": {
+    "name": "Ross 248",
+    "system": "Ross 248",
+    "spectralType": "M",
+    "absoluteMagnitude": 14.79,
+    "mass": 0.136,
+    "d": 10.3057,
+    "ra": [23, 41, 54.7],
+    "dec": [44, 10, 30]
+  },
+  "Epsilon Eridani": {
+    "name": "Epsilon Eridani",
+    "system": "Epsilon Eridani",
+    "spectralType": "K",
+    "absoluteMagnitude": 6.19,
+    "mass": 0.820,
+    "d": 10.4749,
+    "ra": [3, 32, 55.8],
+    "dec": [-9, 27, 30]
+  },
+  "Lacaille 9352": {
+    "name": "Lacaille 9352",
+    "system": "Lacaille 9352",
+    "spectralType": "M",
+    "absoluteMagnitude": 9.75,
+    "mass": 0.486,
+    "d": 10.7241,
+    "ra": [23, 5, 52],
+    "dec": [-35, 51, 11]
+  },
+  "Ross 128": {
+    "name": "Ross 128",
+    "system": "Ross 128",
+    "spectralType": "M",
+    "absoluteMagnitude": 13.51,
+    "mass": 0.168,
+    "d": 11.0074,
+    "ra": [11, 47, 44.4],
+    "dec": [0, 48, 16]
+  },
+  "EZ Aquarii B": {
+    "name": "EZ Aquarii B",
+    "system": "EZ Aquarii",
+    "spectralType": "M",
+    "absoluteMagnitude": 15.58,
+    "mass": 0.11,
+    "d": 11.109,
+    "ra": [22, 38, 33.4],
+    "dec": [-15, 17, 57]
+  },
+  "EZ Aquarii C": {
+    "name": "EZ Aquarii C",
+    "system": "EZ Aquarii",
+    "spectralType": "M",
+    "absoluteMagnitude": 16.34,
+    "mass": 0.1,
+    "d": 11.075,
+    "ra": [22, 38, 33.4],
+    "dec": [-15, 17, 57]
+  },
+  "EZ Aquarii A": {
+    "name": "EZ Aquarii A",
+    "system": "EZ Aquarii",
+    "spectralType": "M",
+    "absoluteMagnitude": 15.64,
+    "mass": 0.11,
+    "d": 11.143,
+    "ra": [22, 38, 33.4],
+    "dec": [-15, 17, 57]
+  },
+  "Procyon B": {
+    "name": "Procyon B",
+    "system": "Procyon",
+    "spectralType": "D",
+    "absoluteMagnitude": 12.98,
+    "mass": 0.602,
+    "d": 11.37,
+    "ra": [7, 39, 18.1],
+    "dec": [5, 13, 30]
+  },
+  "Procyon A": {
+    "name": "Procyon A",
+    "system": "Procyon",
+    "spectralType": "F",
+    "absoluteMagnitude": 2.66,
+    "mass": 1.499,
+    "d": 11.434,
+    "ra": [7, 39, 18.1],
+    "dec": [5, 13, 30]
+  },
+  "61 Cygni A": {
+    "name": "61 Cygni A",
+    "system": "61 Cygni",
+    "spectralType": "K",
+    "absoluteMagnitude": 7.49,
+    "mass": 0.7,
+    "d": 11.4039,
+    "ra": [21, 6, 53.9],
+    "dec": [38, 44, 58]
+  },
+  "61 Cygni B": {
+    "name": "61 Cygni B",
+    "system": "61 Cygni",
+    "spectralType": "K",
+    "absoluteMagnitude": 8.31,
+    "mass": 0.63,
+    "d": 11.4039,
+    "ra": [21, 6, 55.3],
+    "dec": [38, 44, 31]
+  },
+  "Struve 2398 A": {
+    "name": "Struve 2398 A",
+    "system": "Struve 2398",
+    "spectralType": "M",
+    "absoluteMagnitude": 11.16,
+    "mass": 0.334,
+    "d": 11.4908,
+    "ra": [18, 42, 46.7],
+    "dec": [59, 37, 49]
+  },
+  "Struve 2398 B": {
+    "name": "Struve 2398 B",
+    "system": "Struve 2398",
+    "spectralType": "M",
+    "absoluteMagnitude": 11.95,
+    "mass": 0.248,
+    "d": 11.4908,
+    "ra": [18, 42, 46.9],
+    "dec": [59, 37, 37]
+  },
+  "Groombridge 34 A": {
+    "name": "Groombridge 34 A",
+    "system": "Groombridge 34",
+    "spectralType": "M",
+    "absoluteMagnitude": 10.32,
+    "mass": 0.38,
+    "d": 11.6183,
+    "ra": [0, 18, 22.9],
+    "dec": [44, 1, 23]
+  },
+  "Groombridge 34 B": {
+    "name": "Groombridge 34 B",
+    "system": "Groombridge 34",
+    "spectralType": "M",
+    "absoluteMagnitude": 13.3,
+    "mass": 0.15,
+    "d": 11.6199,
+    "ra": [0, 18, 22.9],
+    "dec": [44, 1, 23]
+  },
+  "DX Cancri": {
+    "name": "DX Cancri",
+    "system": "Cancri",
+    "spectralType": "M",
+    "absoluteMagnitude": 16.98,
+    "mass": 0.09,
+    "d": 11.6797,
+    "ra": [8, 29, 49.5],
+    "dec": [26, 46, 37]
+  },
+  "Epsilon Indi A": {
+    "name": "Epsilon Indi A",
+    "system": "Epsilon Indi",
+    "spectralType": "K",
+    "absoluteMagnitude": 6.89,
+    "mass": 0.754,
+    "d": 11.8670,
+    "ra": [22, 3, 21.7],
+    "dec": [-57, 47, 10]
+  },
+  "Epsilon Indi Ba": {
+    "name": "Epsilon Indi Ba",
+    "system": "Epsilon Indi",
+    "spectralType": "T",
+    "absoluteMagnitude": 14.5,
+    "mass": 0.065,
+    "d": 11.8711,
+    "ra": [22, 4, 10.5],
+    "dec": [-56, 46, 58]
+  },
+  "Epsilon Indi Bb": {
+    "name": "Epsilon Indi Bb",
+    "system": "Epsilon Indi",
+    "spectralType": "T",
+    "absoluteMagnitude": 15.4,
+    "mass": 0.050,
+    "d": 11.8629,
+    "ra": [22, 4, 10.5],
+    "dec": [-56, 46, 58]
+  },
+  "Tau Ceti": {
+    "name": "Tau Ceti",
+    "system": "Tau Ceti",
+    "spectralType": "G",
+    "absoluteMagnitude": 5.68,
+    "mass": 0.783,
+    "d": 11.9118,
+    "ra": [1, 44, 4.1],
+    "dec": [-15, 56, 15]
+  },
+  "GJ 1061": {
+    "name": "GJ 1061",
+    "system": "GJ 1061",
+    "spectralType": "M",
+    "absoluteMagnitude": 15.26,
+    "mass": 0.113,
+    "d": 11.9839,
+    "ra": [3, 35, 59.7],
+    "dec": [-44, 30, 45]
+  },
+  "YZ Ceti": {
+    "name": "YZ Ceti",
+    "system": "YZ Ceti",
+    "spectralType": "M",
+    "absoluteMagnitude": 14.17,
+    "mass": 0.130,
+    "d": 12.1222,
+    "ra": [1, 12, 30.6],
+    "dec": [-16, 59, 56]
+  }, 
+  "Luyten's Star": {
+    "name": "Luyten's Star",
+    "system": "Luyten's Star",
+    "spectralType": "M",
+    "absoluteMagnitude": 11.97,
+    "mass": 0.26,
+    "d": 12.3485,
+    "ra": [7, 27, 24.5],
+    "dec": [5, 13, 33]
+  },
+  "Teegarden's Star": {
+    "name": "Teegarden's Star",
+    "system": "Teegarden's Star",
+    "spectralType": "M",
+    "absoluteMagnitude": 17.22,
+    "mass": 0.08,
+    "d": 12.4970,
+    "ra": [2, 53, 0.9],
+    "dec": [16, 52, 53]
+  },
+  "Kapteyn's Star": {
+    "name": "Kapteyn's Star",
+    "system": "Kapteyn's Star",
+    "spectralType": "M",
+    "absoluteMagnitude": 10.87,
+    "mass": 0.281,
+    "d": 12.8308,
+    "ra": [5, 11, 40.6],
+    "dec": [-45, 1, 6]
+  },
+  "Lacaille 8760": {
+    "name": "Lacaille 8760",
+    "system": "Lacaille 8760",
+    "spectralType": "M",
+    "absoluteMagnitude": 8.69,
+    "mass": 0.6,
+    "d": 12.9472,
+    "ra": [21, 17, 15.3],
+    "dec": [-38, 52, 3]
+  },
+  "SCR 1845-6357 A": {
+    "name": "SCR 1845-6357 A",
+    "system": "SCR 1845-6357",
+    "spectralType": "M",
+    "absoluteMagnitude": 19.41,
+    "mass": 0.07,
+    "d": 13.0638,
+    "ra": [18, 45, 5.3],
+    "dec": [-63, 57, 48]
+  },
+  "SCR 1845-6357 B": {
+    "name": "SCR 1845-6357 B",
+    "system": "SCR 1845-6357",
+    "spectralType": "T",
+    "absoluteMagnitude": 15.3,
+    "mass": 0.03,
+    "d": 13.0638,
+    "ra": [18, 45, 2.6],
+    "dec": [-63, 57, 52]
+  },
+  "Kruger 60 A": {
+    "name": "Kruger 60 A",
+    "system": "Kruger 60",
+    "spectralType": "M",
+    "absoluteMagnitude": 11.76,
+    "mass": 0.271,
+    "d": 13.0672,
+    "ra": [22, 27, 59.5],
+    "dec": [57, 41, 45]
+  },
+  "Kruger 60 B": {
+    "name": "Kruger 60 B",
+    "system": "Kruger 60",
+    "spectralType": "M",
+    "absoluteMagnitude": 13.38,
+    "mass": 0.276,
+    "d": 13.0776,
+    "ra": [22, 27, 59.5],
+    "dec": [57, 41, 45]
+  },
+  "DENIS J1048-3956": {
+    "name": "DENIS J1048",
+    "system": "DENIS J1048",
+    "spectralType": "M",
+    "absoluteMagnitude": 19.37,
+    "mass": 0.08,
+    "d": 13.1932,
+    "ra": [10, 48, 14.7],
+    "dec": [-39, 56, 6]
+  },
+  "Ross 614 A": {
+    "name": "Ross 614 A",
+    "system": "Ross 614",
+    "spectralType": "M",
+    "absoluteMagnitude": 13.09,
+    "mass": 0.223,
+    "d": 13.403,
+    "ra": [6, 29, 23.4],
+    "dec": [-2, 40, 30]
+  },
+  "Ross 614 B": {
+    "name": "Ross 614 B",
+    "system": "Ross 614",
+    "spectralType": "M",
+    "absoluteMagnitude": 16.17,
+    "mass": 0.111,
+    "d": 13.323,
+    "ra": [6, 29, 23.4],
+    "dec": [-2, 40, 30]
+  },
+  "UGPS J0722-0540": {
+    "name": "UGPS J0722-0540",
+    "system": "UGPS J0722-0540",
+    "spectralType": "T",
+    "absoluteMagnitude": 18.45,
+    "mass": 0.01,
+    "d": 13.43,
+    "ra": [7, 22, 27.3],
+    "dec": [-5, 40, 30]
+  },
+  "Wolf 1061": {
+    "name": "Wolf 1061",
+    "system": "Wolf 1061",
+    "spectralType": "M",
+    "absoluteMagnitude": 11.93,
+    "mass": 0.294,
+    "d": 14.05,
+    "ra": [16, 30, 18.1],
+    "dec": [-12, 39, 45]
+  },
+  "Van Maanen's Star": {
+    "name": "Van Maanen's Star",
+    "system": "Van Maanen's Star",
+    "spectralType": "D",
+    "absoluteMagnitude": 14.21,
+    "mass": 0.67,
+    "d": 14.0718,
+    "ra": [0, 49, 9.9],
+    "dec": [5, 23, 19]
+  },
+  "Gliese 1": {
+    "name": "Gliese 1",
+    "system": "Gliese 1",
+    "spectralType": "M",
+    "absoluteMagnitude": 10.35,
+    "mass": 0.45,
+    "d": 14.1747,
+    "ra": [0, 5, 24.4],
+    "dec": [-37, 21, 27]
+  },
+  "TZ Arietis": {
+    "name": "TZ Arietis",
+    "system": "TZ Arietis",
+    "spectralType": "M",
+    "absoluteMagnitude": 14.03,
+    "mass": 0.14,
+    "d": 14.5780,
+    "ra": [2, 0, 13.2],
+    "dec": [13, 3, 8]
+  },
+  "Wolf 424 A": {
+    "name": "Wolf 424 A",
+    "system": "Wolf 424",
+    "spectralType": "M",
+    "absoluteMagnitude": 14.97,
+    "mass": 0.143,
+    "d": 14.626,
+    "ra": [12, 33, 17.2],
+    "dec": [9, 1, 15]
+  },
+  "Wolf 424 B": {
+    "name": "Wolf 424 B",
+    "system": "Wolf 424",
+    "spectralType": "M",
+    "absoluteMagnitude": 14.96,
+    "mass": 0.131,
+    "d": 14.564,
+    "ra": [12, 33, 17.2],
+    "dec": [9, 1, 15]
+  },
+  "Gliese 687": {
+    "name": "Gliese 687",
+    "system": "Gliese 687",
+    "spectralType": "M",
+    "absoluteMagnitude": 10.89,
+    "mass": 0.401,
+    "d": 14.8395,
+    "ra": [17, 36, 25.9],
+    "dec": [68, 20, 21]
+  },
+  "Gliese 674": {
+    "name": "Gliese 674",
+    "system": "Gliese 674",
+    "spectralType": "M",
+    "absoluteMagnitude": 11.09,
+    "mass": 0.35,
+    "d": 14.8492,
+    "ra": [17, 28, 39.9],
+    "dec": [-46, 53, 43]
+  },
+  "LHS 292": {
+    "name": "LHS 292",
+    "system": "LHS 292",
+    "spectralType": "M",
+    "absoluteMagnitude": 17.32,
+    "mass": 0.08,
+    "d": 14.8706,
+    "ra": [10, 48, 12.6],
+    "dec": [-11, 20, 14]
+  },
+  "Gliese 440": {
+    "name": "Gliese 440",
+    "system": "Gliese 440",
+    "spectralType": "D",
+    "absoluteMagnitude": 13.18,
+    "mass": 0.75,
+    "d": 15.1226,
+    "ra": [11, 45, 42.9],
+    "dec": [-64, 50, 29]
+  },
+  "GJ 1245 A": {
+    "name": "GJ 1245 A",
+    "system": "GJ 1245",
+    "spectralType": "M",
+    "absoluteMagnitude": 15.17,
+    "mass": 0.11,
+    "d": 15.2035,
+    "ra": [19, 53, 54.2],
+    "dec": [44, 24, 55]
+  },
+  "GJ 1245 B": {
+    "name": "GJ 1245 B",
+    "system": "GJ 1245",
+    "spectralType": "M",
+    "absoluteMagnitude": 15.72,
+    "mass": 0.1,
+    "d": 15.2001,
+    "ra": [19, 53, 55.2],
+    "dec": [44, 24, 56]
+  },
+  "GJ 1245 C": {
+    "name": "GJ 1245 C",
+    "system": "GJ 1245",
+    "spectralType": "M",
+    "absoluteMagnitude": 18.46,
+    "mass": 0.07,
+    "d": 15.1967,
+    "ra": [19, 53, 54.2],
+    "dec": [44, 24, 55]
+  },
+  "WISE 1741+2553": {
+    "name": "WISE 1741+2553",
+    "system": "WISE 1741+2553",
+    "spectralType": "T",
+    "absoluteMagnitude": 18.18,
+    "mass": 0.3,
+    "d": 15.22,
+    "ra": [17, 41, 24.2],
+    "dec": [25, 53, 19]
+  },
+  "Gliese 876": {
+    "name": "Gliese 876",
+    "system": "Gliese 876",
+    "spectralType": "M",
+    "absoluteMagnitude": 11.81,
+    "mass": 0.37,
+    "d": 15.2382,
+    "ra": [22, 53, 16.7],
+    "dec": [-14, 15, 49]
+  },
+  "WISE 1639-6847": {
+    "name": "WISE 1639-6847",
+    "system": "WISE 1639-6847",
+    "spectralType": "Y",
+    "absoluteMagnitude": 22.10,
+    "mass": 0.15,
+    "d": 15.336,
+    "ra": [19, 39, 40.9],
+    "dec": [-68, 47, 46]
+  },
+  "LHS 288": {
+    "name": "LHS 288",
+    "system": "LHS 288",
+    "spectralType": "M",
+    "absoluteMagnitude": 15.51,
+    "mass": 0.11,
+    "d": 15.7586,
+    "ra": [10, 44, 21.2],
+    "dec": [-61, 12, 36]
+  },
+  "GJ 1002": {
+    "name": "GJ 1002",
+    "system": "GJ 1002",
+    "spectralType": "M",
+    "absoluteMagnitude": 15.40,
+    "mass": 0.11,
+    "d": 15.8060,
+    "ra": [0, 6, 43.8],
+    "dec": [-7, 32, 22]
+  },
+  "DENIS 0255-4700": {
+    "name": "DENIS 0255-4700",
+    "system": "DENIS 0255-4700",
+    "spectralType": "L",
+    "absoluteMagnitude": 24.44,
+    "mass": 0.11,
+    "d": 15.877,
+    "ra": [2, 55, 3.7],
+    "dec": [-47, 0, 52]
+  },
+  "Groombridge 1618": {
+    "name": "Groombridge 1618",
+    "system": "Groombridge 1618",
+    "spectralType": "K",
+    "absoluteMagnitude": 8.16,
+    "mass": 0.67,
+    "d": 15.8857,
+    "ra": [10, 11, 22.1],
+    "dec": [49, 27, 15]
+  },
+  "Gliese 412 A": {
+    "name": "Gliese 412 A",
+    "system": "Gliese 412",
+    "spectralType": "M",
+    "absoluteMagnitude": 10.34,
+    "mass": 0.48,
+    "d": 15.9969,
+    "ra": [11, 5, 28.6],
+    "dec": [43, 31, 36]
+  },
+  "Gliese 412 B": {
+    "name": "Gliese 412 B",
+    "system": "Gliese 412",
+    "spectralType": "M",
+    "absoluteMagnitude": 16.05,
+    "mass": 0.1,
+    "d": 15.9969,
+    "ra": [11, 5, 28.6],
+    "dec": [11, 5, 30.4]
+  },
+  "AD Leonis": {
+    "name": "AD Leonis",
+    "system": "AD Leonis",
+    "spectralType": "M",
+    "absoluteMagnitude": 10.87,
+    "mass": 0.39,
+    "d": 16.1939,
+    "ra": [10, 19, 36.4],
+    "dec": [19, 52, 10]
+  },
+  "Gliese 832": {
+    "name": "Gliese 832",
+    "system": "Gliese 832",
+    "spectralType": "M",
+    "absoluteMagnitude": 10.20,
+    "mass": 0.45,
+    "d": 16.2005,
+    "ra": [21, 33, 34],
+    "dec": [-49, 0, 32]
+  },
+  "Gliese 682": {
+    "name": "Gliese 682",
+    "system": "Gliese 682",
+    "spectralType": "M",
+    "absoluteMagnitude": 12.45,
+    "mass": 0.27,
+    "d": 16.3328,
+    "ra": [17, 37, 3.7],
+    "dec": [-44, 19, 9]
+  },
+  "Keid (A)": {
+    "name": "Keid (A)",
+    "system": "Omicron[squared] Eridani",
+    "spectralType": "K",
+    "absoluteMagnitude": 5.93,
+    "mass": 0.84,
+    "d": 16.333,
+    "ra": [4, 15, 16.3],
+    "dec": [-7, 39, 10]
+  },
+  "Omicron[squared] Eridani B": {
+    "name": "Omicron[squared] Eridani B",
+    "system": "Omicron[squared] Eridani",
+    "spectralType": "D",
+    "absoluteMagnitude": 11.02,
+    "mass": 0.573,
+    "d": 16.333,
+    "ra": [4, 15, 21.8],
+    "dec": [-7, 39, 29]
+  },
+  "Omicron[squared] Eridani C": {
+    "name": "Omicron[squared] Eridani C",
+    "system": "Omicron[squared] Eridani",
+    "spectralType": "M",
+    "absoluteMagnitude": 12.74,
+    "mass": 0.2036,
+    "d": 16.333,
+    "ra": [4, 15, 21.5],
+    "dec": [-7, 39, 22]
+  },
+  "EV Lacertae": {
+    "name": "EV Lacertae",
+    "system": "EV Lacertae",
+    "spectralType": "M",
+    "absoluteMagnitude": 11.70,
+    "mass": 0.35,
+    "d": 16.4761,
+    "ra": [22, 46, 49.7],
+    "dec": [44, 20, 2]
+  },
+  "70 Ophiuchi A": {
+    "name": "70 Ophiuchi A",
+    "system": "70 Ophiuchi",
+    "spectralType": "K",
+    "absoluteMagnitude": 5.66,
+    "mass": 0.9,
+    "d": 16.7074,
+    "ra": [18, 5, 27.4],
+    "dec": [2, 29, 59]
+  },
+  "70 Ophiuchi B": {
+    "name": "70 Ophiuchi B",
+    "system": "70 Ophiuchi",
+    "spectralType": "K",
+    "absoluteMagnitude": 7.46,
+    "mass": 0.7,
+    "d": 16.7074,
+    "ra": [18, 5, 27.5],
+    "dec": [2, 29, 56]
+  },
+  "Altair": {
+    "name": "Altair",
+    "system": "Altair",
+    "spectralType": "A",
+    "absoluteMagnitude": 2.22,
+    "mass": 1.79,
+    "d": 16.730,
+    "ra": [19, 50, 47],
+    "dec": [8, 52, 6]
+  },
+  "El Cancri A": {
+    "name": "El Cancri A",
+    "system": "El Cancri",
+    "spectralType": "M",
+    "absoluteMagnitude": 15.50,
+    "mass": 0.12,
+    "d": 16.789,
+    "ra": [8, 58, 15.2],
+    "dec": [19, 45, 47]
+  },
+  "El Cancri B": {
+    "name": "El Cancri B",
+    "system": "El Cancri",
+    "spectralType": "M",
+    "absoluteMagnitude": 16.36,
+    "mass": 0.1,
+    "d": 16.811,
+    "ra": [8, 58, 15.2],
+    "dec": [19, 45, 47]
+  },
+  "WISE J150649.97+702736.1": {
+    "name": "WISE J150649.97+702736.1",
+    "system": "WISE J150649.97+702736.1",
+    "spectralType": "T",
+    "absoluteMagnitude": 15.17,
+    "mass": 0.09,
+    "d": 16.856,
+    "ra": [15, 6, 52.4],
+    "dec": [70, 27, 25]
+  },
+  "GJ 3379": {
+    "name": "GJ 3379",
+    "system": "GJ 3379",
+    "spectralType": "M",
+    "absoluteMagnitude": 12.73,
+    "mass": 0.2312,
+    "d": 16.9861,
+    "ra": [6, 0, 3.5],
+    "dec": [2, 42, 24]
+  },
+  "DENIS J081730.0-615520": {
+    "name": "DENIS J081730.0-615520",
+    "system": "DENIS J081730.0-615520",
+    "spectralType": "T",
+    "absoluteMagnitude": 15.03,
+    "mass": 0.015,
+    "d": 17.002,
+    "ra": [8, 17, 30.1],
+    "dec": [-61, 55, 16]
+  },
+  "Gliese 445": {
+    "name": "Gliese 445",
+    "system": "Gliese 445",
+    "spectralType": "M",
+    "absoluteMagnitude": 12.19,
+    "mass": 0.14,
+    "d": 17.1368,
+    "ra": [11, 47, 41.4],
+    "dec": [78, 41, 28]
+  },
+  "2MASS J15404342-5101357": {
+    "name": "2MASS J15404342-5101357",
+    "system": "2MASS J15404342-5101357",
+    "spectralType": "M",
+    "absoluteMagnitude": 16.63,
+    "mass": 0.09,
+    "d": 17.3738,
+    "ra": [15, 40, 43.5],
+    "dec": [-51, 1, 36]
+  },
+  "2MASS 0939-2448 A": {
+    "name": "2MASS 0939-2448 A",
+    "system": "2MASS 0939-2448",
+    "spectralType": "T",
+    "absoluteMagnitude": 16.97,
+    "mass": 0.019,
+    "d": 16.97,
+    "ra": [9, 39, 35.5],
+    "dec": [-24, 48, 28]
+  },
+  "2MASS 0939-2448 B": {
+    "name": "2MASS 0939-2448 B",
+    "system": "2MASS 0939-2448",
+    "spectralType": "T",
+    "absoluteMagnitude": 50,
+    "mass": 0.019,
+    "d": 17.85,
+    "ra": [9, 39, 35.5],
+    "dec": [-24, 48, 28]
+  },
+  "GJ 3323": {
+    "name": "GJ 3323",
+    "system": "GJ 3323",
+    "spectralType": "M",
+    "absoluteMagnitude": 13.57,
+    "mass": 0.1705,
+    "d": 17.5309,
+    "ra": [5, 1, 57.4],
+    "dec": [-6, 56, 46]
+  },
+  "Gliese 526": {
+    "name": "Gliese 526",
+    "system": "Gliese 526",
+    "spectralType": "M",
+    "absoluteMagnitude": 9.78,
+    "mass": 0.28,
+    "d": 17.7263,
+    "ra": [13, 45, 43.8],
+    "dec": [14, 53, 29]
+  },
+  "WISE 0350-5658": {
+    "name": "WISE 0350-5658",
+    "system": "WISE 0350-5658",
+    "spectralType": "Y",
+    "absoluteMagnitude": 23.70,
+    "mass": 0.02,
+    "d": 17.84,
+    "ra": [3, 50, 0.3],
+    "dec": [-56, 58, 30]
+  },
+  "Stein 2051 A": {
+    "name": "Stein 2051 A",
+    "system": "Stein 2051",
+    "spectralType": "M",
+    "absoluteMagnitude": 12.33,
+    "mass": 0.252,
+    "d": 17.9925,
+    "ra": [4, 31, 11.5],
+    "dec": [58, 58, 37]
+  },
+  "Stein 2051 B": {
+    "name": "Stein 2051 B",
+    "system": "Stein 2051",
+    "spectralType": "D",
+    "absoluteMagnitude": 13.72,
+    "mass": 0.675,
+    "d": 17.9925,
+    "ra": [4, 31, 12.6],
+    "dec": [58, 58, 41]
+  },
+  "2MASS J11145133-2618235": {
+    "name": "2MASS J11145133-2618235",
+    "system": "2MASS J11145133-2618235",
+    "spectralType": "T",
+    "absoluteMagnitude": 17.12,
+    "mass": 0.029,
+    "d": 18.20,
+    "ra": [11, 14, 51.3],
+    "dec": [-26, 18, 24]
+  },
+  "Gliese 251": {
+    "name": "Gliese 251",
+    "system": "Gliese 251",
+    "spectralType": "M",
+    "absoluteMagnitude": 11.29,
+    "mass": 0.36,
+    "d": 18.2146,
+    "ra": [6, 54, 49],
+    "dec": [33, 16, 5]
+  },
+  "LP 816-60": {
+    "name": "LP 816-60",
+    "system": "LP 816-60",
+    "spectralType": "M",
+    "absoluteMagnitude": 12.75,
+    "mass": 0.224,
+    "d": 18.3305,
+    "ra": [20, 52, 33],
+    "dec": [-16, 58, 29]
+  },
+  "LSR J1835+3259": {
+    "name": "LSR J1835+3259",
+    "system": "LSR J1835+3259",
+    "spectralType": "M",
+    "absoluteMagnitude": 19.5,
+    "mass": 0.053,
+    "d": 18.5534,
+    "ra": [18, 35, 37.9],
+    "dec": [32, 59, 55]
+  },
+  "Gliese 205": {
+    "name": "Gliese 205",
+    "system": "Gliese 205",
+    "spectralType": "M",
+    "absoluteMagnitude": 9.17,
+    "mass": 0.556,
+    "d": 18.6042,
+    "ra": [5, 31, 27.4],
+    "dec": [-3, 40, 38]
+  },
+  "2MASS J04151954-0935066": {
+    "name": "2MASS J04151954-0935066",
+    "system": "2MASS J04151954-0935066",
+    "spectralType": "T",
+    "absoluteMagnitude": 16.56,
+    "mass": 0.03,
+    "d": 18.62,
+    "ra": [4, 15, 19.5],
+    "dec": [-9, 35, 7]
+  },
+  "Gliese 229 A": {
+    "name": "Gliese 229 A",
+    "system": "Gliese 229",
+    "spectralType": "M",
+    "absoluteMagnitude": 9.34,
+    "mass": 0.579,
+    "d": 18.7906,
+    "ra": [6, 10, 34.6],
+    "dec": [-21, 51, 53]
+  },
+  "Gliese 229 Ba": {
+    "name": "Gliese 229 Ba",
+    "system": "Gliese 229",
+    "spectralType": "T",
+    "absoluteMagnitude": 15.21,
+    "mass": 0.036,
+    "d": 18.7888,
+    "ra": [6, 10, 34.6],
+    "dec": [-21, 51, 53]
+  },
+  "Gliese 229 Bb": {
+    "name": "Gliese 229 Bb",
+    "system": "Gliese 229",
+    "spectralType": "T",
+    "absoluteMagnitude": 15.21,
+    "mass": 0.033,
+    "d": 18.7924,
+    "ra": [6, 10, 34.6],
+    "dec": [-21, 51, 53]
+  },
+  "Alsafi": {
+    "name": "Alsafi",
+    "system": "Alsafi",
+    "spectralType": "G",
+    "absoluteMagnitude": 5.87,
+    "mass": 0.85,
+    "d": 18.7993,
+    "ra": [19, 32, 21.6],
+    "dec": [69, 39, 40]
+  },
+  "Ross 47": {
+    "name": "Ross 47",
+    "system": "Ross 47",
+    "spectralType": "M",
+    "absoluteMagnitude": 12.76,
+    "mass": 0.35,
+    "d": 18.8883,
+    "ra": [5, 42, 9.3],
+    "dec": [12, 29, 21]
+  },
+  "WISE 1541-2250": {
+    "name": "WISE 1541-2250",
+    "system": "WISE 1541-2250",
+    "spectralType": "Y",
+    "absoluteMagnitude": 22.10,
+    "mass": 0.011,
+    "d": 18.93,
+    "ra": [15, 41, 51.6],
+    "dec": [-22, 50, 25]
+  },
+  "Gliese 570 A": {
+    "name": "Gliese 570 A",
+    "system": "Gliese 570",
+    "spectralType": "K",
+    "absoluteMagnitude": 6.79,
+    "mass": 0.802,
+    "d": 19.195,
+    "ra": [14, 57, 28],
+    "dec": [-21, 24, 56]
+  },
+  "Gliese 570 B": {
+    "name": "Gliese 570 B",
+    "system": "Gliese 570",
+    "spectralType": "M",
+    "absoluteMagnitude": 9.45,
+    "mass": 0.55,
+    "d": 19.2024,
+    "ra": [14, 57, 28],
+    "dec": [-21, 24, 56]
+  },
+  "Gliese 570 C": {
+    "name": "Gliese 570 A",
+    "system": "Gliese 570",
+    "spectralType": "M",
+    "absoluteMagnitude": 11.11,
+    "mass": 0.35,
+    "d": 19.1913,
+    "ra": [14, 57, 28],
+    "dec": [-21, 24, 56]
+  },
+  "Gliese 570 D": {
+    "name": "Gliese 570 D",
+    "system": "Gliese 570",
+    "spectralType": "T",
+    "absoluteMagnitude": 16.47,
+    "mass": 0.05,
+    "d": 19.2061,
+    "ra": [14, 57, 28],
+    "dec": [-21, 24, 56]
+  },
+  "Gliese 693": {
+    "name": "Gliese 693",
+    "system": "Gliese 693",
+    "spectralType": "M",
+    "absoluteMagnitude": 11.91,
+    "mass": 0.26,
+    "d": 19.2078,
+    "ra": [17, 46, 32.4],
+    "dec": [-57, 19, 9]
+  },
+  "Gliese 754": {
+    "name": "Gliese 754",
+    "system": "Gliese 754",
+    "spectralType": "M",
+    "absoluteMagnitude": 13.37,
+    "mass": 0.173,
+    "d": 19.2724,
+    "ra": [19, 20, 48],
+    "dec": [-45, 33, 30]
+  },
+  "Gliese 908": {
+    "name": "Gliese 908",
+    "system": "Gliese 908",
+    "spectralType": "M",
+    "absoluteMagnitude": 10.12,
+    "mass": 0.37,
+    "d": 19.2745,
+    "ra": [23, 49, 12.5],
+    "dec": [2, 24, 4]
+  },
+  "Gliese 752 A": {
+    "name": "Gliese 752 A",
+    "system": "Gliese 752",
+    "spectralType": "M",
+    "absoluteMagnitude": 10.24,
+    "mass": 0.46,
+    "d": 19.2922,
+    "ra": [19, 16, 55.3],
+    "dec": [5, 10, 8]
+  },
+  "Gliese 752 B": {
+    "name": "Gliese 752 B",
+    "system": "Gliese 752",
+    "spectralType": "M",
+    "absoluteMagnitude": 18.59,
+    "mass": 0.075,
+    "d": 19.2922,
+    "ra": [19, 16, 57.6],
+    "dec": [5, 9, 2]
+  },
+  "Gliese 588": {
+    "name": "Gliese 588",
+    "system": "Gliese 588",
+    "spectralType": "M",
+    "absoluteMagnitude": 10.45,
+    "mass": 0.43,
+    "d": 19.2996,
+    "ra": [15, 32, 12.9],
+    "dec": [-41, 16, 32]
+  },
+  "Achird (A)": {
+    "name": "Achird (A)",
+    "system": "Eta Cassiopeiae",
+    "spectralType": "G",
+    "absoluteMagnitude": 4.6,
+    "mass": 0.972,
+    "d": 19.3289,
+    "ra": [0, 49, 6.3],
+    "dec": [57, 48, 55]
+  },
+  "Eta Cassiopeiae B": {
+    "name": "Eta Cassiopeiae B",
+    "system": "Eta Cassiopeiae",
+    "spectralType": "K",
+    "absoluteMagnitude": 8.65,
+    "mass": 0.57,
+    "d": 19.3339,
+    "ra": [0, 49, 6.3],
+    "dec": [57, 48, 55]
+  },
+  "Guniibuu (A)": {
+    "name": "Guniibuu (A)",
+    "system": "36 Ophiuchi",
+    "spectralType": "K",
+    "absoluteMagnitude": 6.2,
+    "mass": 0.85,
+    "d": 19.4185,
+    "ra": [17, 15, 20.9],
+    "dec": [-26, 36, 9]
+  },
+  "36 Ophiuchi B": {
+    "name": "36 Ophiuchi B",
+    "system": "36 Ophiuchi",
+    "spectralType": "K",
+    "absoluteMagnitude": 6.21,
+    "mass": 0.85,
+    "d": 19.4185,
+    "ra": [17, 15, 21],
+    "dec": [-26, 36, 10]
+  },
+  "36 Ophiuchi C": {
+    "name": "36 Ophiuchi C",
+    "system": "36 Ophiuchi",
+    "spectralType": "K",
+    "absoluteMagnitude": 7.45,
+    "mass": 0.71,
+    "d": 19.4185,
+    "ra": [17, 16, 13.4],
+    "dec": [-26, 32, 46]
+  },
+  "YZ Canis Minoris": {
+    "name": "YZ Canis Minoris",
+    "system": "YZ Canis Minoris",
+    "spectralType": "M",
+    "absoluteMagnitude": 12.3,
+    "mass": 0.308,
+    "d": 19.5330,
+    "ra": [7, 44, 40.2],
+    "dec": [3, 33, 9]
+  },
+  "GJ 1005 A": {
+    "name": "GJ 1005 A",
+    "system": "GJ 1005",
+    "spectralType": "M",
+    "absoluteMagnitude": 12.71,
+    "mass": 0.179,
+    "d": 19.542,
+    "ra": [0, 15, 28.1],
+    "dec": [-16, 8, 2]
+  },
+  "GJ 1005 B": {
+    "name": "GJ 1005 B",
+    "system": "GJ 1005",
+    "spectralType": "M",
+    "absoluteMagnitude": 15.13,
+    "mass": 0.112,
+    "d": 19.612,
+    "ra": [0, 15, 28.1],
+    "dec": [-16, 8, 2]
+  },
+  "HR 7703 A": {
+    "name": "HR 7703 A",
+    "system": "HR 7703",
+    "spectralType": "K",
+    "absoluteMagnitude": 6.41,
+    "mass": 0.65,
+    "d": 19.596,
+    "ra": [20, 11, 11.93],
+    "dec": [-36, 6, 4]
+  },
+  "HR 7703 B": {
+    "name": "HR 7703 B",
+    "system": "HR 7703",
+    "spectralType": "M",
+    "absoluteMagnitude": 12.6,
+    "mass": 0.24,
+    "d": 19.622,
+    "ra": [20, 11, 11.93],
+    "dec": [-36, 6, 4]
+  },
+  "82 G. Eridani": {
+    "name": "82 G. Eridani",
+    "system": "82 G. Eridani",
+    "spectralType": "G",
+    "absoluteMagnitude": 5.35,
+    "mass": 0.70,
+    "d": 19.7045,
+    "ra": [3, 19, 55.7],
+    "dec": [-43, 4, 11]
+  },
+  "Gliese 268 A": {
+    "name": "Gliese 268 A",
+    "system": "Gliese 268",
+    "spectralType": "M",
+    "absoluteMagnitude": 13.14,
+    "mass": 0.226,
+    "d": 19.7338,
+    "ra": [7, 10, 1.8],
+    "dec": [38, 31, 46]
+  },
+  "Gliese 268 B": {
+    "name": "Gliese 268 B",
+    "system": "Gliese 268",
+    "spectralType": "M",
+    "absoluteMagnitude": 13.54,
+    "mass": 0.192,
+    "d": 19.749,
+    "ra": [7, 10, 1.8],
+    "dec": [38, 31, 46]
+  },
+  "Delta Pavonis": {
+    "name": "Delta Pavonis",
+    "system": "Delta Pavonis",
+    "spectralType": "G",
+    "absoluteMagnitude": 4.62,
+    "mass": 1.051,
+    "d": 19.893,
+    "ra": [20, 8, 43.6],
+    "dec": [-66, 10, 55]
+  },
+  "SIMP J013656.5+093347": {
+    "name": "SIMP J013656.5+093347",
+    "system": "SIMP J013656.5+093347",
+    "spectralType": "T",
+    "absoluteMagnitude": 14.32,
+    "mass": 0.012,
+    "d": 19.955,
+    "ra": [1, 36, 56.5],
+    "dec": [9, 33, 47]
+  },
+  "2MASS 0937+2931": {
+    "name": "2MASS 0937+2931",
+    "system": "2MASS 0937+2931",
+    "spectralType": "T",
+    "absoluteMagnitude": 15.71,
+    "mass": 0.04,
+    "d": 19.96,
+    "ra": [9, 37, 34.9],
+    "dec": [29, 31, 41]
+  },
+
+  "J0927-6335": {
+    "name": "J0927-6335",
+    "system": "J0927-6335",
+    "spectralType": "D",
+    "absoluteMagnitude": -50,
+    "mass": 0.04,
+    "d": 25846.32,
+    "ra": [9, 27, 42.691],
+    "dec": [-63, 35, 40.328]
+  },
+  "Gaia20eae": {
+    "name": "Gaia20eae",
+    "system": "Gaia20eae",
+    "spectralType": "T",
+    "absoluteMagnitude": -50,
+    "mass": 0.04,
+    "d": 28487.15,
+    "ra": [19, 25, 40.63],
+    "dec": [15, 7, 46.582]
+  },
+  "2MASS J05241392-0336543": {
+    "name": "2MASS J05241392-0336543",
+    "system": "2MASS J05241392-0336543",
+    "spectralType": "M",
+    "absoluteMagnitude": -50,
+    "mass": 0.04,
+    "d": 29500,
+    "ra": [5, 24, 13.932],
+    "dec": [-3, 36, 54.329]
+  },
+  "LAMOST J1645+4357": {
+    "name": "LAMOST J1645+4357",
+    "system": "LAMOST J1645+4357",
+    "spectralType": "M",
+    "absoluteMagnitude": -50,
+    "mass": 0.04,
+    "d": 37035.92,
+    "ra": [16, 45, 14.955],
+    "dec": [43, 57, 11.976]
+  },
+  "J1235-3752": {
+    "name": "J1235-3752",
+    "system": "J1235-3752",
+    "spectralType": "D",
+    "absoluteMagnitude": -50,
+    "mass": 0.04,
+    "d": 62116,
+    "ra": [12, 35, 31.807],
+    "dec": [-37, 52, 35.526]
+  },
+  "4XMM J0520-6544 B": {
+    "name": "4XMM J0520-6544 B",
+    "system": "4XMM J0520-6544",
+    "spectralType": "D",
+    "absoluteMagnitude": -50,
+    "mass": 0.04,
+    "d": 65088.5205,
+    "ra": [5, 20, 15.497],
+    "dec": [-65, 44, 27.074]
+  },
+  "4XMM J0520-6544 A": {
+    "name": "4XMM J0520-6544 A",
+    "system": "4XMM J0520-6544",
+    "spectralType": "D",
+    "absoluteMagnitude": -50,
+    "mass": 0.04,
+    "d": 65088.52,
+    "ra": [5, 20, 15.497],
+    "dec": [-65, 44, 27.074]
+  },
+  "SMCSGS-FS 69 A": {
+    "name": "SMCSGS-FS 69 A",
+    "system": "SMCSGS-FS 69 A",
+    "spectralType": "T",
+    "absoluteMagnitude": -50,
+    "mass": 0.04,
+    "d": 72618,
+    "ra": [1, 24, 10.795],
+    "dec": [-73, 22, 9.942]
+  }
+}

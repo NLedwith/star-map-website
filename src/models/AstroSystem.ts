@@ -1,6 +1,7 @@
 import { vec3 } from "gl-matrix";
 import { AstroObject } from "./AstroObject";
-
+import { Big, RoundingMode, MC } from "bigdecimal.js";
+import * as bVec3 from "../utils/big-vec3";
 
 // Gravitational constant in m^3*kg^-1*s^-2
 const G = (6.6743 * (10**-11));
@@ -13,17 +14,22 @@ export class AstroSystem {
 
 	// Calculates new acceleration values due to gravity and computes new positions of each astro object in the system
 	public updateAstroSystem(dt: number) {
+		
 		this._computeGravityVectors();
+
+		const tft = performance.now()
 		for (const astroObject of this._astroObjectList) {
 			astroObject.updatePhysics(dt);	
 		}
+
+		console.log((performance.now()-tft)/1000);
 	}
 
 	private _computeGravityVectors() {
 		
 		// Zero out every AstroObject's acceleration
 		for (const astroObject of this._astroObjectList) {
-			vec3.zero(astroObject.acceleration);
+			bVec3.zero(astroObject.acceleration);
 		}
 
 		// Recalculate the acceleration due to gravity for every AstroObject in the system
@@ -31,36 +37,38 @@ export class AstroSystem {
 		for (let i = 0; i < (this._astroObjectList.length - 1); i++) {
 			for (let j = (i + 1); j < this._astroObjectList.length; j++) {
 		
-				let gravityAccelI = vec3.create();
-				let gravityAccelJ = vec3.create();
+				let gravityAccelI = bVec3.create();
+				let gravityAccelJ = bVec3.create();
 					
 				// Find directional vectors for the force of gravity between the 2 AstroObjects
-				vec3.subtract(gravityAccelI, this._astroObjectList[j].position, this._astroObjectList[i].position);
-				vec3.negate(gravityAccelJ, gravityAccelI);
+				bVec3.subtract(gravityAccelI, this._astroObjectList[j].position, this._astroObjectList[i].position);
+				bVec3.negate(gravityAccelJ, gravityAccelI);
 
 				// Normalize the directional vectors
-				vec3.normalize(gravityAccelI, gravityAccelI);
-				vec3.normalize(gravityAccelJ, gravityAccelJ);
+				bVec3.normalize(gravityAccelI, gravityAccelI);
+				bVec3.normalize(gravityAccelJ, gravityAccelJ);
 
-				const sqDistance = vec3.distance(this._astroObjectList[i].position, this._astroObjectList[j].position);
+				const sqDistance = bVec3.distance(this._astroObjectList[i].position, this._astroObjectList[j].position);
+				
 
 				// Calculate the magnitude of the force of gravity for both objects				
-				const gMagI = (G * this._astroObjectList[j].mass) / (sqDistance**2);
-				const gMagJ = (G * this._astroObjectList[i].mass) / (sqDistance**2);
+					
+				const gMagI = (Big(G.toString()).multiply(this._astroObjectList[j].mass)).divide(sqDistance.pow(2), 20, RoundingMode.CEILING);
+				const gMagJ = (Big(G.toString()).multiply(this._astroObjectList[i].mass)).divide(sqDistance.pow(2), 20, RoundingMode.CEILING);
 				
 				
-				vec3.scale(gravityAccelI, gravityAccelI, gMagI);
-				vec3.scale(gravityAccelJ, gravityAccelJ, gMagJ);
+				bVec3.scale(gravityAccelI, gravityAccelI, gMagI);
+				bVec3.scale(gravityAccelJ, gravityAccelJ, gMagJ);
 
 				// Compound acceleration due to gravity for both objects to get their overall acceleration
-				vec3.add(this._astroObjectList[i].acceleration, this._astroObjectList[i].acceleration, gravityAccelI);
-				vec3.add(this._astroObjectList[j].acceleration, this._astroObjectList[j].acceleration, gravityAccelJ);
+				bVec3.add(this._astroObjectList[i].acceleration, this._astroObjectList[i].acceleration, gravityAccelI);
+				bVec3.add(this._astroObjectList[j].acceleration, this._astroObjectList[j].acceleration, gravityAccelJ);
 			}
 		}
 	}
 
 	public getDrawList(userPosition: vec3): AstroObject[] {
-		let evalList: AstroObject[] = []
+		/*let evalList: AstroObject[] = []
 		for(let k = 0; k < this._astroObjectList.length; k++) {
 			if(this._astroObjectList[k].name == "Sun") {
 				evalList.push(this._astroObjectList[k])
@@ -69,9 +77,9 @@ export class AstroSystem {
 		let retList: AstroObject[] = []
 		while (evalList.length != 0) {
 			retList.push(evalList.shift()!);
-			let v = vec3.create()
-			vec3.scale(v, retList[retList.length-1].position, 10**-9)
-			if (retList[retList.length-1].systemSpace > vec3.distance(userPosition, v)) {
+			let v = bVec3.create()
+			bVec3.scale(v, retList[retList.length-1].position, Big("10").pow(-9, new MC(20)))
+			if (Big((retList[retList.length-1].systemSpace).toString()).greaterThan(bVec3.distance(bVec3.fromValues(userPosition[0].toString(), userPosition[1].toString(), userPosition[2].toString()), v))) {
 				for(let i = 0; i < this._astroObjectList.length; i++) {
 					for(let j = 0; j < retList[retList.length-1].subsystem.length; j++) {
 						if (retList[retList.length-1].subsystem[j] == this._astroObjectList[i].name) {
@@ -81,7 +89,7 @@ export class AstroSystem {
 				}
 			}
 		}
-		console.log(retList)
-		return retList;
+		console.log(retList)*/
+		return this._astroObjectList;
 	}
 }
