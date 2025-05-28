@@ -31,6 +31,9 @@ export class UserController {
         let movementVec = vec3.fromValues(0,0,0);
 	let curSpeed = this._getCurSpeed() * dt
 	//console.log(curSpeed);
+	if (this.coupledAstroObject != null) {
+		console.log(vec3.distance(this.coupledAstroObject.drawPos, this.userPosition));
+	}
         if(this.velocity[2] > 0) {
             if (this.coupledAstroObject != null) {
 		let iVec = vec3.create();
@@ -45,8 +48,7 @@ export class UserController {
         } else if(this.velocity[2] < 0) {
 		if (this.coupledAstroObject != null) {
 			let iVec = vec3.create();
-			let tVec = bVec3.getScaledVec3(this.coupledAstroObject.position, 10, -9);
-			vec3.subtract(iVec, tVec, this.userPosition);
+			vec3.subtract(iVec, this.coupledAstroObject.drawPos, this.userPosition);
 			vec3.normalize(iVec, iVec);
 			vec3.scale(movementVec, iVec, -curSpeed);
 		} else {
@@ -57,10 +59,9 @@ export class UserController {
         if(this.velocity[0] > 0) {
 		if (this.coupledAstroObject != null) {
 			let iVec = vec3.create();
-			let tVec = bVec3.getScaledVec3(this.coupledAstroObject.position, 10, -9);
 			let qVec = vec3.create();
 			let cVec = vec3.fromValues(0, 1, 0);
-			vec3.subtract(iVec, tVec, this.userPosition);
+			vec3.subtract(iVec, this.coupledAstroObject.drawPos, this.userPosition);
 			vec3.cross(qVec, cVec, iVec)
 			vec3.normalize(qVec, qVec);
 			vec3.scale(movementVec, qVec, -curSpeed);
@@ -70,10 +71,9 @@ export class UserController {
         } else if(this.velocity[0] < 0) {
 		if (this.coupledAstroObject != null) {
 			let iVec = vec3.create();
-			let tVec = bVec3.getScaledVec3(this.coupledAstroObject.position, 10, -9);
 			let qVec = vec3.create();
 			let cVec = vec3.fromValues(0, 1, 0);
-			vec3.subtract(iVec, tVec, this.userPosition);
+			vec3.subtract(iVec, this.coupledAstroObject.drawPos, this.userPosition);
 			vec3.cross(qVec, cVec, iVec)
 			vec3.normalize(qVec, qVec);
 			vec3.scale(movementVec, qVec, curSpeed);
@@ -86,10 +86,9 @@ export class UserController {
 
 		if (this.coupledAstroObject != null) {
 			let iVec = vec3.create();
-			let tVec = bVec3.getScaledVec3(this.coupledAstroObject.position, 10, -9);
 			let qVec = vec3.create();
 			let cVec = vec3.fromValues(0, 1, 0);
-			vec3.subtract(iVec, tVec, this.userPosition);
+			vec3.subtract(iVec, this.coupledAstroObject.drawPos, this.userPosition);
 			vec3.cross(qVec, cVec, iVec)
 			vec3.cross(cVec, qVec, iVec)
 			vec3.normalize(cVec, cVec)
@@ -103,10 +102,9 @@ export class UserController {
 
 		if (this.coupledAstroObject != null) {
 			let iVec = vec3.create();
-			let tVec = bVec3.getScaledVec3(this.coupledAstroObject.position, 10, -9);
 			let qVec = vec3.create();
 			let cVec = vec3.fromValues(0, 1, 0);
-			vec3.subtract(iVec, tVec, this.userPosition);
+			vec3.subtract(iVec, this.coupledAstroObject.drawPos, this.userPosition);
 			vec3.cross(qVec, cVec, iVec)
 			vec3.cross(cVec, qVec, iVec)
 			vec3.normalize(cVec, cVec)
@@ -115,8 +113,10 @@ export class UserController {
             		vec3.scale(movementVec, vec3.fromValues(0, 1, 0), -curSpeed)
 		}
 	}
-
-        vec3.add(this.userPosition, this.userPosition, movementVec)//(vec3.scale(this.velocity, this.velocity, dt)))
+	this.userPosition[0] += movementVec[0] 
+	this.userPosition[1] += movementVec[1] 
+	this.userPosition[2] += movementVec[2])
+        //vec3.add(this.userPosition, this.userPosition, movementVec)//(vec3.scale(this.velocity, this.velocity, dt)))
     }
     public rotate(dt: number) {
         //this.userOrientation[0] += 1
@@ -169,11 +169,9 @@ export class UserController {
     private _getCurSpeed(): number {
     	let curSpeed = this.speed;
 	if (this.coupledAstroObject != null) { 
-		let scaledObjPos = bVec3.getScaledVec3(this.coupledAstroObject.position, 10, -9);
-		let dist = vec3.distance(this.userPosition, scaledObjPos)
-		let posSpeed = 100000000;
+		let dist = vec3.distance(this.userPosition, this.coupledAstroObject.drawPos)
 		
-		curSpeed = 2* dist 
+		curSpeed = dist 
 	}
 	return curSpeed;
     }
