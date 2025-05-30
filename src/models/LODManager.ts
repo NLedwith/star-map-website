@@ -109,7 +109,7 @@ export class LODManager {
 						this._drawable.className = this._type + "-type-very-bright"
 					} else if (apparentMagnitude <= 0) {
 						this._drawable.className = this._type + "-type-bright"
-					} else if (apparentMagnitude <= 7) {
+					} else if (apparentMagnitude <= 3.5) {
 						this._drawable.className = this._type + "-type-dim"
 					} else {
 						this._drawable.className = this._type + "-type-very-dim"

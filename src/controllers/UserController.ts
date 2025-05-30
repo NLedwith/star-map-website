@@ -28,12 +28,9 @@ export class UserController {
     }
 
     public translate(dt: number) {
-        let movementVec = vec3.fromValues(0,0,0);
+        let movementVec = vec3.create();
 	let curSpeed = this._getCurSpeed() * dt
-	//console.log(curSpeed);
-	if (this.coupledAstroObject != null) {
-		console.log(vec3.distance(this.coupledAstroObject.drawPos, this.userPosition));
-	}
+
         if(this.velocity[2] > 0) {
             if (this.coupledAstroObject != null) {
 		let iVec = vec3.create();
@@ -113,11 +110,10 @@ export class UserController {
             		vec3.scale(movementVec, vec3.fromValues(0, 1, 0), -curSpeed)
 		}
 	}
-	this.userPosition[0] += movementVec[0] 
-	this.userPosition[1] += movementVec[1] 
-	this.userPosition[2] += movementVec[2])
-        //vec3.add(this.userPosition, this.userPosition, movementVec)//(vec3.scale(this.velocity, this.velocity, dt)))
+
+        vec3.add(this.userPosition, this.userPosition, movementVec)
     }
+
     public rotate(dt: number) {
         //this.userOrientation[0] += 1
        // console.log(this.setUserOrientation[0], this.targetUserOrientation[0])
