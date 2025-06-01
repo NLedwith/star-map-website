@@ -8,7 +8,7 @@ import { AstroObjectConfig } from "./interfaces/AstroObjectConfig";
 import { StarConfig } from "./interfaces/StarConfig";
 import { LODManager } from "./models/LODManager";
 import { WebGLShape } from "./models/WebGLShape";
-import { AstroObject } from "./models/AstroObject";
+import { AstroBody, PlanetaryBody, StellarBody } from "./models/AstroBody";
 import { AstroSystem } from "./models/AstroSystem";
 import  * as bVec3  from "./utils/big-vec3";
 import { BigDecimal, Big, MathContext, MC } from "bigdecimal.js";
@@ -279,9 +279,9 @@ async function main() {
 	} else {
 		dataContainer.style.visibility = "visible";
 		dataContainerName.innerHTML = user.coupledAstroObject.name;
-		dataContainerPosition.innerHTML = `${user.coupledAstroObject.position[0]}, ${user.coupledAstroObject.position[1]}, ${user.coupledAstroObject.position[2]}`;
-		dataContainerVelocity.innerHTML = `${user.coupledAstroObject.velocity[0]}, ${user.coupledAstroObject.velocity[1]}, ${user.coupledAstroObject.velocity[2]}`;
-		dataContainerAcceleration.innerHTML = `${user.coupledAstroObject.acceleration[0]}, ${user.coupledAstroObject.acceleration[1]}, ${user.coupledAstroObject.acceleration[2]}`;
+		dataContainerPosition.innerHTML = `${user.coupledAstroObject.getPosition()[0]}, ${user.coupledAstroObject.getPosition()[1]}, ${user.coupledAstroObject.getPosition()[2]}`;
+		dataContainerVelocity.innerHTML = `${user.coupledAstroObject.getVelocity()[0]}, ${user.coupledAstroObject.getVelocity()[1]}, ${user.coupledAstroObject.getVelocity()[2]}`;
+		dataContainerAcceleration.innerHTML = `${user.coupledAstroObject.getAcceleration()[0]}, ${user.coupledAstroObject.getAcceleration()[1]}, ${user.coupledAstroObject.getAcceleration()[2]}`;
 	}
 
 	// Here I need to check distance from camera for each item and choose to draw HTML element or 3d model
@@ -290,7 +290,7 @@ async function main() {
 	let v1 = bVec3.create();
 	let v2 = bVec3.create();
 	system._astroObjectList.forEach((obj) => {
-		obj._lodManager.draw(dt, retList.includes(obj), gl, matWorldUniform, obj.drawPos, matViewProj, i, vec3.distance(user.userPosition, obj.drawPos));
+		obj.getLODManager().draw(dt, retList.includes(obj), gl, matWorldUniform, obj.getDrawPosition(), matViewProj, i, vec3.distance(user.userPosition, obj.getDrawPosition()));
 		i++;
 	});
       
@@ -299,8 +299,8 @@ async function main() {
     requestAnimationFrame(frame);
 }
 
-async function buildAstroObjects(gl: WebGL2RenderingContext, posAttrib: number, colorAttrib: number, user: UserController): Promise<AstroObject[]>{
-	let ret: AstroObject[] = []
+async function buildAstroObjects(gl: WebGL2RenderingContext, posAttrib: number, colorAttrib: number, user: UserController): Promise<AstroBody[]>{
+	let ret: AstroBody[] = []
 	const api = new ApiClient();
 
 	const curEphemeris = await api.getEphemeris(new Date(Date.now()), Object.keys(planetData));
@@ -309,7 +309,7 @@ async function buildAstroObjects(gl: WebGL2RenderingContext, posAttrib: number, 
 
 	
     	var divContainerElement = document.querySelector("#divcontainer")!
-	var sun: AstroObject;
+	var sun: AstroBody;
 	const initialData = planetData as Record<string, AstroObjectConfig>;
 	let types = ["O", "B", "A", "F", "G", "K", "M"];
 	Object.entries(initialData).forEach(([key, data]) => {
@@ -345,17 +345,17 @@ async function buildAstroObjects(gl: WebGL2RenderingContext, posAttrib: number, 
 		let mass = Big(eval(data.mass).toString());
 		let pRadius = 1;
 		let eRadius = 1;
-		let astroObject = new AstroObject(position,
+		let astroObject = new PlanetaryBody(name,
+						    [], "",
+						    mass,
+						 0,
+						 position,
 						 velocity,
 						 acceleration,
-						 name,
-						 mass,
-						 data.systemSpace,
-						 data.subsystem,
 						 pRadius,
 						 eRadius,
-						 lodManager);
-		astroObject._lodManager.setAstroObject(astroObject);
+						 lodManager, data.subsystem);
+		astroObject.getLODManager().setAstroObject(astroObject);
 
 
 
@@ -402,17 +402,20 @@ async function buildAstroObjects(gl: WebGL2RenderingContext, posAttrib: number, 
 		let pRadius = 1;
 		let eRadius = 1;
 
-		let astroObject = new AstroObject(position,
-					velocity,
-					acceleration,
-					name,
+		let astroObject = new StellarBody(name,
+					[],
+					"",
 					mass,
 					0,
-					[],
-					pRadius,
+					velocity,
+					acceleration,
 					eRadius,
-					lodManager);
-		astroObject._lodManager.setAstroObject(astroObject);
+					lodManager,
+					[data.ra[0], data.ra[1], data.ra[2]],
+					[data.dec[0], data.dec[1], data.dec[2]],
+						 [3261.56 / data.d, 0],
+						 6, 6, 6, []);
+		astroObject.getLODManager().setAstroObject(astroObject);
 
 		ret.push(astroObject);
 		

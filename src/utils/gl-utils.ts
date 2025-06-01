@@ -1,3 +1,6 @@
+
+
+
 export function showError(errorText: string) {
     console.error(errorText)
     const errorBoxDiv = document.getElementById('error-box');

@@ -1,13 +1,13 @@
 import { vec3, vec4, mat4 } from "gl-matrix";
 import { WebGLShape } from "./WebGLShape";
 import { UserController } from "../controllers/UserController";
-import { AstroObject } from "./AstroObject";
+import { AstroBody} from "./AstroBody";
 
 
 export class LODManager {
 	private _div: HTMLDivElement;
 	private _drawable: HTMLDivElement;	
-	public astroObject: AstroObject | null;
+	public astroObject: AstroBody | null;
 	private _isPlanet;
 	constructor(
 		private _shape: WebGLShape,	
@@ -67,7 +67,7 @@ export class LODManager {
 		divContainerElement.appendChild(this._div);
 		this.astroObject = null;
 		}
-	public setAstroObject(ast: AstroObject) {	
+	public setAstroObject(ast: AstroBody) {	
 		this.astroObject = ast;
 		let that = this;
 		this._div.onclick = function() { if(that.astroObject != null) {that.userController.setCoupledAstroObject(that.astroObject)}};

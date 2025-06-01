@@ -1,5 +1,5 @@
 import { vec3 } from "gl-matrix";
-import { AstroObject } from "./AstroObject";
+import { AstroBody } from "./AstroBody";
 import { Big, RoundingMode, MC } from "bigdecimal.js";
 import * as bVec3 from "../utils/big-vec3";
 
@@ -10,7 +10,7 @@ const G = (6.6743 * (10**-11));
 // Examples would be The Solar System and Alpha Centauri.
 export class AstroSystem {
 
-	constructor(public _astroObjectList: AstroObject[]) { }
+	constructor(public _astroObjectList: AstroBody[]) { }
 
 	// Calculates new acceleration values due to gravity and computes new positions of each astro object in the system
 	public updateAstroSystem(dt: number) {
@@ -21,15 +21,13 @@ export class AstroSystem {
 		for (const astroObject of this._astroObjectList) {
 			astroObject.updatePhysics(dt);	
 		}
-
-		console.log((performance.now()-tft)/1000);
 	}
 
 	private _computeGravityVectors() {
 		
 		// Zero out every AstroObject's acceleration
 		for (const astroObject of this._astroObjectList) {
-			bVec3.zero(astroObject.acceleration);
+			bVec3.zero(astroObject.getAcceleration());
 		}
 
 		// Recalculate the acceleration due to gravity for every AstroObject in the system
@@ -41,14 +39,14 @@ export class AstroSystem {
 				let gravityAccelJ = bVec3.create();
 					
 				// Find directional vectors for the force of gravity between the 2 AstroObjects
-				bVec3.subtract(gravityAccelI, this._astroObjectList[j].position, this._astroObjectList[i].position);
+				bVec3.subtract(gravityAccelI, this._astroObjectList[j].getPosition(), this._astroObjectList[i].getPosition());
 				bVec3.negate(gravityAccelJ, gravityAccelI);
 
 				// Normalize the directional vectors
 				bVec3.normalize(gravityAccelI, gravityAccelI);
 				bVec3.normalize(gravityAccelJ, gravityAccelJ);
 
-				const sqDistance = bVec3.distance(this._astroObjectList[i].position, this._astroObjectList[j].position);
+				const sqDistance = bVec3.distance(this._astroObjectList[i].getPosition(), this._astroObjectList[j].getPosition());
 				
 
 				// Calculate the magnitude of the force of gravity for both objects				
@@ -61,13 +59,13 @@ export class AstroSystem {
 				bVec3.scale(gravityAccelJ, gravityAccelJ, gMagJ);
 
 				// Compound acceleration due to gravity for both objects to get their overall acceleration
-				bVec3.add(this._astroObjectList[i].acceleration, this._astroObjectList[i].acceleration, gravityAccelI);
-				bVec3.add(this._astroObjectList[j].acceleration, this._astroObjectList[j].acceleration, gravityAccelJ);
+				bVec3.add(this._astroObjectList[i].getAcceleration(), this._astroObjectList[i].getAcceleration(), gravityAccelI);
+				bVec3.add(this._astroObjectList[j].getAcceleration(), this._astroObjectList[j].getAcceleration(), gravityAccelJ);
 			}
 		}
 	}
 
-	public getDrawList(userPosition: vec3): AstroObject[] {
+	public getDrawList(userPosition: vec3): AstroBody[] {
 		/*let evalList: AstroObject[] = []
 		for(let k = 0; k < this._astroObjectList.length; k++) {
 			if(this._astroObjectList[k].name == "Sun") {
