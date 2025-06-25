@@ -235,7 +235,8 @@ html, head, body {
     	position: absolute;
 	bottom: 50px;
 	left: 100px;
-	width: fit-content;
+	min-width: 300px;
+	max-width: fit-content;
 	height: fit-content;
 	background-color: rgba(0, 0, 0, 0.5);
 	display: flex;

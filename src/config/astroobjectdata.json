@@ -11,7 +11,7 @@
 	"199": {
 		"name": "Mercury",
 		"mass": "(3.285 * (10**23))",
-		"radius": 2439.7,
+		"radius": 24.7,
 		"axialTilt": 0.00047,
 		"rotationSpeed": 0.0000175,
 		"systemSpace": 0,

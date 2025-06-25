@@ -4,6 +4,7 @@ import { glMatrix, mat4, quat, ReadonlyVec3, vec3, vec4 } from "gl-matrix";
 import { UserController } from "./controllers/UserController";
 import { ApiClient } from "./services/ApiClient";
 import planetData from "./config/astroobjectdata.json";
+import { AstroObjectParse } from "./interfaces/AstroObjectParse";
 import { AstroObjectConfig } from "./interfaces/AstroObjectConfig";
 import { StarConfig } from "./interfaces/StarConfig";
 import { LODManager } from "./models/LODManager";
@@ -13,11 +14,13 @@ import { AstroSystem } from "./models/AstroSystem";
 import  * as bVec3  from "./utils/big-vec3";
 import { BigDecimal, Big, MathContext, MC } from "bigdecimal.js";
 import starData from "./config/nearbystars.json";
+import astroobjectdata from "./config/astroobject.json";
+
 
 const G = (6.6743*(10**-11));
 
 const vertexShaderSourceCode = `#version 300 es
-    precision mediump float;
+    precision highp float;
     
     in vec3 vertexPosition;
     in vec3 vertexColor;
@@ -34,7 +37,7 @@ const vertexShaderSourceCode = `#version 300 es
     }`;
 
 const fragmentShaderSourceCode = `#version 300 es
-    precision mediump float;
+    precision highp float;
     
     in vec3 fragmentColor;
     out vec4 outputColor;
@@ -158,6 +161,7 @@ async function main() {
     var divContainerElement = document.querySelector("#divcontainer")!
     var dataContainer = document.getElementById("datacontainer")!
     var dataContainerName = document.getElementById("datacontainerName")!
+    var dataContainerClassification = document.getElementById("datacontainerClassification")!
     var dataContainerPosition = document.getElementById("datacontainerPosition")!
     var dataContainerVelocity = document.getElementById("datacontainerVelocity")!
     var dataContainerAcceleration = document.getElementById("datacontainerAcceleration")!
@@ -279,7 +283,9 @@ async function main() {
 	} else {
 		dataContainer.style.visibility = "visible";
 		dataContainerName.innerHTML = user.coupledAstroObject.name;
-		dataContainerPosition.innerHTML = `${user.coupledAstroObject.getPosition()[0]}, ${user.coupledAstroObject.getPosition()[1]}, ${user.coupledAstroObject.getPosition()[2]}`;
+		dataContainerClassification.innerHTML = user.coupledAstroObject.classification;
+		
+		dataContainerPosition.innerHTML = ``;
 		dataContainerVelocity.innerHTML = `${user.coupledAstroObject.getVelocity()[0]}, ${user.coupledAstroObject.getVelocity()[1]}, ${user.coupledAstroObject.getVelocity()[2]}`;
 		dataContainerAcceleration.innerHTML = `${user.coupledAstroObject.getAcceleration()[0]}, ${user.coupledAstroObject.getAcceleration()[1]}, ${user.coupledAstroObject.getAcceleration()[2]}`;
 	}
@@ -299,6 +305,26 @@ async function main() {
     requestAnimationFrame(frame);
 }
 
+function buildAstroObjectsRecur(curObject: AstroObjectParse, depth: number) {
+	// Build astro object
+	// Iterate through and build astro bodies	
+	console.log(`${String('\t').repeat(depth)}${curObject.name}`)
+	for(const bod of curObject.astroBodies) {
+		console.log(`${String('\t').repeat(depth+1)}${bod.name}`)
+	}
+
+	if(curObject.astroObjects.length == 0) {
+		// Return astro object
+		return
+	} else {
+		for(const obj of curObject.astroObjects) {
+			buildAstroObjectsRecur(obj, depth+1)
+			// Append astro object to this astro object
+		}
+		// return astro object
+	}
+}
+
 async function buildAstroObjects(gl: WebGL2RenderingContext, posAttrib: number, colorAttrib: number, user: UserController): Promise<AstroBody[]>{
 	let ret: AstroBody[] = []
 	const api = new ApiClient();
@@ -308,10 +334,14 @@ async function buildAstroObjects(gl: WebGL2RenderingContext, posAttrib: number, 
 	
 
 	
+	const rootObject = astroobjectdata as AstroObjectParse;
+	buildAstroObjectsRecur(rootObject, 0)
+
     	var divContainerElement = document.querySelector("#divcontainer")!
 	var sun: AstroBody;
 	const initialData = planetData as Record<string, AstroObjectConfig>;
 	let types = ["O", "B", "A", "F", "G", "K", "M"];
+
 	Object.entries(initialData).forEach(([key, data]) => {
 		// Get WebGLShape
 		let size = data.radius/696349
@@ -346,7 +376,7 @@ async function buildAstroObjects(gl: WebGL2RenderingContext, posAttrib: number, 
 		let pRadius = 1;
 		let eRadius = 1;
 		let astroObject = new PlanetaryBody(name,
-						    [], "",
+						    [], "Gas Giant",
 						    mass,
 						 0,
 						 position,
@@ -404,7 +434,7 @@ async function buildAstroObjects(gl: WebGL2RenderingContext, posAttrib: number, 
 
 		let astroObject = new StellarBody(name,
 					[],
-					"",
+					"Red Hypergiant",
 					mass,
 					0,
 					velocity,
@@ -428,6 +458,8 @@ async function buildAstroObjects(gl: WebGL2RenderingContext, posAttrib: number, 
 
 try {
 	main()
+	//const starsData = astroobjectdata as AstroObjectParse;
+	//console.log(starsData)
 	// Initialize UserController
 	// Initialize AstroObjects
 	// Initialize AstroSystem

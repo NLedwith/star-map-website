@@ -1,0 +1,201 @@
+{
+	"name": "Cosmic Web",
+	"designations": ["The Cosmic Web"],
+	"systemSpace": 9007199254740991,
+	"containsDynamicBodies": true,
+	"isDynamicObject": false,
+	"primaryBodies": [],
+	"astroBodies": [],
+	"astroObjects": [
+		{
+			"name": "Laniakea Supercluster",
+			"designations": ["Laniakea Supercluster"],
+			"systemSpace": 9007199254740991,
+			"containsDynamicBodies": true,
+			"isDynamicObject": false,
+			"primaryBodies": [],
+			"astroBodies": [],
+			"astroObjects": [
+				{
+					"name": "Virgo Cluster",
+					"designations": ["Virgo Cluster"],
+					"systemSpace": 9007199254740991,
+					"containsDynamicBodies": true,
+					"isDynamicObject": false,
+					"primaryBodies": [],
+					"astroBodies": [],
+					"astroObjects": [
+						{
+							"name": "Local Group",
+							"designations": ["Local Group"],
+							"systemSpace": 9007199254740991,
+							"containsDynamicBodies": true,
+							"isDynamicObject": false,
+							"primaryBodies": [],
+							"astroBodies": [],
+							"astroObjects": [
+								{
+									"name": "Milky Way Galaxy",
+									"designations": ["Milky Way Galaxy"],
+									"systemSpace": 9007199254740991,
+									"containsDynamicBodies": true,
+									"isDynamicObject": false,
+									"primaryBodies": [],
+									"astroBodies": [],
+									"astroObjects": [
+										{
+											"name": "Solar System",
+											"designations": ["Solar System"],
+											"systemSpace": 9007199254740991,
+											"containsDynamicBodies": true,
+											"isDynamicObject": true,
+											"primaryBodies": ["Sun"],
+											"astroBodies": [
+												{
+													"name": "Sun",
+													"mass": "(1.99 * (10**30))",
+													"radius": 696349,
+													"axialTilt": 0.1265364,
+													"rotationSpeed": 0
+												},
+												{
+													"name": "Mercury"
+												},
+												{
+													"name": "Venus"
+												}
+											],
+											"astroObjects": [
+												{
+													"name": "Earth-Moon System",
+													"designations": ["Earth-Moon System"],
+													"systemSpace": 9007199254740991,
+													"containsDynamicBodies": true,
+													"isDynamicObject": true,
+													"primaryBodies": ["Earth"],
+													"astroBodies": [
+														{
+															"name": "Earth"
+														},
+														{
+															"name": "Moon"
+														}
+													],
+													"astroObjects": []
+												},
+												{
+													"name": "Martian System",
+													"designations": ["Martian System"],
+													"systemSpace": 9007199254740991,
+													"containsDynamicBodies": true,
+													"isDynamicObject": false,
+													"primaryBodies": ["Mars"],
+													"astroBodies": [
+														{
+															"name": "Mars"
+														},
+														{
+															"name": "Phobos"
+														},
+														{
+															"name": "Deimos"
+														}
+													],
+													"astroObjects": []
+												}
+											]
+										},
+										{
+											"name": "Alpha Centauri",
+											"designations": ["AlphaCentauri"],
+											"systemSpace": 9007199254740991,
+											"containsDynamicBodies": false,
+											"isDynamicObject": false,
+											"primaryBodies": ["Rigil Kentaurus"],
+											"astroBodies": [],
+											"astroObjects": [
+												{
+													"name": "Alpha Centauri AB",
+													"designations": ["Alpha Centauri AB"],
+													"systemSpace": 9007199254740991,
+													"containsDynamicBodies": false,
+													"isDynamicObject": false,
+													"primaryBodies": ["Rigil Centaurus"],
+													"astroBodies": [
+														{
+															"name": "Rigil Centaurus"
+														},
+														{
+															"name": "Toliman"
+														}
+													],
+													"astroObjects": []
+												},
+												{
+													"name": "Proxima Centauri",
+													"designations": ["Proxima Centauri"],
+													"systemSpace": 9007199254740991,
+													"containsDynamicBodies": false,
+													"isDynamicObject": false,
+													"primaryBodies": ["Proxima Centauri"],
+													"astroBodies": [
+														{
+															"name": "Proxima Centauri",
+															"spectralType": "M",
+															"absoluteMagnitude": 15.6,
+															"mass": 0.122,
+															"d": 4.2465,
+															"ra": [14, 29, 43],
+															"dec": [-62, 40, 46]
+														},
+														{
+															"name": "Proxima Centauri b"
+														},
+														{
+															"name": "Proxima Centauri c"
+														},
+														{
+															"name": "Proxima Centauri d"
+														}
+													],
+													"astroObjects": []
+												}
+											]
+										},
+										{
+											"name": "Barnard's Star",
+											"designations": ["Barnard's Star"],
+											"systemSpace": 9007199254740991,
+											"containsDynamicBodies": false,
+											"isDynamicObject": false,
+											"primaryBodies": ["Barnard's Star"],
+											"astroBodies": [
+												{
+													"name": "Barnard's Star"
+												},
+												{
+													"name": "Barnard's Star b"
+												},
+												{
+													"name": "Barnard's Star c"
+												},
+												{
+													"name": "Barnard's Star d"
+												},
+												{
+													"name": "Barnard's Star e"
+												}
+											],
+											"astroObjects": []
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+
+}
